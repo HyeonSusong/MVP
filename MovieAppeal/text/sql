@@ -1,0 +1,119 @@
+////// 쿼리문 ////////////
+
+
+////// 유저 테이블 //////////////
+
+create table users(
+u_no number(10) not null primary key,
+u_id varchar2(20 char),
+u_pwd varchar2(20 char),
+u_mail varchar2(50 char),
+u_mygenre varchar2(50 char),
+u_verify char(1) default 'N' ,
+u_lock char(1) default 'N'
+);
+
+create sequence users_seq;
+
+/////// 영화 테이블/////////
+
+create table movies(
+m_no number(10) not null primary key,
+m_title varchar2(30 char),
+m_premiere date,
+m_genre varchar2(20 char),
+m_rating number(2),
+m_likes number(7)
+);
+
+create sequence movie_seq;
+
+//////// 영화 추천수 테이블 //////
+
+create table movie_like(
+ml_no number(11) not null primary key,
+u_no number(10) not null,
+m_no number(10) not null,
+ml_like number(1)
+constraint ml_u_no_fk foreign key (u_no) references users(u_no),
+constraint ml_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence ml_seq;
+
+///////// 영화 별점 테이블 //////
+
+create table movie_rate(
+mr_no number(11) not null primary key,
+u_no number(10) not null,
+m_no number(10) not null,
+mr_rating number(2) default 0.0,
+constraint mr_u_no_fk foreign key (u_no) references users(u_no),
+constraint mr_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence mr_seq;
+
+////////// 영화 미니리뷰 테이블 ////////
+
+create table movie_minireview(
+mmr_no number(12) not null primary key,
+u_no number(10) not null,
+m_no number(10) not null,
+mmr_text varchar2(500 char)
+constraint mmr_u_no_fk foreign key (u_no) references users(u_no),
+constraint mmr_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence mmr_seq;
+
+
+/////////// 리뷰게시판글 테이블 ///////////
+
+create table review_board(
+b_no number(10) not null primary key,
+u_no number(10) not null,
+m_no number(10) not null,
+b_category varchar2(20 char) not null,
+b_title varchar2(30 char),
+b_text varchar2(3000 char),
+b_date date,
+b_likes number(7) default 0,
+constraint b_u_no_fk foreign key (u_no) references users(u_no),
+constraint b_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence rb_seq;
+
+//////// 리뷰게시글 댓글 테이블 /////////////
+
+create table review_board_reply(
+br_no number(10) not null primary key,
+b_no number(10) not null,
+u_no number(10) not null,
+m_no number(10) not null,
+br_text varchar2(300 char),
+br_date date,
+constraint br_b_no_fk foreign key (b_no) references review_board(b_no),
+constraint br_u_no_fk foreign key (u_no) references users(u_no),
+constraint br_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence br_seq;
+
+
+//////// 리뷰게시글 추천 테이블 /////////////
+
+create table review_board_like(
+bl_no number(11) not null primary key,
+b_no number(10) not null,
+u_no number(10) not null,
+m_no number(10) not null,
+bl_like number(1),
+constraint br_b_no_fk foreign key (b_no) references review_board(b_no),
+constraint br_u_no_fk foreign key (u_no) references users(u_no),
+constraint br_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence bl_seq;
+
