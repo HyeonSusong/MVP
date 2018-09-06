@@ -1,4 +1,4 @@
-package net.mvp.main;
+package net.mvp.user;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HomeController {
+public class userController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(userController.class);
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
