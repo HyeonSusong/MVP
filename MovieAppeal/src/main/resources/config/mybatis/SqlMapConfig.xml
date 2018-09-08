@@ -3,11 +3,20 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-	   <typeAlias alias="dto" type="net.hb.crud.BoardDTO"/>
-	   <typeAlias alias="rdto" type="net.hb.crud.ReplyDTO"/>
+	   <typeAlias alias="udto" type="net.mvp.users.UsersDTO"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="config/mybatis/board.xml"/>
-		<mapper resource="config/mybatis/reply.xml"/>		
+	<!--  리뷰게시판 관련 쿼리문 xml -->
+	<!-- 	<mapper resource="config/mybatis/board.xml"/> 
+		<mapper resource="config/mybatis/board_reply.xml"/>		
+		<mapper resource="config/mybatis/board_like.xml"/>
+	  영화게시글 관련 쿼리문 xml 
+		<mapper resource="config/mybatis/movie.xml"/>
+		<mapper resource="config/mybatis/movie_like.xml"/>
+		<mapper resource="config/mybatis/movie_mini.xml"/>
+		<mapper resource="config/mybatis/movie_rate.xml"/>
+	 유저정보 관련 쿼리문 xml -->
+		<mapper resource="config/mybatis/users.xml"/>	
+		 
 	</mappers>
 </configuration>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  tiles-definitions PUBLIC
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- main -->
+	<definition name="mainLayout" template="/WEB-INF/views/main/mainLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>
+	
+	<!-- admin -->
+	<definition name="admin" template="/WEB-INF/views/admin/admin.jsp"/>
+		
+	<!-- review board -->
+	<definition name="board" template="/WEB-INF/views/board/board.jsp"/>
+	
+	<!-- rank -->
+	<definition name="event" template="/WEB-INF/views/event/event.jsp"/>
+	
+	<!-- recommend -->
+	<definition name="member" template="/WEB-INF/views/member/member.jsp"/>
+	<definition name="memberPreEdit" template="/WEB-INF/views/member/memberEdit.jsp"/>
+	
+	<!-- movie -->
+	<definition name="movie" template="/WEB-INF/views/movie/movie.jsp"/>
+	<definition name="likeMovie" template="/WEB-INF/views/movie/likeMovie.jsp"/>
+	
+	<!-- appraisal -->
+	<definition name="notice" template="/WEB-INF/views/notice/notice.jsp"/>
+	
+	<!-- users -->
+	<definition name="signup" template="/WEB-INF/views/users/signup.jsp"/>
+
+	
+</tiles-definitions>
