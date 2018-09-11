@@ -11,26 +11,26 @@
 	</definition>
 	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>
 	
-	<!-- admin -->
+	<!--  admin
 	<definition name="admin" template="/WEB-INF/views/admin/admin.jsp"/>
 		
-	<!-- review board -->
+	
 	<definition name="board" template="/WEB-INF/views/board/board.jsp"/>
 	
-	<!-- rank -->
+	rank
 	<definition name="event" template="/WEB-INF/views/event/event.jsp"/>
 	
-	<!-- recommend -->
+	recommend
 	<definition name="member" template="/WEB-INF/views/member/member.jsp"/>
 	<definition name="memberPreEdit" template="/WEB-INF/views/member/memberEdit.jsp"/>
 	
-	<!-- movie -->
+	movie
 	<definition name="movie" template="/WEB-INF/views/movie/movie.jsp"/>
 	<definition name="likeMovie" template="/WEB-INF/views/movie/likeMovie.jsp"/>
 	
-	<!-- appraisal -->
+	appraisal
 	<definition name="notice" template="/WEB-INF/views/notice/notice.jsp"/>
-	
+	 -->
 	<!-- users -->
 	<definition name="signup" template="/WEB-INF/views/users/signup.jsp"/>
 

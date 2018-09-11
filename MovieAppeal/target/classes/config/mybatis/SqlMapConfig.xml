@@ -2,9 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-	   <typeAlias alias="udto" type="net.mvp.users.UsersDTO"/>
-	</typeAliases>
+
 	<mappers>
 	<!--  리뷰게시판 관련 쿼리문 xml -->
 	<!-- 	<mapper resource="config/mybatis/board.xml"/> 
@@ -16,7 +14,7 @@
 		<mapper resource="config/mybatis/movie_mini.xml"/>
 		<mapper resource="config/mybatis/movie_rate.xml"/>
 	 유저정보 관련 쿼리문 xml -->
-		<mapper resource="config/mybatis/users.xml"/>	
+	 	<mapper resource="config/mybatis/users.xml"/>	 
 		 
 	</mappers>
 </configuration>

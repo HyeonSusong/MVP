@@ -1,6 +1,6 @@
 package net.mvp.users;
 
-public class UsersDTO {
+public class usersDTO {
 	private int u_no;
 	private String u_id;
 	private String u_pwd;
@@ -9,7 +9,7 @@ public class UsersDTO {
 	private String u_verify;
 	private String u_lock;
 	
-	//// Ãß°¡ ////
+	//// mail input ////
 	private String u_mail_id;
 	private String u_mail_domain;
 	public int getU_no() {
