@@ -16,4 +16,13 @@ public class usersDAO {
 	public void dbuserInsert(usersDTO udto) {
 		temp.insert("users.add", udto);
 	}
+	
+	public int dbidcheck(String userid) {
+		int cnt = temp.selectOne("users.idcheck", userid);
+		return cnt;
+	}
+	public int dbmailcheck(String u_mail) {
+		int cnt = temp.selectOne("users.mailcheck",u_mail);
+		return cnt;
+	}
 }

@@ -37,6 +37,20 @@
 		
  	<context:component-scan base-package="net.mvp.*" >
  	</context:component-scan>
+ 	
+ 	<!--
+        - This bean processes annotated handler methods, applying Application-specific PropertyEditors
+        - for request parameter binding. It overrides the default AnnotationMethodHandlerAdapter.
+     -->
+     <beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+<!-- 
+출처: http://seongilman.tistory.com/117 [SEONG]
+        @ResponseBody를 사용하기 위해
+        jre : jackson-core, jackson-mapper 필요
+  		<beans:property name="messageConverters" value="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+ 		 <bean
+ 		</beans:property> 
+    </beans:bean> -->
  
 <!--
 		<context:include-filter type="annotation" expression="org.springframework.context.annotation.Configuration"/>

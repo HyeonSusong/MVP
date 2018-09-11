@@ -72,8 +72,8 @@ create sequence mmr_seq;
 
 create table review_board(
 b_no number(10) not null primary key,
-u_no number(10) not null,
-m_no number(10) not null,
+u_no number(10) not null,2
+m_no number(10) not null,3
 b_category varchar2(20 char) not null,
 b_title varchar2(30 char),
 b_text varchar2(3000 char),

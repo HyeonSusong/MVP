@@ -55,13 +55,25 @@
 						}*/
 						
 						if(genre_ck()<5){
-							alert("선호하시는 장르를 5개이상 체크해주세요")
+							alert("선호하시는 장르를 5개이상 체크해주세요");
 							genre_cnt=0;
 							return;
 						}
+						if(!id_overlap_flag){
+							alert("아이디 중복체크를 해주세요");
+							id_overlap_flag=false;
+							return;
+						}
+						if(!mail_overlap_flag){
+							alert("메일 중복체크를 해주세요");
+							mail_overlap_flag=false;
+							return;
+						}
+						
 						$('#signupform').submit();				
 					});
 			});
+		
 		
 		function pwdcheck(){
 			var pwd1 = $('#pwdbox1').val();
@@ -121,6 +133,10 @@
 		    //idck 버튼을 클릭했을 때 
 		    $("#idck").click(function() {		        
 		        //userid 를 param.
+				if(check($('#idbox'))){
+					alert("아이디를 입력해주세요");
+					return;
+				}
 		        var userid =  $("#idbox").val();		        
 		        $.ajax({
 		            async: true,
@@ -133,14 +149,10 @@
 		                if (data.cnt > 0) {		                    
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#idbox").addClass("has-error")
-		                    $("#idbox").removeClass("has-success")
 		                    $("#idbox").focus();		                    		                
 		                } else {
 		                    alert("사용가능한 아이디입니다.");
 		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#divInputId").addClass("has-success")
-		                    $("#divInputId").removeClass("has-error")
 		                    $("#userpwd").focus();
 		                    //아이디가 중복하지 않으면  idck = 1 
 		                    id_overlap_flag = true;
@@ -156,16 +168,25 @@
 		$(function() {
 		    //idck 버튼을 클릭했을 때 
 		    $("#mailck").click(function() {		        
-		        //userid 를 param.
+		        //userid 를 param
+				if(check($('#mailbox1'))){
+					alert("메일 아이디입력해주세요");
+					return;
+				}
+				if(check($('#mailbox2'))){
+					alert("메일 도메인을 입력해주세요");
+					return;
+				} 
 		        var userid =  $("#mailbox1").val();
 		        var domain = $("#mailbox2").val();
+		        
 		        $.ajax({
 		            async: true,
 		            type : 'POST',
-		            data : {
-		            			u_email_id : userid,
+		            data : JSON.stringify({
+		            			u_mail_id : userid,
 		            			u_mail_domain : domain
-		            },
+		            }),
 		            url : "mailcheck.do",
 		            dataType : "json",
 		            contentType: "application/json; charset=UTF-8",
@@ -203,13 +224,22 @@
 			return genre_cnt;
 		}
 		
+		function flagreset(box){
+			if($(box).attr("id")=="idbox"){
+				var id_overlap_flag=false;
+			}
+ 			if($(box).attr("id")=="mailbox1" || $(box).attr("id")=="mailbox2"){
+				var mail_overlap_flag=false;
+			} 
+		}
+		
 		
 
 	</script>
-<form id="signupform">
+<form id="signupform" method="post" action="usercreate.do">
 <label>id</label>
-<input id="idbox" name="u_id" type="text" maxlength="20"/>
-<input id="idck" type="button"  value="아이디중복체크">
+<input id="idbox" name="u_id" onchange="flagreset(this);" type="text" maxlength="20"/>
+<input id="idck" type="button" value="아이디중복체크">
 <br>
 <label>비밀번호</label>
 <input id="pwdbox1" name="u_pwd" type="password" maxlength="20">
@@ -217,8 +247,8 @@
 <input id="pwdbox2" type="password" maxlength="20">
 <br>
 <label>이메일</label>
-<input id="mailbox1" name="u_email_id" type="text">@
-<input id="mailbox2" name="u_email_domain">
+<input id="mailbox1" onchange="flagreset(this);" name="u_mail_id" type="text">@
+<input id="mailbox2" onchange="flagreset(this);" name="u_mail_domain">
 <select id="domain" onchange="copy();">
 	<option value="">도메인</option>
 	<option value="naver.com">naver.com</option>
@@ -229,16 +259,17 @@
 <input id="mailck" type="button" value="메일중복체크">
 <br>
 <p>장르</p>
-<p><input class="checkSelect" name="u_genre" type="checkbox" value="액션">액션
-<input class="checkSelect" name="u_genre" type="checkbox" value="범죄">범죄
-<input class="checkSelect" name="u_genre" type="checkbox" value="드라마">드라마
-<input class="checkSelect" name="u_genre" type="checkbox" value="멜로">멜로
-<input class="checkSelect" name="u_genre" type="checkbox" value="코미디">코미디
-<p><input class="checkSelect" name="u_genre" type="checkbox" value="공포">공포
-<input class="checkSelect" name="u_genre" type="checkbox" value="스릴러">스릴러
-<input class="checkSelect" name="u_genre" type="checkbox" value="SF">SF
-<input class="checkSelect" name="u_genre" type="checkbox" value="판타지">판타지
-<input class="checkSelect" name="u_genre" type="checkbox" value="애니메이션">애니메이션</p>
+<p><input class="checkSelect" name="u_mygenre" type="checkbox" value="액션">액션
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="범죄">범죄
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="드라마">드라마
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="멜로">멜로
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="코미디">코미디
+<p><input class="checkSelect" name="u_mygenre" type="checkbox" value="공포">공포
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="스릴러">스릴러
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="SF">SF
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="판타지">판타지
+<input class="checkSelect" name="u_mygenre" type="checkbox" value="애니메이션">애니메이션</p>
+
 
 
 <input class="submit_btn" type="button">

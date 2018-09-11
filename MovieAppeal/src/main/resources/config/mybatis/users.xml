@@ -21,11 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from (select u_id, u_pwd from users where u_id=#{u_id} ) u where u.u_pwd=#{u_pwd}
 	</select>
 	
-	<select id="idcheck" parameterType="String">
+	<select id="idcheck" parameterType="String" resultType="int" >
 		select count(*) as cnt from users where u_id=#{userid} 
 	</select>
 	
-	<select id="mailcheck" parameterType="String">
+	<select id="mailcheck" parameterType="String" resultType="int">
 		select count(*) as cnt from users where u_mail=#{u_mail} 
 	</select>
 	
