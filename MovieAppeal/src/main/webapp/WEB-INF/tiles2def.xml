@@ -11,28 +11,19 @@
 	</definition>
 	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>
 	
-	<!--  admin
-	<definition name="admin" template="/WEB-INF/views/admin/admin.jsp"/>
-		
-	
-	<definition name="board" template="/WEB-INF/views/board/board.jsp"/>
-	
-	rank
-	<definition name="event" template="/WEB-INF/views/event/event.jsp"/>
-	
-	recommend
-	<definition name="member" template="/WEB-INF/views/member/member.jsp"/>
-	<definition name="memberPreEdit" template="/WEB-INF/views/member/memberEdit.jsp"/>
-	
-	movie
+
+	<!-- movie -->
 	<definition name="movie" template="/WEB-INF/views/movie/movie.jsp"/>
-	<definition name="likeMovie" template="/WEB-INF/views/movie/likeMovie.jsp"/>
 	
-	appraisal
-	<definition name="notice" template="/WEB-INF/views/notice/notice.jsp"/>
-	 -->
+	<!-- rank -->
+	<definition name="rank" template="/WEB-INF/views/rank/rank.jsp"/>
+	
+	<!-- recommend -->
+	<definition name="recommend" template="/WEB-INF/views/recommend/recommend.jsp"></definition>
+	
 	<!-- users -->
 	<definition name="signup" template="/WEB-INF/views/users/signup.jsp"/>
+	<definition name="login" template="/WEB-INF/views/users/login.jsp"/>
 
 	
 </tiles-definitions>

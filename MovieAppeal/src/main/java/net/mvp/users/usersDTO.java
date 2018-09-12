@@ -9,23 +9,9 @@ public class usersDTO {
 	private String u_verify;
 	private String u_lock;
 	
-	//// mail input ////
-	private String u_mail_id;
-	private String u_mail_domain;
+
 	public int getU_no() {
 		return u_no;
-	}
-	public String getU_mail_id() {
-		return u_mail_id;
-	}
-	public void setU_mail_id(String u_mail_id) {
-		this.u_mail_id = u_mail_id;
-	}
-	public String getU_mail_domain() {
-		return u_mail_domain;
-	}
-	public void setU_mail_domain(String u_mail_domain) {
-		this.u_mail_domain = u_mail_domain;
 	}
 	public void setU_no(int u_no) {
 		this.u_no = u_no;

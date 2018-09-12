@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class mainController {
@@ -18,10 +19,12 @@ public class mainController {
 	
 	
 	@RequestMapping(value = "/main.do")
-	public String home() {
-
-		
-		return "main";
+	public ModelAndView home() {
+		ModelAndView mav = new ModelAndView();
+		String url = "main";
+		mav.addObject("page",url);
+		mav.setViewName("mainLayout");
+		return mav;
 	}
 	
 }

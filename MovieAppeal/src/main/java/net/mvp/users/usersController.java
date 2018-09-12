@@ -28,21 +28,46 @@ public class usersController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(usersController.class);
 	
-	@RequestMapping("/signup.do")
-	public String Signup() {
-		return "signup";
+	@RequestMapping("/login.do")
+	public ModelAndView login() {
+		ModelAndView mav = new ModelAndView();
+		String url = "login";
+		mav.addObject("page",url);
+		mav.setViewName("mainLayout");
+		return mav;
 	}
+	@RequestMapping("/signin.do")
+	public ModelAndView signin() {
+		ModelAndView mav = new ModelAndView();
+		String url = "main";
+		mav.addObject("page",url);
+		mav.setViewName("mainLayout");
+		return mav;
+	}
+	
+	@RequestMapping("/signup.do")
+	public ModelAndView Signup() {
+		ModelAndView mav = new ModelAndView();
+		String url = "signup";
+		mav.addObject("page",url);
+		mav.setViewName("mainLayout");
+		return mav;
+	}
+	
+	//////////////////// 유저 생성  ///////////////////////////////////////
 	
 	@RequestMapping("/usercreate.do")
 	public ModelAndView usercreate(usersDTO udto) {
 		ModelAndView mav = new ModelAndView();
-		udto.setU_mail(udto.getU_mail_id()+"@"+udto.getU_mail_domain());
 		System.out.println(udto.getU_mygenre());
 		udao.dbuserInsert(udto);
-		mav.setViewName("main");
+		String url = "main";
+		mav.addObject("page",url);
+		mav.setViewName("mainLayout");
 		return mav;
 	}
 	
+	// AJAX id check
 	@RequestMapping("/idcheck.do")
     @ResponseBody
     public Map<Object, Object> idcheck(@RequestBody String userid) {
@@ -53,11 +78,11 @@ public class usersController {
        return map;	
 	}
 	
+	//  AJAX mail check
 	@RequestMapping("/mailcheck.do")
     @ResponseBody
-    public Map<Object, Object> idcheck(@RequestBody Map<Object, Object> mail) {
+    public Map<Object, Object> mailcheck(@RequestBody String u_mail) {
         int count = 0;
-        String u_mail = (String)mail.get("u_mail_id")+"@"+mail.get("u_mail_domain");
         System.out.println(u_mail);
         Map<Object, Object> map = new HashMap<Object, Object>();
         count = udao.dbmailcheck(u_mail);
