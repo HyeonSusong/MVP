@@ -20,30 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class usersController {
+public class UsersController {
 	
 	@Autowired
 	@Inject
-	usersDAO udao;
+	UsersDAO udao;
 	
-	private static final Logger logger = LoggerFactory.getLogger(usersController.class);
-	
-	@RequestMapping("/login.do")
-	public ModelAndView login() {
-		ModelAndView mav = new ModelAndView();
-		String url = "login";
-		mav.addObject("page",url);
-		mav.setViewName("mainLayout");
-		return mav;
-	}
-	@RequestMapping("/signin.do")
-	public ModelAndView signin() {
-		ModelAndView mav = new ModelAndView();
-		String url = "main";
-		mav.addObject("page",url);
-		mav.setViewName("mainLayout");
-		return mav;
-	}
+	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 	
 	@RequestMapping("/signup.do")
 	public ModelAndView Signup() {
@@ -57,7 +40,7 @@ public class usersController {
 	//////////////////// 유저 생성  ///////////////////////////////////////
 	
 	@RequestMapping("/usercreate.do")
-	public ModelAndView usercreate(usersDTO udto) {
+	public ModelAndView usercreate(UsersDTO udto) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(udto.getU_mygenre());
 		udao.dbuserInsert(udto);

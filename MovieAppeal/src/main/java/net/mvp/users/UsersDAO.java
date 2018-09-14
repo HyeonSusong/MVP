@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class usersDAO {
+public class UsersDAO {
 
 	@Inject
 	@Autowired
 	SqlSessionTemplate temp;
 	
-	public void dbuserInsert(usersDTO udto) {
+	public void dbuserInsert(UsersDTO udto) {
 		temp.insert("users.add", udto);
 	}
 	

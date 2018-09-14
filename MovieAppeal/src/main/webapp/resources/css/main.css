@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+#prelist{
+	width:1040px;
+	padding:10px;
+	overflow:hidden;
+	}
+
+#prelist-hit {
+    boder:1px solid#487BE1;
+    width:520px;
+    float:left;
+    padding:10px;
+}
+#prelist-new {
+	boder:1px solid#487BE1;
+    width:520px;
+    float:right;
+    padding:10px;
+    margin-left:15px;
+}

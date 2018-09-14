@@ -18,6 +18,7 @@
 	.spaceLeft { margin-left: 10px;	}
 	.spaceRight {margin-right: 10px;}
 	.space{	margin : 10px;}
+	.space2x{	margin : 20px;}
 	.spaceTop{ 	margin-top: 10px;}
 	.btn span.fa {	opacity: 0;}
 	.btn.active span.fa {opacity: 1;}
@@ -25,6 +26,7 @@
         margin: 0 auto; /* Added */
         float: none; /* Added */
         margin-bottom: 10px; /* Added */
+        padding-bottom:20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		align: center;
 	}
@@ -99,8 +101,8 @@
 					</label>
 				</div>
 			</div>
-			<div class="form-group space">
-				<div class="checkvox">
+			<div class="form-group">
+				<div class="checkbox">
 					<label>
 					<input class="checkSelect" name="u_mygenre" type="checkbox" value="공포">공포
 					</label>
@@ -119,18 +121,15 @@
 				</div>
 				</div>
 			</div>
-			
-			<div class="col-sm-6 space">
-				<div align="center">
-					<button class="btn btn-primary btn-lg" id="submit_btn" type="button" >
-					<i class="fa fa-check spaceLeft">회원가입</i>
-					</button>
-					<button class="btn btn-danger btn-lg" id="cancel_btn" type="button" >
-					 <i class="fa fa-times spaceLeft">가입취소</i>
-					</button> 
-				</div>
-			</div>
 		</form>
+	</div>
+	<div class="space2x" align="center">
+		<button class="btn btn-primary btn-lg" id="submit_btn" type="button" >
+			<i class="fa fa-check spaceLeft">회원가입</i>
+		</button>
+		<button class="btn btn-danger btn-lg" id="cancel_btn" type="button" >
+			 <i class="fa fa-times spaceLeft">가입취소</i>
+		</button> 
 	</div>
 	</div>
 </body>

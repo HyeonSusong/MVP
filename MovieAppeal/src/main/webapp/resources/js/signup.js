@@ -197,4 +197,13 @@
 			} 
 		}
 		
+		$(function(){
+			$('#cancel_btn').click(
+					function(){
+						var url = "main.do"
+						$(location).attr('href', url);
+					}
+					);
+		});
+		
 		

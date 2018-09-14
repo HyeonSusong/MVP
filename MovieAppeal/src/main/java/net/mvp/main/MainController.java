@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class mainController {
+public class MainController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(mainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	
 	@RequestMapping(value = "/main.do")

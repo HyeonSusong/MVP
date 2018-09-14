@@ -1,6 +1,6 @@
 package net.mvp.users;
 
-public class usersDTO {
+public class UsersDTO {
 	private int u_no;
 	private String u_id;
 	private String u_pwd;

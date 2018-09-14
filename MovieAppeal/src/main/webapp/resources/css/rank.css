@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+#ranklist{
+	margin-left: 5rem;
+}
+#ranklist {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 37%;
+}
+#ranklist td, #ranklist th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#ranklist tr:nth-child(even){background-color: #f2f2f2;}
+#ranklist tr:hover {
+background-color: #ddd;
+ -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+}
+#ranklist th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:#6c757d;
+    color: white;
+}
+

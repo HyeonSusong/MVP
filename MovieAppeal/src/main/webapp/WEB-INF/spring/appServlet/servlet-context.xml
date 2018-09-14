@@ -76,6 +76,22 @@
 		</beans:bean>
 		 -->
 		 
+		 <!--  인터셉터 설정 -->
+		 <beans:bean id="authInterceptor" class="net.mvp.login.AuthInterceptor">		 
+		 </beans:bean>
+		 <beans:bean id="loginInterceptor" class="net.mvp.login.LoginInterceptor">		 
+		 </beans:bean>
+		 <interceptors>
+		 	<interceptor>
+		 		<mapping path="/loginPost.do"/>
+		 		<beans:ref bean="loginInterceptor"/>
+		 	</interceptor>
+		 	<interceptor>
+		 		<mapping path="/rank.do"/>
+		 		<beans:ref bean="authInterceptor"/>
+		 	</interceptor>
+		 </interceptors>
+		 
 		 	<!-- 파일업로드 Commons~~~ -->
 
 	

@@ -1,6 +1,6 @@
 package net.mvp.user.mail;
 
-public class sendmail {
+public class Sendmail {
 
 	
 }
