@@ -24,6 +24,7 @@
 	<!-- users -->
 	<definition name="signup" template="/WEB-INF/views/users/signup.jsp"/>
 	<definition name="login" template="/WEB-INF/views/users/login.jsp"/>
+	<definition name="mypagemenu" template="/WEB-INF/views/users/mypagemenu.jsp"/>
 
 	
 </tiles-definitions>

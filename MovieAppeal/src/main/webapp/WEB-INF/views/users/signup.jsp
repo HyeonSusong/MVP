@@ -8,8 +8,6 @@
 
 <title>회원 가입</title>
 	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet">
 	<script src="js/signup.js"></script>
 	<style type="text/css">

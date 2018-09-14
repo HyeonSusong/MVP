@@ -72,4 +72,13 @@ public class UsersController {
         map.put("cnt", count);
        return map;	
 	}
+	
+	@RequestMapping("/mypage.do")
+	public ModelAndView mymenu() {
+		ModelAndView mav = new ModelAndView();
+		String url = "mypagemenu";
+		mav.addObject("page",url);
+		mav.setViewName("mainLayout");
+		return mav;
+	}
 }
