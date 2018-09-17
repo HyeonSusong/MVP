@@ -76,9 +76,26 @@ public class UsersController {
 	@RequestMapping("/mypage.do")
 	public ModelAndView mymenu() {
 		ModelAndView mav = new ModelAndView();
-		String url = "mypagemenu";
+		String url = "profile";
 		mav.addObject("page",url);
-		mav.setViewName("mainLayout");
+		mav.setViewName("mypagemenu");
+		return mav;
+	}
+	
+	@RequestMapping("/myfavorite.do")
+	public ModelAndView myfavorite() {
+		ModelAndView mav = new ModelAndView();
+		String url = "myfavorite";
+		mav.addObject("page",url);
+		mav.setViewName("mypagemenu");
+		return mav;
+	}	
+	@RequestMapping("/profile.do")
+	public ModelAndView myprofile() {
+		ModelAndView mav = new ModelAndView();
+		String url = "profile";
+		mav.addObject("page",url);
+		mav.setViewName("mypagemenu");
 		return mav;
 	}
 }

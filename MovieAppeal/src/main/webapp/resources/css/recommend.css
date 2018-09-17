@@ -1,6 +1,54 @@
-@charset "utf-8";
 
-div .item{
-	 display: inline;
+
+/* 붉은 색 : #C71B1B;
+rgba(199, 27, 27, 0.5);
+
+아이보리 : #D6BA8A;
+rgba(214, 186, 138, 0.5);
+
+청녹색 : #017467;
+rgba(1, 116, 103, 0.5);
+
+귤색 : #E08F23;
+rgba(224, 143, 35, 0.5);
+
+검은색 : #0B0D0C;
+rgba(11, 13, 12, 0.5); */
+
+#recommend {
+	background-color: #eee;
+	color : #0B0D0C;
+	width: 100%;
+	margin: 0;
+	margin-top: 0px;
+	padding: 77px 0px 50px 0px;
 }
+
+<!--추천 리스트 css -->
+.rec-list {
+	padding: 10;
+	margin-top:100px;
+	margin-left:100px;
+    border: 2px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+.rec-list img {
+    width:320px; 
+    height:180px;
+}
+.item-title {
+    text-align: center;
+}
+
+.item:hover {
+  background-color: #ddd;
+ -webkit-transform:scale(1.5);
+    -moz-transform:scale(1.5);
+    -ms-transform:scale(1.5);   
+    -o-transform:scale(1.5);
+    transform:scale(1.5);
+}
+
 

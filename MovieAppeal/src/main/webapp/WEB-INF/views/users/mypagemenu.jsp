@@ -1,119 +1,79 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-	<script src="js/signup.js"></script>
-<style type="text/css">
-		@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-		*{ font-mily: 'Nanum Gothic', arial, helvetica, sans-serif; font-size:15px;}
-	.spaceLeft { margin-left: 10px;	}
-	.spaceRight {margin-right: 10px;}
-	.space{	margin : 10px;}
-	.space2x{	margin : 20px;}
-	.spaceTop{ 	margin-top: 10px;}
-	.btn span. {	opacity: 0;}
-	.btn.active span. {opacity: 1;}
-	    .card {
-        margin: auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-        padding-bottom:20px;
-        background-color:;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		align: center;
-	} 
-	
-	article{
-    	margin: 0;
-    	padding: 0;
-    	position: relative;
-    	height: 100%;
-    	width: 60rem;
-	}
- 
-	 .back{
- 		background-color: #;
- 	}
- 	.btn_linen{
-		background-color: #353C42 !important; 	
- 	}
- 	.list_user{
- 		border-right: 1;
- 		border-right-color: #gray;
- 		padding:15px;
- 	}
- 	.list_categoty{
- 		margin-top: 20px;
- 		margin-bottom: 20px;
- 		font-size: 20px;
- 		font-mily: 
- 	}
- 	
- 	a{
- 		color: #030303;
- 	}
- 	a>onclick{
- 		color: #030303;
- 	}
- 	.list-area{
- 		height: 100%;
- 		width: 200px;
- 		align:left;
- 	}
-</style>
+    <title>MovieAppeal</title>
+    
+    
+    	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<!-- í°íŠ¸ì–´ì¸ -->
 
-</head>
-<body class="form-inline">
-	<div class="container back ">
-				<div class="visible-xs-block">
-				<button class="btn btn_linen "><i class="">Ä«Å×°í¸®</i>
-				</button>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link href="/css/movie.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link href="/css/jquery.datePicker.css" rel="stylesheet">
+	
+	<!-- ì œìž‘íŒŒì¼ css -->
+	<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">	
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/rank.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/recommend.css" rel="stylesheet">
+     
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Plugin CSS -->
+
+     <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-select.css" rel="stylesheet">
+    <!-- ë‚˜ëˆ” ì†ê¸€ì”¨ íŽœ -->
+	<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
+	<!-- js.íŒŒì¼ ì¶”ê°€ë°©ì‹ <script src="/js/main.js"></script> -->
+	<script src="/js/movie.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link href="/css/flip-carousel.css" rel="stylesheet">
+	<link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+	<script src="/js/star-rating.js" type="text/javascript"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<link href="css/mypage.css" rel="stylesheet"/>
+	<link href="css/poster.css" rel="stylesheet"/>
+  </head>
+  <body>
+  <!--  header -->
+    <div id="header">
+		<tiles:insertAttribute name="header"/>
+	</div>
+	
+	<!-- cotnet -->	
+  	<div style="padding-top:80px; ">
+  		<div class="visible-xs-block">
+			<button class="btn btn_linen "><i class="">ì¹´í…Œê³ ë¦¬</i>
+			</button>
+		</div>
+		<div class="container back">
+			<div class=" left_float">
+			<div class="hidden-xs list-area" >
+				<tiles:insertAttribute name="mymenu"/>
 			</div>
-	<div class="hidden-xs list-area ">
-				<ul class="list-unstyled bg-warning list_user">
-					<li class="list_categoty">
-						<a class="" href="#">
-							ÇÁ·ÎÇÊÆíÁý
-						</a>
-					</li>
-					<li class="list_categoty">
-						<a class="" href="">
-							³ªÀÇÃßÃµ¿µÈ­
-						</a>
-					</li>
-					<li class="list_categoty">
-						<a href="">
-							³ªÀÇº°Á¡¸®½ºÆ®
-						</a>
-					</li>
-					<li class="list_categoty">
-						<a href="">
-							³ªÀÇ°Ô½Ã±Û
-						</a>
-					</li>
-					<li class="list_categoty">
-						<a href="">
-							³ªÀÇ´ñ±Û
-						</a>
-					</li>
-					<li class="list_categoty">
-						<a href="">
-							È¸¿øÅ»Åð
-						</a>
-					</li>
-				</ul>
 			</div>
-		<div class="card">
-				<div class="form-group">
-			
 			<div class="article">
-				¤¾¤·
+				<tiles:insertDefinition name="${page}"/>
 			</div>
 		</div>
-		</div>
-	</div>	
+	</div>
+	
+	<!-- footer -->
+	<div id="footer">
+		<tiles:insertAttribute name="footer"/>
+	</div>
 </body>
 </html>

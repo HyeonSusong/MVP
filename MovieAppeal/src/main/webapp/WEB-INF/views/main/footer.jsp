@@ -1,66 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
-<%@ page session="false" %>
-<!DOCTYPE html>
-<html lang="en">
+<style>
 
-  </head>
-  <body id="page-top">
-    <!-- Footer -->
-    <footer class="footer text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 mb-5 mb-lg-0">
-            <h4 class="text-uppercase mb-4">Location</h4>
-            <p class="lead mb-0">2215 John Daniel Drive
-              <br>Clark, MO 65243</p>
-          </div>
-          <div class="col-md-4 mb-5 mb-lg-0">
-            <h4 class="text-uppercase mb-4">Around the Web</h4>
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fa fa-fw fa-facebook"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fa fa-fw fa-google-plus"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fa fa-fw fa-twitter"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fa fa-fw fa-linkedin"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                  <i class="fa fa-fw fa-dribbble"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h4 class="text-uppercase mb-4">About Freelancer</h4>
-            <p class="lead mb-0">Freelance is a free to use, open source Bootstrap theme created by
-              <a href="http://startbootstrap.com">vip</a>.</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+</style>
 
-   <div class="copyright py-4 text-center text-white">
-      <div class="copyright">
-        <small>Copyright &copy; Your Website 2018</small>
-      </div>
-    </div>
+<script type="text/javascript">
 
-  </body>
+$(document).ready(function(){
+	$('.bottom-col .link1').hover(function(){$(".bottom-col .link1").addClass("fa-spin");});
+	$('.bottom-col .link2').hover(function(){$(".bottom-col .link2").addClass("fa-spin");});
+	$('.bottom-col .link3').hover(function(){$(".bottom-col .link3").addClass("fa-spin");});
+	$('.bottom-col .link1').mouseleave(function(){$(".bottom-col .link1").removeClass("fa-spin");});
+	$('.bottom-col .link2').mouseleave(function(){$(".bottom-col .link2").removeClass("fa-spin");});
+	$('.bottom-col .link3').mouseleave(function(){$(".bottom-col .link3").removeClass("fa-spin");});
+});
 
-</html>
+
+
+</script>
+
+<div class="bottom-col">
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+  	<div class="container">
+	  	<div class="col-md-4 cen">
+	  		<img src="img/MVP.jpg" width="80px">
+	  	</div>
+	  	<div class="col-md-4 cen">
+	  		<div class="bottomtitle">Site Map</div>
+			<div class="comment cen">
+				<a href="index.jsp">Home</a><br>
+				<a href="Rank.do">RANK</a><br>
+				<a href="recommend.do">RECOMMEND</a><br>
+				<a href="theater.do">Theater</a><br>
+				<a href="#">REVIEWS</a><br>
+	        </div>
+	  	</div>
+	  	<div class="col-md-4 cen">
+	  		<div class="bottomtitle">Our Address</div>
+			<div class="bottomname">
+				<i class="fa fa-map-marker igray"></i> <span class="comment">63-14, Sinsu-dong, Mapo-gu, Seoul</span> <br>
+				<i class="fa fa-phone igray"></i><span class="comment"> +82 3387 2200</span><br>
+				<i class="fa fa-envelope igray"></i> <span class="comment">MovieAppeal@gmail.com</span><br>
+			</div>
+				<i class="fa fa-facebook-square fa-3x link1"></i>&nbsp; &nbsp;
+				<i class="fa fa-twitter-square fa-3x link2"></i>&nbsp; &nbsp;
+				<i class="fa fa-instagram fa-3x link3"></i>
+	  	</div>
+  	</div>
+  </div>
+ </div>
+</div>
+</div>
+ <div class="copy">copyright &copy; by MVP.com</div>

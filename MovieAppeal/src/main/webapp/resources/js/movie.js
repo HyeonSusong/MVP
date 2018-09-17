@@ -269,7 +269,7 @@ function likeplus(){
 
 function poster_likeplus(MOVIE_ID, NowUser){ 
 	   if(NowUser=='null'||NowUser==''){
-		   g_alert("로그인 후에 참여해주세요");
+		   alert("로그인 후에 참여해주세요");
 		   return;
 	   }else{
 	    $.ajax({

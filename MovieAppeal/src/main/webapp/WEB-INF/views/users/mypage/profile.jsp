@@ -1,0 +1,95 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+		<div class="col-md-12" style=" border-radius:20px;">
+			<div class="page-header space align-middle">
+			<br>
+        	 	<h1 class="spaceLeft spaceTop">회원정보수정</h1>
+       		</div>
+			<form class="form-horizontal" id="signupform" method="post" action="usercreate.do">
+       			<!-- id -->
+				<div class="form-group space">
+          			<label class="col-sm-3 control-label" for="idbox" >아이디</label>
+        				<div class="col-sm-6">
+							<input class="form-control" placeholder="아이디" id="idbox" name="u_id" onchange="flagreset(this);" type="text" maxlength="20" readonly/>
+						</div>
+						
+				</div>
+				<div class="form-group space">
+          			<label class="col-sm-3 control-label" for="pwdbox1">비밀번호</label>
+        			<div class="col-sm-6">
+						<input class="form-control" placeholder="비밀번호" id="pwdbox1" name="u_pwd" type="password" maxlength="20">
+					</div>
+				</div>
+				<div class="form-group space">
+          			<label class="col-sm-3 control-label" for="pwdbox2">비밀번호 재입력</label>
+        				<div class="col-sm-6">
+							<input class="form-control" placeholder="비밀번호 재입력" id="pwdbox2" type="password" maxlength="20">
+						</div>
+				</div>
+				<div class="form-group space">
+          			<label class="col-sm-3 control-label" for="mailbox">이메일</label>
+        				<div class="col-sm-6">
+							<input class="form-control" placeholder="이메일" id="mailbox" onchange="flagreset(this);" name="u_mail_id" type="text" readonly>
+        					<span class="input-group-btn spaceTop spaceLeft">
+								<button class="btn btn-default spaceTop" id="mailck" type="button" disabled="disabled">
+									<i class=fa> 메일중복체크</i>
+								</button>								
+							</span>
+						</div>		
+				</div>
+			<p>
+
+
+				<div class="col-sm-offset-3" >
+				<div class="form-group space">
+							<small class="space">* 선호하시는 장르를 5개이상 선택해주세요</small>
+				<div class="checkbox">
+					<p>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="액션">액션
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="범죄">범죄
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="드라마">드라마
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="멜로">멜로
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="코미디">코미디
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="공포">공포
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="스릴러">스릴러
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="SF">SF
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="판타지">판타지
+					</label>
+					<label>
+					<input class="checkSelect" name="u_mygenre" type="checkbox" value="애니메이션">애니메이션
+					</label>				
+				</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="space2x" align="center">
+		<button class="btn btn-primary btn-lg" id="submit_btn" type="button" >
+			<i class="fa fa-check spaceLeft">정보수정</i>
+		</button>
+		<button class="btn btn-danger btn-lg" id="cancel_btn" type="button" >
+			 <i class="fa fa-times spaceLeft">취소</i>
+		</button> 
+	</div>

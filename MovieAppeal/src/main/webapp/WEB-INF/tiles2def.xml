@@ -24,7 +24,15 @@
 	<!-- users -->
 	<definition name="signup" template="/WEB-INF/views/users/signup.jsp"/>
 	<definition name="login" template="/WEB-INF/views/users/login.jsp"/>
-	<definition name="mypagemenu" template="/WEB-INF/views/users/mypagemenu.jsp"/>
-
+	
+	<!--  mypage -->
+	<definition name="mypagemenu" template="/WEB-INF/views/users/mypagemenu.jsp">
+		<put-attribute name="mymenu" value="/WEB-INF/views/users/mymenu.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+	
+	<definition name="profile" template="/WEB-INF/views/users/mypage/profile.jsp"></definition>
+	<definition name="myfavorite" template="/WEB-INF/views/users/mypage/myfavorite.jsp"></definition>
 	
 </tiles-definitions>
