@@ -137,7 +137,7 @@
 		    $("#mailck").click(function() {		        
 		        //userid 를 param
 				if(check($('#mailbox'))){
-					alert("메일 아이디입력해주세요");
+					alert("메일을입력해주세요");
 					return;
 				}
 				if(mailcheck()){
@@ -156,16 +156,12 @@
 		            contentType: "application/json; charset=UTF-8",
 		            success : function(data) {
 		                if (data.cnt > 0) {		                    
-		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		                    alert("해당 메일은 이미 존재합니다. 다른 아이디를 입력해주세요.");
 		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#mailbox").addClass("has-error");
-		                    $("#mailbox").removeClass("has-success");
 		                    $("#mailbox").focus();		                    		                
 		                } else {
-		                    alert("사용가능한 아이디입니다.");
+		                    alert("사용가능한 이메일입니다.");
 		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#mailbox").addClass("has-success");
-		                    $("#mailbox").removeClass("has-error");
 		                    $("#mailbox").focus();
 		                    //아이디가 중복하지 않으면  idck = 1 
 		                    mail_overlap_flag = true;

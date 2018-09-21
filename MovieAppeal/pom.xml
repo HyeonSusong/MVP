@@ -27,6 +27,13 @@
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
 		
+		
+     <repository >
+             <id >movie-api </id >
+             <name >external jars </name >
+             <url >file://${project.basedir}/lib </url >
+     </repository >
+
 	</repositories>
 	
 	<dependencies>
@@ -252,27 +259,38 @@
     
     <!-- JSON @ResponBody 사용  -->
 <!-- Jackson -->
-<dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-annotations</artifactId>
-           <version>2.4.2</version>
-</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-annotations</artifactId>
+		<version>2.4.2</version>
+	</dependency>
  
-<dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-core</artifactId>
-           <version>2.4.2</version>
-</dependency>
-<dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-databind</artifactId>
-           <version>2.4.2</version>
-</dependency>
-<dependency>
-   <groupId>org.codehaus.jackson</groupId>
-   <artifactId>jackson-mapper-asl</artifactId>
-   <version>1.9.13</version>
-  </dependency>
+	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.4.2</version>
+	</dependency>
+	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.4.2</version>
+	</dependency>
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.9.13</version>
+	</dependency>
+  
+  
+           <!--      영화진흥위원회 API     -->
+           
+	<dependency>
+		<groupId>kr.or.kobis</groupId>
+    	<artifactId>kobis-opcl-rest</artifactId>
+		<version>1.0 </version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/kobis-opcl-rest-v1.0.jar</systemPath>
+	</dependency> 
 
 	</dependencies>
 
@@ -310,9 +328,26 @@
                 <version>1.2.1</version>
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
+          
                 </configuration>
             </plugin>
+            <plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-war-plugin</artifactId>
+    			<configuration>
+        			<webResources>
+            			<resource>
+                			<directory>lib</directory>
+                			<targetPath>WEB-INF/lib/</targetPath>
+                			<!-- 스프링 부트는  <targetPath>BOOT-INF/lib/</targetPath> -->
+                			<includes>
+                    		<include>**/*.jar</include>
+                			</includes>
+            			</resource>
+        			</webResources>
+    			</configuration>
+			</plugin>
         </plugins>
     </build>
-    <artifactId>crud</artifactId>
+    <artifactId>mvp</artifactId>
 </project>

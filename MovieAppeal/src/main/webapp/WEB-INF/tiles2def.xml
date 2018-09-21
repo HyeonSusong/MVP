@@ -9,11 +9,11 @@
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
-	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>
-	
+	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>	
 
 	<!-- movie -->
 	<definition name="movie" template="/WEB-INF/views/movie/movie.jsp"/>
+	<definition name="moviedetail" template="/WEB-INF/views/movie/movie_Detail.jsp"/>
 	
 	<!-- rank -->
 	<definition name="rank" template="/WEB-INF/views/rank/rank.jsp"/>
@@ -32,7 +32,28 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	<definition name="profile" template="/WEB-INF/views/users/mypage/profile.jsp"></definition>
+	<definition name="myprofile" template="/WEB-INF/views/users/mypage/profile.jsp"></definition>
 	<definition name="myfavorite" template="/WEB-INF/views/users/mypage/myfavorite.jsp"></definition>
+	<definition name="myrating" template="/WEB-INF/views/users/mypage/myrating.jsp"></definition>
+	<definition name="myreview" template="/WEB-INF/views/users/mypage/myreview.jsp"></definition>
+	<definition name="myreply" template="/WEB-INF/views/users/mypage/myreply.jsp"></definition>
+	<definition name="user_delete" template="/WEB-INF/views/users/mypage/user_delete.jsp"></definition>
+	
+	
+	<!-- adminpage -->
+	<definition name="administratormain" template="/WEB-INF/views/admin/administratormain.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/admin/adminheader.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/admin/adminfooter.jsp"/>
+	</definition>
+	
+	<definition name="movietable" template="/WEB-INF/views/admin/movietable.jsp"/>
+	<definition name="movieadd" template="/WEB-INF/views/admin/movieadd.jsp"/>
+	<definition name="usermanage" template="/WEB-INF/views/admin/usermanage.jsp"/>
+	<definition name="reviewmanage" template="/WEB-INF/views/admin/reviewmanage.jsp"/>
+	<definition name="replymanage" template="/WEB-INF/views/admin/replymanage.jsp"/>
+	<definition name="admincreate" template="/WEB-INF/views/admin/admincreate.jsp"/>
+	<definition name="adminlogin" template="/WEB-INF/views/admin/adminlogin.jsp"/>
+	
+	
 	
 </tiles-definitions>

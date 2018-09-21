@@ -4,6 +4,13 @@ public class LoginDTO {
 	
 	private String u_id;
 	private String u_pwd;
+	private String u_mail;
+	public String getU_mail() {
+		return u_mail;
+	}
+	public void setU_mail(String u_mail) {
+		this.u_mail = u_mail;
+	}
 	public String getU_id() {
 		return u_id;
 	}

@@ -32,7 +32,6 @@ $(document).ready(function(){
 				<a href="index.jsp">Home</a><br>
 				<a href="Rank.do">RANK</a><br>
 				<a href="recommend.do">RECOMMEND</a><br>
-				<a href="theater.do">Theater</a><br>
 				<a href="#">REVIEWS</a><br>
 	        </div>
 	  	</div>

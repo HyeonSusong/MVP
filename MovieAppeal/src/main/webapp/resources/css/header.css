@@ -89,12 +89,10 @@ body{
 	left : 0px;
 	background-color: rgba(26, 37, 48, 0);
 	text-shadow : 0px 0px 7px #161616;
-	z-index: 1300;
 }
 #header .logo img{
 	width: 150px;
-	height:75px;
-	transition : all 0.3s;
+	height:77px;
 }
 	
 #header .nav > li {
@@ -113,7 +111,7 @@ body{
     padding: 23px 23px;
     border-bottom: solid;
     border-top: solid;
-    border-color: #017467;
+    border-color: #D6BA8A;
     transition : all 0.3s;
 }
 
@@ -121,14 +119,14 @@ body{
 	background-color: #005E57;
     border-bottom: solid;
     border-top: solid;
-    border-color: #E08F23;
+    border-color: #D6BA8A;
 }
 
 #header .nav > li > a.select {
 	background-color: #005E57;
     border-bottom: solid;
     border-top: solid;
-    border-color: #E08F23;
+    border-color: #D6BA8A;
 }
 
 #header .nav > li > a:focus {
@@ -144,9 +142,9 @@ body{
 	margin-left : 50px;
 	padding: 10px 33px;
 	border: solid;
-	border-color: #E08F23;
+	border-color: #D6BA8A;
 	background-color: transparent;
-	color : #E08F23;
+	color : #D6BA8A;
 	font-size: 18px;
     font-weight: bold;
     transition : all 0.3s;
@@ -166,7 +164,7 @@ body{
 }
 #header #loginlogo {
 	width: 60%;
-    margin: 40px 20% 20px 20%;
+    margin: 40px 0% 20px 20%;
 }
 
 #header #header .member, #header .idpwFind_wrap{
@@ -257,10 +255,11 @@ body{
 }
 
 #header #idpwFind:hover, #header #joinbt:hover {
- background-color: #E08F23;
- color: #fff;
+ background-color: #fff;
+ color: #D6BA8A;
  
  }
+ 
  
  /*============= member ===================*/
  
@@ -508,6 +507,14 @@ body{
 	background-color: #015f53;
 }
 
+/*==============축소 반응형==================*/
+@media ( max-width: 480px ) {
+        .backcolor .header-wrap {
+          width: auto;
+        }
+        
+      }
+
 
 #scroll {
 	cursor : pointer;
@@ -547,6 +554,7 @@ body{
     left: 0px;
  }
  
+ /*===================로그인버튼 css=============*/
 .Login-btn{
 	 background:#16375a;
   color:#fff;

@@ -81,6 +81,8 @@
 		 </beans:bean>
 		 <beans:bean id="loginInterceptor" class="net.mvp.login.LoginInterceptor">		 
 		 </beans:bean>
+		 <beans:bean id="adminInterceptor" class="net.mvp.admin.AdminInterceptor">		 
+		 </beans:bean>
 		 <interceptors>
 		 	<interceptor>
 		 		<mapping path="/loginPost.do"/>
@@ -88,10 +90,33 @@
 		 	</interceptor>
 		 	<interceptor>
 		 		<mapping path="/rank.do"/>
+		 		<mapping path="/mypage.do"/>
+		 		<mapping path="/myrating.do"/>
+		 		<mapping path="/myreply.do"/>
+		 		<mapping path="/myreview.do"/>
+		 		<mapping path="/userdelete.do"/>
+		 		<mapping path="/myfavorite.do"/>
+		 		<mapping path="/myprofile.do"/>
 		 		<beans:ref bean="authInterceptor"/>
+		 	</interceptor>
+		 	<interceptor>
+		 		<mapping path="/administrator/movietable.do"/>
+		 		<mapping path="/administrator/main.do"/>
+		 		<mapping path="/administrator/movieadd.do"/>
+		 		<mapping path="/administrator/usersmanage.do"/>
+		 		<mapping path="/administrator/reviewmanage.do"/>
+		 		<mapping path="/administrator/replymanage.do"/>
+		 		<mapping path="/administrator/admincreate.do"/>
+		 		<beans:ref bean="adminInterceptor"/>
 		 	</interceptor>
 		 </interceptors>
 		 
+
+							
+							
+							
+							
+							
 		 	<!-- 파일업로드 Commons~~~ -->
 
 	

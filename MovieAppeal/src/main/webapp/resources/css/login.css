@@ -1,22 +1,9 @@
 @charset "UTF-8";
 	@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 	
-	html {
-		height: 100%;
-	}
+
 	
-	body {
-	    width:100%;
-	    height:100%;
-	    margin: 0;
-  		padding-top: 80px;
-  		padding-bottom: 40px;
-  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-  		background-repeat: no-repeat;
-  		background:linear-gradient(to bottom right, #0098FF, #6BA8D1);
-	}
-	
-    .card {
+    #modal .logincard {
         margin: 0 auto; /* Added */
         height:auto;
         float: none; /* Added */
@@ -33,3 +20,35 @@
   		padding: 10px;
   		font-size: 16px;
 	}
+	.btn-black{
+		background-color: #030303 !important;
+	}
+	.btn-black > i {
+	color : #D6BA8A;
+	}
+	.btn-black:hover{
+	background-color: #ababab !important;
+
+	}
+
+	#admin-loginara{
+	background-color: #d3d3d3;
+	}
+	#default{
+	color:#D6BA8A;
+	}
+	/*  관리자 */
+	#admin-loginarea .logincard{
+       margin-left: auto; /* Added */
+       margin-right: auto;
+       margin-top: 40px;
+        margin-bottom: 50px; /* Added */
+        padding:20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width:40rem;
+		align: center;
+		max-width: 80%;
+        border-radius:20px;
+        
+	}
+	

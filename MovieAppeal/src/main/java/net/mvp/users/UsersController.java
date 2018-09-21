@@ -73,6 +73,7 @@ public class UsersController {
        return map;	
 	}
 	
+	// 마이페이지 메인	
 	@RequestMapping("/mypage.do")
 	public ModelAndView mymenu() {
 		ModelAndView mav = new ModelAndView();
@@ -81,7 +82,17 @@ public class UsersController {
 		mav.setViewName("mypagemenu");
 		return mav;
 	}
+	///회원 정보 조회
+	@RequestMapping("/myprofile.do")
+	public ModelAndView myprofile() {
+		ModelAndView mav = new ModelAndView();
+		String url = "profile";
+		mav.addObject("page",url);
+		mav.setViewName("mypagemenu");
+		return mav;
+	}
 	
+	//회원 페이지 - 선호하는 영화
 	@RequestMapping("/myfavorite.do")
 	public ModelAndView myfavorite() {
 		ModelAndView mav = new ModelAndView();
@@ -89,11 +100,43 @@ public class UsersController {
 		mav.addObject("page",url);
 		mav.setViewName("mypagemenu");
 		return mav;
-	}	
-	@RequestMapping("/profile.do")
-	public ModelAndView myprofile() {
+	}
+
+	//회원 페이지 - 평점을 남긴영화
+	@RequestMapping("/myrating.do")
+	public ModelAndView myrating() {
 		ModelAndView mav = new ModelAndView();
-		String url = "profile";
+		String url = "myrating";
+		mav.addObject("page",url);
+		mav.setViewName("mypagemenu");
+		return mav;
+	}
+	
+	//회원 페이지 - 나의 게시물
+	@RequestMapping("/myreview.do")
+	public ModelAndView myreview() {
+		ModelAndView mav = new ModelAndView();
+		String url = "myreview";
+		mav.addObject("page",url);
+		mav.setViewName("mypagemenu");
+		return mav;
+	}
+	
+	//회원 페이지 - 나의 댓글
+	@RequestMapping("/myreply.do")
+	public ModelAndView myreply() {
+		ModelAndView mav = new ModelAndView();
+		String url = "myreply";
+		mav.addObject("page",url);
+		mav.setViewName("mypagemenu");
+		return mav;
+	}
+
+	//회원 페이지 - 나의 댓글
+	@RequestMapping("/userdelete.do")
+	public ModelAndView userdelete() {
+		ModelAndView mav = new ModelAndView();
+		String url = "userdelete";
 		mav.addObject("page",url);
 		mav.setViewName("mypagemenu");
 		return mav;

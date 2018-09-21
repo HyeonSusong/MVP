@@ -10,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import net.mvp.users.UsersDTO;
+
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	
 	private static final String LOGIN = "login";
@@ -19,44 +21,41 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		
 		if(session.getAttribute(LOGIN) != null) {
 			logger.info("clear login data before");
 			session.removeAttribute(LOGIN);
 		}
-			saveDest(request);
+		//	saveDest(request);
 		return true;
 	}
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView mav) throws Exception {
-		// TODO Auto-generated method stub
+		try {
 		HttpSession session = request.getSession();
-		ModelMap modelMap = mav.getModelMap();
-		Object usersDTO = modelMap.get("LoginDTO");
-		if(usersDTO != null) {
+		UsersDTO dto =(UsersDTO)session.getAttribute("LOGIN");
+		System.out.println(dto.getU_verify());
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("½ÇÆÐ");
+		}
+		// TODO Auto-generated method stub
+/*		HttpSession session = request.getSession();
+		Object UsersDTO = request.getAttribute("UsersDTO");
+		System.out.println("5");
+		
+		if(UsersDTO != null) {
 			logger.info("setAttribute");
-			session.setAttribute(LOGIN, usersDTO);
-			String url = (String)request.getSession().getAttribute("dest");
-			response.sendRedirect(url);
-			
-		}		
+			session.setAttribute(LOGIN, UsersDTO);
+			//String url = (String)request.getSession().getAttribute("dest");
+			//response.sendRedirect(url);
+			System.out.println("8");
+		}
+		System.out.println("7");*/
 	}
 	
-	private void saveDest(HttpServletRequest req) {
-		String uri = req.getRequestURI();
-		String query = req.getQueryString();
-		if(query == null || query.equals("null")) {
-			query ="";
-		}else {
-			query = "?"+query;			
-		}
-		
-		if(req.getMethod().equals("GET")) {
-			req.getSession().setAttribute("dest", uri+query);
-		}
-	}
+/**/
 	
 	
 	@Override

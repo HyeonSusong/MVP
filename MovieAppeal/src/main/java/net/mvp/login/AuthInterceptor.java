@@ -13,7 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
-	private static final String LOGIN = "login";
+	private static final String LOGIN = "LOGIN";
 	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	
 	@Override
@@ -29,8 +29,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	     writer.println("</script>");
 	     writer.flush();
 		  return false;
-		}		
+		}
 		return true;
 	}
+	
+
 
 }

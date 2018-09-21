@@ -33,6 +33,11 @@
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    
     <!-- 나눔 손글씨 펜 -->
 	<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
 	<!-- js.파일 추가방식 <script src="/js/main.js"></script> -->
@@ -55,9 +60,44 @@
 	
 	<!-- cotnet -->	
   	<div style="padding-top:80px; ">
-  		<div class="visible-xs-block">
-			<button class="btn btn_linen "><i class="">카테고리</i>
+  		<div class="visible-xs-block dropdown">
+			<button id="categry-btn" class="btn btn_linen dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<i class="fa" style="color:#030303">카테고리</i>
+			  <span class="caret"></span>
 			</button>
+			
+			  <ul class="dropdown-menu" role="menu" aria-labelledby="categry-btn">
+					<li class="list_categoty">
+						<a class="" href="/myprofile.do">
+							<label class="control-label">프로필편집</label>
+						</a>
+					</li>
+					<li class="list_categoty">
+						<a class="" href="/myfavorite.do">
+							<label class="control-label">나의추천영화</label>
+						</a>
+					</li>
+					<li class="list_categoty">
+						<a href="/myrating.do">
+							<label class="control-label">나의별점리스트</label>							
+						</a>
+					</li>
+					<li class="list_categoty">
+						<a href="/myreview.do">
+							<label class="control-label">나의게시글</label>							
+						</a>
+					</li>
+					<li class="list_categoty">
+						<a href="/myreply.do">
+							<label class="control-label">나의댓글</label>							
+						</a>
+					</li>
+					<li class="list_categoty">
+						<a href="/userdelete.do">
+							<label class="control-label">회원탈퇴</label>							
+						</a>
+					</li>
+			  </ul>
 		</div>
 		<div class="container back">
 			<div class=" left_float">

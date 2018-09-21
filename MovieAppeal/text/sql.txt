@@ -8,7 +8,7 @@ u_no number(10) not null primary key,
 u_id varchar2(20 char),
 u_pwd varchar2(20 char),
 u_mail varchar2(50 char),
-u_mygenre varchar2(50 char),
+u_mygenre varchar2(100 char),
 u_verify char(1) default 'N' ,
 u_lock char(1) default 'N'
 );
@@ -22,8 +22,10 @@ m_no number(10) not null primary key,
 m_title varchar2(30 char),
 m_premiere date,
 m_genre varchar2(20 char),
+m_plot varchar2(600 char),
 m_rating number(2),
-m_likes number(7)
+m_likes number(7),
+m_imgurl varchar2(100 char)
 );
 
 create sequence movie_seq;

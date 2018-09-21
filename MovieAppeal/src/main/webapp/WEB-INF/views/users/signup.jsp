@@ -66,7 +66,7 @@
 				<div class="form-group space">
           			<label class="col-sm-3 control-label" for="mailbox">이메일</label>
         				<div class="col-sm-6">
-							<input class="form-control" placeholder="이메일" id="mailbox" onchange="flagreset(this);" name="u_mail_id" type="text">
+							<input class="form-control" placeholder="이메일" id="mailbox" onchange="flagreset(this);" name="u_mail" type="text">
         					<span class="input-group-btn spaceTop spaceLeft">
 								<button class="btn btn-default spaceTop" id="mailck" type="button" >
 									<i class=fa> 메일중복체크</i>

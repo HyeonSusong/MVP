@@ -20,22 +20,30 @@
 	
 	<!-- 제작파일 css -->
 	<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">	
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/rank.css" rel="stylesheet">
-    <link href="css/header.css" rel="stylesheet">
-    <link href="css/footer.css" rel="stylesheet">
-    <link href="css/recommend.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/rank.css" rel="stylesheet">
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/recommend.css" rel="stylesheet">
      
+    <!-- 제작파일 css -->
+	<script src="/js/movie.js"></script>
+	<script src="/js/header.js"></script>
+	
     <!-- Custom fonts for this template -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <!-- Plugin CSS -->
 
-     <!-- Bootstrap core CSS -->
+     <!-- Bootstrap core  -->
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
     <!-- 나눔 손글씨 펜 -->
 	<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
 	<!-- js.파일 추가방식 <script src="/js/main.js"></script> -->
@@ -43,8 +51,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="/js/jquery.datePicker.js"></script>
-	<script src="/js/jquery.magnific-popup.js"></script>
 	<link href="/css/flip-carousel.css" rel="stylesheet">
 	<script src="/js/flip-carousel.js"></script>
 	<link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />

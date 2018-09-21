@@ -32,7 +32,7 @@
 	
 	    <!-- http://사이트도메인/ 쳤을때 가장 처음 인식하는 페이지명입니다.-->
  <welcome-file-list>
-  <welcome-file>/main.do/</welcome-file>
+  <welcome-file>/main.do</welcome-file>
  </welcome-file-list>
 
 	
@@ -55,6 +55,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 	<!-- 한글설정 END -->
 
 </web-app>

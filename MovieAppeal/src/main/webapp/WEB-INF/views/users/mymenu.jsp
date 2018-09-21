@@ -8,33 +8,32 @@
 
 <ul class="list-unstyled list_user">
 					<li class="list_categoty">
-						<a class="" href="#">
+						<a class="" href="/myprofile.do">
 							<label class="control-label">프로필편집</label>
 						</a>
 					</li>
 					<li class="list_categoty">
-						<a class="" href="">
+						<a class="" href="/myfavorite.do">
 							<label class="control-label">나의추천영화</label>
 						</a>
 					</li>
 					<li class="list_categoty">
-						<a href="">
+						<a href="/myrating.do">
 							<label class="control-label">나의별점리스트</label>							
 						</a>
 					</li>
 					<li class="list_categoty">
-						<a href="">
+						<a href="/myreview.do">
 							<label class="control-label">나의게시글</label>							
 						</a>
 					</li>
 					<li class="list_categoty">
-						<a href="">
+						<a href="/myreply.do">
 							<label class="control-label">나의댓글</label>							
 						</a>
 					</li>
 					<li class="list_categoty">
-						<a href="">
+						<a href="/userdelete.do">
 							<label class="control-label">회원탈퇴</label>							
 						</a>
-					</li>
-				</ul>
+					</li>				</ul>

@@ -14,11 +14,13 @@ public class UsersDAO {
 	SqlSessionTemplate temp;
 	
 	public void dbuserInsert(UsersDTO udto) {
+		System.out.println(udto.getU_mail());
 		temp.insert("users.add", udto);
 	}
 	
 	public int dbidcheck(String userid) {
-		int cnt = temp.selectOne("users.idcheck", userid);
+		String u_id=userid;
+		int cnt = temp.selectOne("users.idcheck", u_id);
 		return cnt;
 	}
 	public int dbmailcheck(String u_mail) {

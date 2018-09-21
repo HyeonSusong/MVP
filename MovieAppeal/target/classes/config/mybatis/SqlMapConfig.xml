@@ -2,6 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!-- 	<typeAliases>
+	   <typeAlias alias="ldto" type="net.mvp.login.LoginDTO"/>
+	   <typeAlias alias="udto" type="net.mvp.users.UsersDTO"/>
+	</typeAliases> -->
 
 	<mappers>
 	<!--  리뷰게시판 관련 쿼리문 xml -->
