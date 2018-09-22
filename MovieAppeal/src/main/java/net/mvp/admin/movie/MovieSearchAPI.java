@@ -164,6 +164,8 @@ public class MovieSearchAPI {
 		String url ="";
 		return url ;
 	}
+	
+	
 
 /*
 		// KOBIS 오픈 API Rest Client를 통해 코드 서비스 호출 (boolean isJson, String comCode )
