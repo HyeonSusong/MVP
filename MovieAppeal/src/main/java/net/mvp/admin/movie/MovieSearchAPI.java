@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Repository;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import kr.or.kobis.kobisopenapi.consumer.rest.exception.OpenAPIFault;
@@ -73,21 +74,23 @@ public class MovieSearchAPI {
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String,Object> result1 = mapper.readValue(movieCdResponse, HashMap.class);
 		HashMap<String,Object> result2 = mapper.convertValue(result1.get("movieListResult"), HashMap.class);
-		ArrayList<Object> result3 = mapper.convertValue(result2.get("movieList"), ArrayList.class);
-		ArrayList<HashMap<String, Object>> lastresult = new ArrayList<HashMap<String,Object>>();
-		for(int i=0; i<result3.size(); i++ ) {
-			HashMap<String,Object> map = mapper.convertValue(result3.get(i), HashMap.class);
+		ArrayList<HashMap<String, Object>> lastresult = mapper.convertValue(result2.get("movieList"),new TypeReference<ArrayList<HashMap<String,Object>>>(){});
+		for(int i=0; i<lastresult.size(); i++ ) {
+			HashMap<String,Object> map = mapper.convertValue(lastresult.get(i), HashMap.class);
 			System.out.println(map.get("movieNm"));
 			String movieName = map.get("movieNm").toString();
 			String openDt = map.get("openDt").toString();
-			ArrayList<Object> directors= mapper.convertValue(map.get("directors"),ArrayList.class);
-			for (Object objects : directors) {
-			} 
-			
+			ArrayList<HashMap<String, Object>> directors= mapper.convertValue(map.get("directors"),new TypeReference<ArrayList<HashMap<String,Object>>>(){});
+			String[] directorName = new String[directors.size()];
+			for (HashMap<String, Object> objects : directors) {
+				int j=0;
+				directorName[j] = objects.get("peopleNm").toString();
+				j++;
+			}
 			if((i+1)%10==0) {
 			Thread.sleep(1000);
 			}
-			String na = OpenNaverApi(movieName,openDt);
+			String na = OpenNaverApi(movieName,openDt,directorName);
 			
 		}
 		return result1;
@@ -121,7 +124,7 @@ public class MovieSearchAPI {
 		return pageNummap;
 	}
 	
-	public String OpenNaverApi(String movieName, String openDt) {
+	public String OpenNaverApi(String movieName, String openDt,String[] directorName) {
 		String clientId = "zE4ogyqon6uPhV50yEx1";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "QQy6nVjclv";//애플리케이션 클라이언트 시크릿값";
         String result="";
