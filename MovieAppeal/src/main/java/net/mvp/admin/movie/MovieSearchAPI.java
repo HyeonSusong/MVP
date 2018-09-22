@@ -125,7 +125,9 @@ public class MovieSearchAPI {
 		String clientId = "zE4ogyqon6uPhV50yEx1";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "QQy6nVjclv";//애플리케이션 클라이언트 시크릿값";
         String result="";
-        String year= openDt.substring(0, 5);
+        String year= "";
+        if(openDt== ""|| openDt ==null)
+        year= openDt.substring(0, 4);
         System.out.println(year);
         String requesttext="";
         try {
