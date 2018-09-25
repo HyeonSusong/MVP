@@ -36,12 +36,11 @@ public class MovieSearchAPI {
 	private String repNationCd;		//대표국적코드 (공통코드서비스에서 '2204'로 조회된 국가코드)
 	private String[] movieTypeCdArr;		//영화형태코드 배열 (공통코드서비스에서 '2201'로 조회된 영화형태코드)
 	
-	
 	KobisOpenAPIRestService service = new KobisOpenAPIRestService(key); // 서비스호출객체
 
-	public HashMap<String,Object> MovieSearch(MovieSearchDTO dto) throws OpenAPIFault, Exception {
+	public ArrayList<HashMap<String, Object>> MovieSearch(MovieSearchDTO dto) throws OpenAPIFault, Exception {
 		curPage = dto.getCurPage()==null?"1":dto.getCurPage();				
-		itemPerPage = dto.getItemPerPage()==null?"20":dto.getItemPerPage();		
+		itemPerPage = dto.getItemPerPage()==null?"10":dto.getItemPerPage();		
 		movieNm = dto.getMovieNm()==null?"":dto.getMovieNm();						
 		directorNm = dto.getDirectorNm()==null?"":dto.getDirectorNm();			
 		openStartDt = dto.getOpenStartDt()==null?"":dto.getOpenStartDt();			
@@ -74,35 +73,37 @@ public class MovieSearchAPI {
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String,Object> result1 = mapper.readValue(movieCdResponse, HashMap.class);
 		HashMap<String,Object> result2 = mapper.convertValue(result1.get("movieListResult"), HashMap.class);
-		ArrayList<HashMap<String, Object>> lastresult = mapper.convertValue(result2.get("movieList"),new TypeReference<ArrayList<HashMap<String,Object>>>(){});
-		for(int i=0; i<lastresult.size(); i++ ) {
-			HashMap<String,Object> map = mapper.convertValue(lastresult.get(i), HashMap.class);
-			System.out.println(map.get("movieNm"));
-			String movieName = map.get("movieNm").toString();
-			String openDt = map.get("openDt").toString();
-			ArrayList<HashMap<String, Object>> directors= mapper.convertValue(map.get("directors"),new TypeReference<ArrayList<HashMap<String,Object>>>(){});
-			String[] directorName = new String[directors.size()];
+		ArrayList<HashMap<String, Object>> lastresult = mapper.convertValue(result2.get("movieList"),new TypeReference<ArrayList<HashMap<String, Object>>>(){});
+		ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+		int j = 1;
+		for(HashMap<String, Object> object : lastresult) {
+			String movieName = object.get("movieNm").toString();
+			String movieNameEng = object.get("movieNmEn").toString();
+			String openDt = object.get("openDt").toString();
+			ArrayList<HashMap<String, Object>> directors = mapper.convertValue(object.get("directors"),new TypeReference<ArrayList<HashMap<String, Object>>>(){});
+			String[] directorNm= new String[directors.size()];
 			for (HashMap<String, Object> objects : directors) {
-				int j=0;
-				directorName[j] = objects.get("peopleNm").toString();
-				j++;
-			}
-			if((i+1)%10==0) {
+				int i=0;
+				directorNm[i] = objects.get("peopleNm").toString();
+				i++;
+			} 
+			if((j%5)==0) {
 			Thread.sleep(1000);
 			}
-			String na = OpenNaverApi(movieName,openDt,directorName);
-			
+			j++;
+			String url = OpenNaverApi(movieName,openDt,directorNm,movieNameEng);
+			object.put("imageUrl", url);
+			object.put("directors", directorNm);
+			result.add(object);
 		}
-		return result1;
+		return result;
 	}
 	
 	public HashMap<String,Object> MovieCodeSearch() throws OpenAPIFault, Exception {
 		
 		String movieCd = "2201";
-		
 		// 영화코드조회 서비스 호출 (boolean isJson, String curPage, String itemPerPage,String directorNm, String movieCd, String movieNm, String openStartDt,String openEndDt, String ordering, String prdtEndYear, String prdtStartYear, String repNationCd, String[] movieTypeCdArr)
 		// Json 라이브러리를 통해 Handling
-
 		String movieCdResponse = service.getComCodeList(true,movieCd);
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String,Object> result = mapper.readValue(movieCdResponse, HashMap.class);		
@@ -110,12 +111,13 @@ public class MovieSearchAPI {
 	}
 
 	public Map<String, Integer> SearchPageNum(String curPage){
+		curPage = curPage==null||curPage=="" ?"1":curPage;				
 		Map<String,Integer> pageNummap = new HashMap<String, Integer>();
 		int pageIndex = 10;
 		int firstPage ; 
 		int lastPage ;
 		int nowPage=Integer.parseInt(curPage);
-		lastPage = (pageIndex+(nowPage-1)/pageIndex)*pageIndex;
+		lastPage = (1+(nowPage-1)/pageIndex)*pageIndex;
 		firstPage= lastPage-pageIndex+1;
 		pageNummap.put("pageIndex", pageIndex);
 		pageNummap.put("firstPage", firstPage);
@@ -124,19 +126,22 @@ public class MovieSearchAPI {
 		return pageNummap;
 	}
 	
-	public String OpenNaverApi(String movieName, String openDt,String[] directorName) {
+	public String OpenNaverApi(String movieName, String openDt, String[] directorNm, String movieNameEng) {
 		String clientId = "zE4ogyqon6uPhV50yEx1";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "QQy6nVjclv";//애플리케이션 클라이언트 시크릿값";
         String result="";
-        String year= "";
-        if(openDt== ""|| openDt ==null)
+        String year="";
+        if(openDt !=""&&openDt !=null) {
         year= openDt.substring(0, 4);
-        System.out.println(year);
+        }
         String requesttext="";
-        try {
-        	requesttext = "query="+movieName+"&yearfrom="+year+"&yearto="+year;
-            String text = URLEncoder.encode(movieName, "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/search/movie.json?query="+ text; // json 결과
+		String imgurl ="";
+        ObjectMapper mapper = new ObjectMapper(); 
+		try {
+            movieName = URLEncoder.encode(movieName, "UTF-8");
+            year=URLEncoder.encode(year, "UTF-8");
+//            movieNameEng = URLEncoder.encode(movieNameEng, "UTF-8");
+            String apiURL = "https://openapi.naver.com/v1/search/movie.json?query="+movieName+"&yearfrom="+year+"&yearto="+year; // json 결과
             //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -157,14 +162,54 @@ public class MovieSearchAPI {
             }
             br.close();
             System.out.println(response.toString());
-            result = response.toString();
+            inputLine = response.toString();
+            HashMap<String, Object> naver = mapper.readValue(inputLine, HashMap.class);
+            int display = (Integer) naver.get("display");
+            
+            // 한글 제목 검색결과 없을시 영어이름으로 검색 
+            if(display == 0 ) {
+           	 apiURL = "https://openapi.naver.com/v1/search/movie.json?query="+movieNameEng+"&yearfrom="+year+"&yearto="+year; // json 결과
+                //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
+                url = new URL(apiURL);
+                con = (HttpURLConnection)url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("X-Naver-Client-Id", clientId);
+                con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+                responseCode = con.getResponseCode();
+                if(responseCode==200) { // 정상 호출
+                    br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+                } else {  // 에러 발생
+                    br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
+                }
+                response = new StringBuffer();
+                while ((inputLine = br.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                br.close();
+                System.out.println(response.toString());
+                inputLine = response.toString();
+                naver = mapper.readValue(inputLine, HashMap.class);
+                display = (Integer) naver.get("display");
+           }
+            imgurl = display==0 ? "": urlgetter(naver, directorNm);           
         } catch (Exception e) {
-        	result="";
+        	imgurl = "";
             System.out.println(e);
         }
-        
-		String url ="";
-		return url ;
+		System.out.println(imgurl);
+		return imgurl;
+	}
+	public String urlgetter(HashMap<String,Object> naver,String[] directorNm) {
+		String url= "";
+        ObjectMapper mapper = new ObjectMapper(); 
+		ArrayList<HashMap<String,Object>> itemlist = mapper.convertValue(naver.get("items"), new TypeReference<ArrayList<HashMap<String,Object>>>(){});
+		for(HashMap item : itemlist) {
+		 boolean test = item.get("director").toString().indexOf(directorNm[0])>=0;
+		 if(test) {
+			 url = item.get("image").toString();
+			 break;
+		 }}
+		return url;
 	}
 	
 	

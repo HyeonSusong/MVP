@@ -104,7 +104,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/administrator/movieadd.do")
 	public ModelAndView movieadd(MovieSearchDTO mdto, HttpServletRequest req) {
-		HashMap<String, Object> movielist = new HashMap<String,Object>();
+		ArrayList<HashMap<String, Object>> movielist = new ArrayList<HashMap<String, Object>>();
 		ModelAndView mav = new ModelAndView();
 		if(req.getQueryString()==""||req.getQueryString()==null) {
 			mdto.setPrdtStartYear(now.nowyear());
@@ -126,12 +126,13 @@ public class AdminController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		String page = mdto.getCurPage()==null ? "" : mdto.getCurPage();
+		Map<String,Integer> pageset = msapi.SearchPageNum(page);	
 		String url = "movieadd";
 		mav.addObject("page",url);
-		
-		
+		mav.addObject("pageset",pageset);
 		mav.addObject("movielist",movielist);
+		System.out.println("¿þ¾ÊµÊ?");
 		mav.setViewName("administratormain");
 		return mav;
 	}

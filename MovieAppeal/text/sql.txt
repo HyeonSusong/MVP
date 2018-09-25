@@ -20,7 +20,6 @@ create sequence users_seq;
 create table movies(
 m_no number(10) not null primary key,
 m_title varchar2(30 char),
-m_premiere date,
 m_genre varchar2(20 char),
 m_plot varchar2(600 char),
 m_rating number(2),
