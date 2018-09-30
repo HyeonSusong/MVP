@@ -8,8 +8,6 @@
 	<script src="/js/login.js"></script>
 	<link href="/css/login.css" rel="stylesheet">
 	<style type="text/css">
-		@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-		*{ font-family: 'Nanum Gothic', arial, helvetica, sans-serif; font-size:15px;}
 	.spaceLeft { margin-left: 10px;	}
 	.spaceRight {margin-right: 10px;}
 	.space{	margin : 10px;}

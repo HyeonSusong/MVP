@@ -22,9 +22,10 @@ m_no number(10) not null primary key,
 m_title varchar2(30 char),
 m_genre varchar2(20 char),
 m_plot varchar2(600 char),
-m_rating number(2),
+m_rating number(2,1),
 m_likes number(7),
-m_imgurl varchar2(100 char)
+m_imgurl varchar2(100 char),
+m_trailerurl varchar2(100 char)
 );
 
 create sequence movie_seq;

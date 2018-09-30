@@ -1,0 +1,111 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Notable|Noto+Serif+KR');
+
+* #movieDetail {
+	margin: 450px 0 0px;
+	width: 100%;
+	height: auto;
+	display: block;
+	font-family: 'Noto Serif KR', sans-serif !important;
+	font-size:17pt;
+}
+
+.mdbg {
+	background: linear-gradient(to right, #202020, #232239, #232239, #202020);
+	width: 100%;
+	height: 489px;
+	z-index: 0;
+	position: absolute;
+	top: 76px;
+	left: 0px;
+}
+
+.movieDetail-wrap {
+	width: 100%;
+	position: relative;
+	margin-top: 0px;
+	top: -20px;
+	margin: 15px auto 0px auto;
+}
+
+.movieDetail-wrap h2 {
+	margin-left: 260px;
+	padding-left: 20px;
+	color: #000;
+}
+
+#movieDetail .moviedetail-top {
+	width: 100%;
+	display: inline-block;
+	position: relative;
+	top: -15rem;
+	left: -20rem;
+}
+
+#movieDetail .movieDetail-poster {
+	width: 300px;
+	margin: 0px 0px 0px 0px;
+	position: relative;
+	left: -170px;
+}
+
+.movieDetail-poster img {
+	width: 230px;
+	box-shadow: 4px 4px 3px #808080;
+	border-radius: 5px;
+}
+
+.movieDetail-title {
+	width: 200px;
+	top: -200px;
+	left: 55px;
+	position: relative;
+}
+
+.movieDetail-title h1 {
+	border-bottom: 1px solid;
+}
+
+.movieDetail-info {
+	position: relative;
+	width: 230px;
+	top: -180px;
+	left: 60px;
+}
+
+.movieDetail-rate {
+	position: relative;
+	width: 230px;
+	top: -180px;
+	left: 10px;
+}
+
+.movieDetail-like {
+	position: relative;
+	width: 230px;
+	top: -160px;
+	left: 10px;
+}
+
+.movieDetail-bottom {
+	margin: -20rem 15rem 5rem 0rem;
+}
+
+.movieDetail-bottom .d_middle {
+	box-shadow: 1px 1px 1px #808080;
+	border-radius: 5px;
+	background-color: #f2f0f2;
+	width: 815px;
+	border: 10px solid #ddd;
+	padding: 10px;
+}
+.youtube_wrap{
+	margin-bottom:200px;
+}
+.summary{
+	margin-right: 55px;
+    border: 1px solid #ddd;
+    padding: 20px;
+	
+}
+/* 리뷰 디테일 영화정보칸 */

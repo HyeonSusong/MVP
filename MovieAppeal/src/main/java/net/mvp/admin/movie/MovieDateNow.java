@@ -11,4 +11,10 @@ public class MovieDateNow {
 		String nowdate = sdf.format(day.getTime()).toString();
 		return nowdate;		
 	}
+	
+	public String openday (String date) {
+		sdf = new SimpleDateFormat("yyyy³âMM¿ùddÀÏ");
+		String opendate = sdf.format(date);
+		return opendate;
+	}
 }

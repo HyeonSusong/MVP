@@ -25,7 +25,10 @@ import net.mvp.admin.movie.MovieSearchAPI;
 import net.mvp.admin.movie.MovieSearchDTO;
 import net.mvp.login.LoginDAO;
 import net.mvp.login.LoginDTO;
+import net.mvp.movie.MovieDAO;
+import net.mvp.movie.MovieDTO;
 import net.mvp.users.UsersDTO;
+import oracle.net.aso.e;
 
 @Controller
 public class AdminController {
@@ -50,14 +53,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/administrator/movietable.do")
-	public ModelAndView movietable() {
-		ModelAndView mav = new ModelAndView();
-		String url = "movietable";
-		mav.addObject("page",url);
-		mav.setViewName("administratormain");
-		return mav;
-	}
+
 	
 
 	@RequestMapping(value = "/administrator/usersmanage.do")
@@ -96,11 +92,88 @@ public class AdminController {
 		return mav;
 	}
 	
-	////////////////////////// 영화 추가 관련 /////////////////////////////////////
+	////////////////////////// 영화 수정 관련 /////////////////////////////////////
 	MovieDateNow now = new MovieDateNow();
 	@Inject
 	@Autowired
 	MovieSearchAPI msapi;
+	
+	//// 영화 추가
+	@Inject
+	@Autowired
+	MovieDAO mdao;
+	
+	@RequestMapping(value = "/administrator/movietable.do")
+	public ModelAndView movietable(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		MovieDTO reqdto = new MovieDTO();
+		List<MovieDTO> list = new ArrayList<MovieDTO>();
+		String curPage = req.getParameter("curPage");
+		int maxitem = mdao.MovieAllCount(reqdto);
+		Map<String,Integer> setpage = reqdto.setPage(curPage,maxitem);
+		list = mdao.dbAdminMovieList(reqdto);
+		String url = "movietable";
+		mav.addObject("page",url);
+		mav.addObject("list",list);
+		mav.addObject("pageset",setpage);
+		mav.setViewName("administratormain");
+		return mav;
+	}
+	
+	@RequestMapping(value ="/administrator/movieedit.do")
+	@ResponseBody
+	public Map<Object, Object> movieEdit(@RequestBody Map<Object,Object> reqmap){
+		MovieDTO mdto = new MovieDTO();
+		Map<Object, Object> map = new HashMap<Object,Object>();
+		System.out.println(reqmap);
+		System.out.println(reqmap.get("m_no"));
+		mdto.setM_no(Integer.parseInt((String)reqmap.get("m_no")));
+		mdto.setM_imgurl((String)reqmap.get("m_imgurl"));
+		mdto.setM_plot((String)reqmap.get("m_plot"));
+		mdto.setM_trailerurl((String)reqmap.get("m_trailerurl"));
+		int cnt = mdao.dbMovieCount(mdto);
+		String msg = "NO";
+		if(cnt > 0) {
+			try {
+			mdao.dbMovieEdit(mdto);
+			msg="OK";
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				msg="NO";
+			}
+		}	
+		System.out.println("cnt:"+cnt+"msg:"+msg);
+		map.put("msg", msg);
+		return map;
+	} //conunt AJAX ADMINmovieeidt
+	
+	@RequestMapping(value ="/administrator/moviedelete.do")
+	@ResponseBody
+	public Map<Object, Object> moviedelete(@RequestBody Map<Object,Object> reqmap){
+		MovieDTO mdto = new MovieDTO();
+		Map<Object, Object> map = new HashMap<Object,Object>();
+		System.out.println(reqmap);
+		System.out.println(reqmap.get("m_no"));
+		mdto.setM_no(Integer.parseInt((String)reqmap.get("m_no")));
+		int cnt = mdao.dbMovieCount(mdto);
+		String msg = "NO";
+		if(cnt > 0) {
+			try {
+			mdao.dbMovieDelete(mdto);
+			msg="OK";
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				msg="NO";
+			}
+		}	
+		System.out.println("cnt:"+cnt+"msg:"+msg);
+		map.put("msg", msg);
+		return map;
+	} //conunt AJAX ADMINmovieeidt
+	
+	
+	////////////////////////// 영화 추가 관련 /////////////////////////////////////
+
 	
 	@RequestMapping(value = "/administrator/movieadd.do")
 	public ModelAndView movieadd(MovieSearchDTO mdto, HttpServletRequest req) {
@@ -132,12 +205,39 @@ public class AdminController {
 		mav.addObject("page",url);
 		mav.addObject("pageset",pageset);
 		mav.addObject("movielist",movielist);
-		System.out.println("웨않됨?");
 		mav.setViewName("administratormain");
 		return mav;
 	}
+
 	
-	
+	@RequestMapping(value ="/administrator/postmovieadd.do")
+	@ResponseBody
+	public Map<Object, Object> postMovieAdd(@RequestBody Map<Object,Object> reqmap){
+		MovieDTO mdto = new MovieDTO();
+		Map<Object, Object> map = new HashMap<Object,Object>();
+		System.out.println("0");
+		System.out.println(reqmap);
+		System.out.println(reqmap.get("m_no"));
+		mdto.setM_no(Integer.parseInt((String)reqmap.get("m_no")));
+		mdto.setM_title((String)reqmap.get("m_title"));
+		mdto.setM_genre((String)reqmap.get("m_genre"));
+		mdto.setM_imgurl((String)reqmap.get("m_imgurl"));
+		System.out.println("1");
+		int cnt = mdao.dbMovieCount(mdto);
+		System.out.println("2");
+		if(cnt == 0) {
+			try {
+			System.out.println("3");
+			mdao.dbMovieAdd(mdto);
+			System.out.println("4");
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}	
+		System.out.println("cnt:"+cnt);
+		map.put("cnt", cnt);
+		return map;
+	} //conunt AJAX ADMINmovieadd
 	
 	
 	////// 관리자로그인 화면 관련/////////////////////////////////////////////////////////////////////////

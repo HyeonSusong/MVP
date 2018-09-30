@@ -13,11 +13,14 @@
 
 	<!-- movie -->
 	<definition name="movie" template="/WEB-INF/views/movie/movie.jsp"/>
-	<definition name="moviedetail" template="/WEB-INF/views/movie/movie_Detail.jsp"/>
+	<definition name="moviedetail" template="/WEB-INF/views/movie/movieDetail.jsp"/>
 	
 	<!-- rank -->
 	<definition name="rank" template="/WEB-INF/views/rank/rank.jsp"/>
 	
+	<!-- review -->
+	<definition name="review" template="/WEB-INF/views/review/review.jsp"/>
+		
 	<!-- recommend -->
 	<definition name="recommend" template="/WEB-INF/views/recommend/recommend.jsp"></definition>
 	
@@ -32,7 +35,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
-	<definition name="myprofile" template="/WEB-INF/views/users/mypage/profile.jsp"></definition>
+	<definition name="profile" template="/WEB-INF/views/users/mypage/profile.jsp"></definition>
 	<definition name="myfavorite" template="/WEB-INF/views/users/mypage/myfavorite.jsp"></definition>
 	<definition name="myrating" template="/WEB-INF/views/users/mypage/myrating.jsp"></definition>
 	<definition name="myreview" template="/WEB-INF/views/users/mypage/myreview.jsp"></definition>

@@ -41,21 +41,24 @@
 			</tr>
 			<c:if test="${not empty movielist}">
 				<c:forEach var="list" items="${movielist}">
-					<tr class="dager">
-					<td>
-					<img class="m_imgurl" src="${list.imageUrl}">
+					<tr class="dager movieEntity">
+					<td class="m_imgarea">
+					<img  class="m_imgurl" src="${list.imageUrl}">
 					</td>
-					<td class="m_no"><label class="fa" >${list.movieCd}</label>
+					<td><label class="fa" >${list.movieCd}</label>
+					<input class="m_no" type="hidden" value="${list.movieCd}"> 
 					</td>
-					<td class="m_title"><label class="fa">${list.movieNm}</label>
+					<td><label class="fa">${list.movieNm}</label>
+					<input class="m_title" type="hidden" value="${list.movieNm}"> 
 					</td>
 					<td><label class="fa">${list.movieNmEn}</label>
 					</td>
 					<td><label class="fa">${list.openDt}</label>
 					</td>
-					<td class="m_genre"><label class="fa">${list.genreAlt}</label>
+					<td><label class="fa">${list.genreAlt}</label>
 					</td>
 					<td><label class="fa">${list.repGenreNm}</label>
+					<input class="m_genre" type="hidden" value="${list.repGenreNm}">
 					</td>
 					<td>
 						<c:forEach var="direct" items="${ list.directors}">
@@ -64,7 +67,7 @@
 					</td>
 					<td>
 						<div class="checkbox">
-							<input class="movieAddCheck" type="checkbox">
+							<input class="movieAddCheck" id="movieAddCheck" type="checkbox">
 						</div>
 					</td>
 					</tr>
@@ -99,15 +102,57 @@
 				</td>
 			</tr>
 		</table>
-		<button type="button" >
+		<button class ="btn" type="button" id="btnMovieAdd"> <i>영화 추가</i>
 		</button>
-	
+	<form>
+	<input type="text" id="m_imgurl" name="m_imgurl" >
+	<input type="text" id="m_no" name="m_no">
+	<input type="text" id="m_title" name="m_title">
+	<input type="text" id="m_genre" name="m_genre">
+	</form>
 	</div>
 </div>
 </div>
-<script>
+<script type="text/javascript">
 	$(function(){
-		
+		$("#btnMovieAdd").click(function(){
+			var dataname = '';
+			for (i=0; i<$(".movieAddCheck").length;i++){
+				if($(".movieAddCheck").eq(i).is(":checked")){
+					var m_imgurl = $(".movieAddCheck").eq(i).parents('.movieEntity').children().children('.m_imgurl').attr('src');
+					var m_no = $(".movieAddCheck").eq(i).parents('.movieEntity').children().children('.m_no').val();
+					var m_title = $(".movieAddCheck").eq(i).parents('.movieEntity').children().children('.m_title').val();
+					var m_genre = $(".movieAddCheck").eq(i).parents('.movieEntity').children().children('.m_genre').val();
+					
+			        $.ajax({
+			            async: true,
+			            type : 'POST',
+			            data : JSON.stringify({
+			            	'm_no' : m_no,
+			            	'm_title' : m_title,
+			            	'm_genre' : m_genre,
+			            	'm_imgurl' : m_imgurl
+			            }),
+			            url : "/administrator/postmovieadd.do",
+			            dataType : "json",
+			            contentType: "application/json; charset=UTF-8",
+			            success : function(data) {
+			            	if(data.cnt==0){
+			            	dataname = dataname + m_title+",";
+		            		location.reload();
+			            	}
+			            	if(data.cnt>0){
+			            		alert(m_title+"은 이미 등록된 영화입니다.");
+			            		}
+			            },
+			            error : function(error) {		                
+			                alert("error : " + error);
+			            }
+			        });
+				}
+			}
+			alert( dataname + "등록완료");
+		});
 	});
 </script>
 <style type="text/css">

@@ -1,28 +1,47 @@
-<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="reply">
+<mapper namespace="movie">
 
-	<insert id="add" parameterType="net.hb.crud.ReplyDTO">
-	  insert into hobby_reply
-	  values( rhobby_seq.nextVal, #{rwriter}, #{rmemo}, #{hobby_idx})     
+	<insert id="add" parameterType="net.mvp.movie.MovieDTO">
+	  insert into movies ( m_no, m_title, m_genre, m_imgurl)
+	  values( #{m_no}, #{m_title}, #{m_genre}, #{m_imgurl})     
 	</insert>
 	
-	<select id="selectAll"  parameterType="int" resultType="net.hb.crud.ReplyDTO">
-		select * from  hobby_reply where hobby_idx=#{hobby_idx} 
+	<select id="detail"  parameterType="int" resultType="net.mvp.movie.MovieDTO">
+		select * from  movies where m_no=#{m_no} 
 	</select>
 
-	<select id="countAll" parameterType="int" resultType="int">
-		select count(*) from  hobby_reply where hobby_idx=#{hobby_idx} 
+	<select id="count" parameterType="int" resultType="int">
+		select count(*) from movies where m_no=#{m_no} 
+	</select>
+	
+	<select id="countAll" parameterType="net.mvp.movie.MovieDTO" resultType="int">
+		select count(*) from movies
+		<if test="m_title != null">
+		where m_title like %'||#{m_title}||'%'
+		</if>
+	</select>
+	
+	<select id="list" parameterType="net.mvp.movie.MovieDTO" resultType="net.mvp.movie.MovieDTO">
+		select * from 
+					(select 
+						rownum as rn, 
+						m.* from movies m 
+						<if test="m_title != null">
+						where m_title like %'||#{m_title}||'%'
+						</if>
+					)
+					where rn between #{start} and #{end}
 	</select>
 		
-	<update id="edit" parameterType="net.hb.crud.ReplyDTO">
-		update hobby_reply set rwriter=#{rwriter}, rmemo=#{rmemo} where rhobby_idx=#{rhobby_idx}
+	<update id="edit" parameterType="net.mvp.movie.MovieDTO">
+		update movies set m_plot=#{m_plot}, m_imgurl=#{m_imgurl}, m_trailerurl=#{m_trailerurl} where m_no=#{m_no}
 	</update>
 	
 	<delete id="delete" parameterType="int">
-	   delete from  hobby_reply where rhobby_idx = #{rhobby_idx} 
+	   delete from  movies where m_no = #{m_no} 
 	</delete>
 
-</mapper> -->
+</mapper>
