@@ -35,7 +35,7 @@ public class MovieController {
 	@RequestMapping(value = "/moviedetail.do")
 	public ModelAndView movieDetail(MovieDTO dto) {
 		ModelAndView mav = new ModelAndView();
-		dto.setM_no(20177478);		
+		dto.setM_no(20176122);		
 		int count = mdao.dbMovieCount(dto);
 		if(count >0) {
 			dto = mdao.dbMovieSelet(dto);
@@ -50,6 +50,7 @@ public class MovieController {
 		
 		}
 		String url = "moviedetail";
+		mav.addObject("DTO",dto);
 		mav.addObject("page",url);
 		mav.setViewName("mainLayout");
 		return mav;

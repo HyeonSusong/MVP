@@ -67,17 +67,22 @@ ul {
 	<div class="movieDetail-wrap" align="center">
 		<div class="moviedetail-top">
 			<div class="movieDetail-poster">
-				<img src="img/movie/ansi_poster.jpg">
+				<img src="${DTO.m_imgurl}">
 			</div>
 			<div class="movieDetail-title">
-				<h1>안시성</h1>
+				<h1>${DTO.m_title }</h1>
 			</div>
-			<div class="movieDetail-info">2018 .09.19' 시대극' 한국</div>
+			<div class="movieDetail-info">${DTO.openDt} , ${DTO.genres} 한국 
+			<br>
+			감독 : ${DTO.directors}
+			<br>
+			출연 : ${DTO.actors}
+			</div>
 			<div class="movieDetail-rate">
-				평점: <i class="fas fa-star">7.6</i>
+				평점: <i class="fas fa-star">${DTO.m_rating}</i>
 			</div>
 			<div class="movieDetail-like">
-				<i class="fas fa-heart"></i>
+				<i class="fas fa-heart">${DTO.m_likes}</i>
 			</div>
 
 		</div>
@@ -86,9 +91,8 @@ ul {
 
 
 			<div class="d_middle"><strong>줄거리</strong> 
-				<div class="summary" style="text-align: left; margin-left: 55px;" > <br>우리는 물러서는 법을 배우지 못했다! <br>우리는
-					무릎 꿇는 법을 배우지 못했다! <br> 우리는 항복이라는 걸 배우지 못했다! <br> 천하를 손에
-					넣으려는 당 태종은 수십만 대군을 동원해 고구려의 변방 안시성을 침공한다.
+				<div class="summary" style="text-align: left; margin-left: 55px;" > 
+				${DTO.m_plot}
 				</div>
 				<hr>
 
@@ -115,7 +119,7 @@ ul {
 				</div>
 				<strong>영상</strong>
 					<div class="youtube_wrap">
-					<iframe width="700" height="350" src="https://www.youtube.com/embed/dmMjjsMLxLk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					<iframe width="700" height="350" src="${DTO.m_trailerurl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 					</div>
 			</div>
 

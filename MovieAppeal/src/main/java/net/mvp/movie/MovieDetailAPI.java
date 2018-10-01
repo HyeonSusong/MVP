@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import kr.or.kobis.kobisopenapi.consumer.rest.exception.OpenAPIFault;
+import net.mvp.admin.movie.MovieDateNow;
 @Repository
 public class MovieDetailAPI {
 	private String key = "423d940b3ab18808f63dff1ba428ecdd"; /// 발급받은 키 
 	private String movieCd ="" ;
-	private String movieNm ="";
 	private String movieNmEn ="";
 	private String openDt ="";
 	private String genres ="";
@@ -37,14 +37,16 @@ public class MovieDetailAPI {
 		///////movieDetail 추출//////
 		ArrayList<HashMap<String,String>> step3 = new ArrayList<HashMap<String,String>>();
 		
+		this.movieNmEn = step2.get("movieNmEn").toString();
+		dto.setM_titleEn(movieNmEn);
+		MovieDateNow mdatenow = new MovieDateNow();
+		this.openDt = step2.get("openDt").toString();
+		openDt = mdatenow.openday(openDt);
+		dto.setOpenDt(openDt);
 		
-		
-		
-		
-		
-		
-		
-		
+		step3 = mapper.convertValue(step2.get("audits"), new TypeReference<ArrayList<HashMap<String,String>>>(){});
+		this.watchGrade = step3.get(0).get("watchGradeNm");	
+		dto.setWatchGrade(watchGrade);
 		//step3 = mapper.convertValue(step2.get(""), new TypeReference<ArrayList<HashMap<String,String>>>(){});
 		
 		step3 = mapper.convertValue(step2.get("genres"), new TypeReference<ArrayList<HashMap<String,String>>>(){});
@@ -52,13 +54,13 @@ public class MovieDetailAPI {
 			String genre  = map.get("genreNm");
 			this.genres = this.genres + genre+ "/";
 		}
-		
+		dto.setGenres(genres);		
 		step3 = mapper.convertValue(step2.get("directors"), new TypeReference<ArrayList<HashMap<String,String>>>(){});
 		for(HashMap<String,String> map : step3) {
 			String name = map.get("peopleNm");
 			this.directors = this.directors + name + "/";
 		}	
-		dto.setActors(actors);
+		dto.setDirectors(directors);
 		step3 = mapper.convertValue(step2.get("actors"), new TypeReference<ArrayList<HashMap<String,String>>>(){});
 		for(HashMap<String,String> map : step3) {
 			String name = map.get("peopleNm");
@@ -73,9 +75,12 @@ public class MovieDetailAPI {
 			}
 			this.actors = this.actors+ actor + " / ";	
 		}
+		dto.setActors(actors);
 				
 		return dto;
 	}
+	
+	
 	
 
 }
