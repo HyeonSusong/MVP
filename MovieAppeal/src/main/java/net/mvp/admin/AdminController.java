@@ -1,7 +1,10 @@
 package net.mvp.admin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.kobis.kobisopenapi.consumer.rest.exception.OpenAPIFault;
@@ -27,6 +33,8 @@ import net.mvp.login.LoginDAO;
 import net.mvp.login.LoginDTO;
 import net.mvp.movie.MovieDAO;
 import net.mvp.movie.MovieDTO;
+import net.mvp.movie.MovieImgDAO;
+import net.mvp.movie.MovieImgDTO;
 import net.mvp.users.UsersDTO;
 import oracle.net.aso.e;
 
@@ -170,6 +178,97 @@ public class AdminController {
 		map.put("msg", msg);
 		return map;
 	} //conunt AJAX ADMINmovieeidt
+	
+	
+	
+	@Inject
+	@Autowired
+	MovieImgDAO midao;
+	
+	private final String PATH = "C://Users/bit-user/git/MVP/MovieAppeal/src/main/webapp/resources/upload/movie/";
+	
+	@RequestMapping(value ="/administrator/movieimgupload.do",method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@ResponseBody 
+	public String movieimgupload(MultipartHttpServletRequest multi) throws IOException{
+		//String root = multireq.getSession().getServletContext().getRealPath("/");
+		//String path = root+"resources/upload/"
+		Map<Object,Object> map = new HashMap<Object,Object>();
+		String path = this.PATH;
+		String newFileName = "";
+		String msg ="";
+		MovieImgDTO midto = new MovieImgDTO();
+		int m_no = Integer.parseInt(multi.getParameter("m_no").toString());
+		File file = new File(path);
+		if(!file.isDirectory()) {
+			file.mkdir();
+		} 
+		// 디렉토리없을시 생성
+		Iterator<String> itr = multi.getFileNames();
+		while(itr.hasNext()) {
+			System.out.println(itr.hasNext());
+			MultipartFile mf = multi.getFile(itr.next());
+			String header = mf.getContentType();
+			System.out.println(header);
+			if(!header.startsWith("image")) {
+				msg = "image file only";
+				break;
+			}
+			if(mf.getBytes().length>10485760) {
+				msg = "10Mbyte 이하만 등록가능합니다";
+				break;
+			}
+			String fileName = mf.getOriginalFilename();
+			System.out.println("실제파일 이름 : "+ fileName);
+			newFileName = System.currentTimeMillis()+"."+fileName.substring(fileName.lastIndexOf(".")+1);
+			try {
+				mf.transferTo(new File(path+newFileName));
+				msg = "파일업로드 성공";
+				midto.setDirectory(path);
+				midto.setM_no(m_no);
+				midto.setOriginal_fileNm(fileName);
+				midto.setStorage_fileNm(newFileName);
+				midao.dbmovieImgAdd(midto);
+			} catch(Exception e) {
+				e.printStackTrace();
+				msg = "파일 업로드 실패";
+			} 
+		}
+		String aa="";
+		aa ="{\"data\":\""+msg+"\"}"; 
+		return aa;
+	} //conunt AJAX ADMINmovieeidt
+	
+	
+	@RequestMapping(value ="/administrator/movieimglist.do")
+	@ResponseBody
+	public Map<Object, Object> movieImgList(@RequestBody Map<Object,Object> reqmap){
+		MovieImgDTO midto = new MovieImgDTO();
+		Map<Object, Object> map = new HashMap<Object,Object>();
+		List<Map<String,Object>> dtolist = new ArrayList<Map<String,Object>>();
+		System.out.println(reqmap.get("m_no"));
+		midto.setM_no(Integer.parseInt((String)reqmap.get("m_no")));
+		int cnt = midao.dbMovieimgcount(midto);
+		if(cnt > 0) {
+			try {
+				List<MovieImgDTO> list = midao.dbMovieImgSelectList(midto);
+				for (MovieImgDTO dto : list) {
+					Map<String,Object> dtomap = new HashMap<String, Object>();
+					dtomap.put("mi_no", dto.getMi_no());
+					dtomap.put("m_no", dto.getM_no());
+					dtomap.put("directory", dto.getDirectory());
+					dtomap.put("original_fileNm", dto.getOriginal_fileNm());
+					dtomap.put("storage_fileNm", dto.getStorage_fileNm());
+					dtolist.add(dtomap);
+				}
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		map.put("list",dtolist);	
+		}	
+		System.out.println(dtolist);
+		map.put("cnt", cnt);
+		return map;
+	} //conunt AJAX ADMINmovieadd
 	
 	
 	////////////////////////// 영화 추가 관련 /////////////////////////////////////

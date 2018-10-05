@@ -6,7 +6,9 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -32,8 +34,18 @@
 	<beans:bean id="tilesconfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<beans:property name="definitions" value="/WEB-INF/tiles2def.xml" />
 	</beans:bean>
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	
+	<!-- 파일업로드 Commons~~~ -->
+	<beans:bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760" /> <!-- 10mb 제한 -->
 	</beans:bean>
+	
+	
+	<!-- 업로드된 파일의 저장 위치 지정 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="C:\\Users\bit-user\git\MVP\MovieAppeal\src\main\webapp\resources\upload\movie"></beans:constructor-arg>
+	</beans:bean>
+	
 		
  	<context:component-scan base-package="net.mvp.*" >
  	</context:component-scan>
@@ -43,23 +55,7 @@
         - for request parameter binding. It overrides the default AnnotationMethodHandlerAdapter.
      -->
      <beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
-<!-- 
-출처: http://seongilman.tistory.com/117 [SEONG]
-        @ResponseBody를 사용하기 위해
-        jre : jackson-core, jackson-mapper 필요
-  		<beans:property name="messageConverters" value="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
- 		 <bean
- 		</beans:property> 
-    </beans:bean> -->
- 
-<!--
-		<context:include-filter type="annotation" expression="org.springframework.context.annotation.Configuration"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="regex" expression="(service|controller|dao)\..*"/>
-	</context:component-scan>
-	 -->
+
 
 	<!-- 
         이메일보내기
@@ -97,6 +93,10 @@
 		 		<mapping path="/userdelete.do"/>
 		 		<mapping path="/myfavorite.do"/>
 		 		<mapping path="/myprofile.do"/>
+		 		
+		 		<!-- movie refer -->
+		 		<mapping path="/movielike.do"/>
+		 		<mapping path="/movierate.do"/>
 		 		<beans:ref bean="authInterceptor"/>
 		 	</interceptor>
 		 	<interceptor>
@@ -117,7 +117,6 @@
 							
 							
 							
-		 	<!-- 파일업로드 Commons~~~ -->
 
 	
 	

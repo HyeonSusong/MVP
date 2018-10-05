@@ -61,7 +61,14 @@ line-height: 1.2;
 	
 }
 
-
+.poster-wrap .rating-container{
+	position: relative;
+    top: -148px;
+    left: 38px;
+    margin-top: -57px;
+    display: none;
+    width: 152px;
+}
 
 .poster-wrap .btn{
 	position: relative;
@@ -75,7 +82,14 @@ line-height: 1.2;
 }
 
 
-.item 
+.item .poster_like {
+	display: inline-flex;
+	margin-top: -45px;
+    position: relative;
+    top: -244px;
+    display : none;
+   /*  transition : all 0.4s; */
+}
 
 .nextmoviepage .item .poster_like, .likemoviepage .item .poster_like {
 	margin-top: -60px;
@@ -99,6 +113,10 @@ line-height: 1.2;
     transition : all 0.4s;
 }
 
+.item .poster_like .likebt:hover{
+	background-color: #E08F23;
+	border-color: #E08F23;
+}
 
 
 #movie #moviesbt {

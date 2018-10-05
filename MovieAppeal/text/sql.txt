@@ -56,6 +56,20 @@ constraint mr_m_no_fk foreign key (m_no) references movies(m_no)
 
 create sequence mr_seq;
 
+/////////// 영화 이미지 테이블 //////////////
+
+create table movie_img(
+mi_no number(11) not null primary key,
+original_fileNm varchar2(50 char),
+storage_fileNm varchar2(30 char),
+directory varchar2(100 char),
+m_no number(10) not null,
+constraint mi_m_no_fk foreign key (m_no) references movies(m_no)
+);
+
+create sequence mi_seq;
+
+
 ////////// 영화 미니리뷰 테이블 ////////
 
 create table movie_minireview(

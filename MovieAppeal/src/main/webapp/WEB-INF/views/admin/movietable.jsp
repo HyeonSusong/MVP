@@ -83,7 +83,7 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h2 class="card-title text-center" style="align:left; color:#fafafa;"id="titleArea">영화제목 : </h2>
 				</div>
-				<div class="card-body">
+				<div class="card-body" id="modal-form-wrap">
     				<form class="form-horizontal form-signin" method="POST" >
         				<h5 class="form-signin-heading" id="m_no">영화관리번호 : </h5>
         				<input type="hidden" id="hide_m_no">
@@ -99,9 +99,28 @@
         				</div>
         				<div class="form-group" align="center">
         				<button id="btn-edit" class="btn btn-default" type="button">수 정</button>
-        				<button id="btn-cancel" class="btn btn-danger" type="button">취 소</button>
+        				<button id="btn-cancel" class="btn btn-danger close" data-dismiss="modal" type="button">취 소</button>
         				</div>
      				</form>
+     				<div>
+     					<h6>movie photoadder</h6>
+     					<div>
+     						<form id="img_file_upload" action="/administrator/movieimgupload.do" method="post"  enctype="multipart/form-data" >
+     							<div class="input-group">
+     								<label for="file_input" class="control-label">이미지첨부</label>
+     								<input id="m_image" type="file" name="multi" class="form-control" placeholder="imageonly">
+     								<span class="input-group-btn">
+      					 				<button id="imageadd-btn" class="btn btn-default" type="button">등록</button>
+     				 				</span>
+     				 				<input type="hidden" name="m_no" id="file_m_no">
+		     					</div>
+     						</form>
+     						<div>
+     							<ul id="img_list">
+     							</ul>
+     						</div>
+     					</div>
+     				</div>
 				</div>
 			</div>
       </div>
@@ -110,6 +129,86 @@
 </div>
 </div>	
 <script type="text/javascript">
+
+	$(function(){
+		$('#imageadd-btn').click(function(){
+			$('#file_m_no').val($(this).parents('#modal-form-wrap').find('#hide_m_no').val());
+			var form = document.getElementById('img_file_upload');
+			var formData = new FormData(form);
+			formData.append("file",$('#m_image'));
+	        $.ajax({
+	            async: true,
+	            type : 'POST',
+	            data : formData,
+	            url : "/administrator/movieimgupload.do",
+	            processData : false,
+	            contentType: false,
+	            dataType : "json",
+//	            contentType: "application/json; charset=UTF-8",
+	            success : function(json) {
+	            	alert(json.data);
+	            	var a = json.data
+	            	switch(a){
+	            	case "파일업로드 성공" : {
+	            		 
+	            			var m_no = $('#file_m_no').val();
+	            			imglistexpress(m_no);
+	        		 break;
+	            	}
+	            		
+	            	}
+	            },
+	            error : function(error) {		                
+	                alert("10Mb 이하만 이미지파일만 업로드가능합니다.");
+	            }
+	        });
+			
+			//$this.parents('.input-group').children('#m_image');
+			
+		});
+	});
+	
+/* 	function fileExtendcheck(name){
+		var ext = name.substring		
+	}
+ */
+ 
+	function imglistexpress(m){
+	 
+		var m_no = m;
+		$.ajax({
+            async: true,
+            type : 'POST',
+            data : JSON.stringify({
+            	'm_no' : m_no,
+             }),
+            url : "/administrator/movieimglist.do",
+            dataType : "json",
+            contentType: "application/json; charset=UTF-8",
+            success : function(data) {
+            	if(data.cnt > 0 ){
+        			$('#img_list').text("");
+            		$.each(data.list, function(idx, val) {
+	            		$('#img_list').append('<li>');
+	            		$('#img_list').append('<a href="/upload/movie/'+val.storage_fileNm+'">'+val.storage_fileNm+'</a>');
+	            		$('#img_list').append('<input type="hidden" value="'+val.mi_no+'" >');
+						$('#img_list').append('<button type="button" class="img_delete_btn btn btn-danger"> 삭제 </button>');
+	            		$('#img_list').append('</li>');
+            		});
+            	}
+            	else{
+        			$('#img_list').text("");
+            		$('#img_list').append('<li> 등록된 이미지 데이터가 없습니다');
+            		$('#img_list').append('</li>');
+            	}
+            },
+            error : function(error) {		                
+                alert("error : " + error);
+            }
+        });	 
+ } 
+ 
+ 
 	function movieEdit(btn){
 		var m_no = $(btn).parents('.movieEntity').children().children('.m_no').val();
 		var m_title = $(btn).parents('.movieEntity').children().children('.m_title').val();
@@ -117,13 +216,13 @@
 		var m_plot = $(btn).parents('.movieEntity').children().children('.m_plot').val();
 		var m_trailerurl = $(btn).parents('.movieEntity').children().children('.m_trailerurl').val();
 			$('#hide_m_no').val(m_no);
+			imglistexpress(m_no);	
 			m_no = '영화관리번호 : '+m_no;
 			$('#m_no').text(m_no);
 			$('#titleArea').text('영화제목 :'+m_title);
 			$('#m_imgurl').val(m_imgurl);
 			$('#m_plot').val(m_plot);
 			$('#m_trailerurl').val(m_trailerurl);
-		
 	}
 	
 	function movieDelete(btn){

@@ -6,6 +6,7 @@
 <tiles-definitions>
 	<!-- main -->
 	<definition name="mainLayout" template="/WEB-INF/views/main/mainLayout.jsp">
+		<put-attribute name="libinsert" value="/WEB-INF/views/main/libinsert.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
@@ -30,6 +31,7 @@
 	
 	<!--  mypage -->
 	<definition name="mypagemenu" template="/WEB-INF/views/users/mypagemenu.jsp">
+		<put-attribute name="libinsert" value="/WEB-INF/views/main/libinsert.jsp"/>
 		<put-attribute name="mymenu" value="/WEB-INF/views/users/mymenu.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
@@ -45,6 +47,7 @@
 	
 	<!-- adminpage -->
 	<definition name="administratormain" template="/WEB-INF/views/admin/administratormain.jsp">
+		<put-attribute name="libinsert" value="/WEB-INF/views/main/libinsert.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/admin/adminheader.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/admin/adminfooter.jsp"/>
 	</definition>

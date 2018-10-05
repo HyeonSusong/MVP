@@ -23,11 +23,20 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(session.getAttribute(LOGIN) == null) { 
 			response.setCharacterEncoding("EUC-KR");
 			PrintWriter writer = response.getWriter();
-	     writer.println("<script type='text/javascript'>");
-	     writer.println("alert('로그인이 필요한 서비스입니다');");
-	     writer.println("history.back();");
-	     writer.println("</script>");
-	     writer.flush();
+			if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))){
+			    writer.println("<script type='text/javascript'>");
+			    writer.println("alert('로그인이 필요한 서비스입니다');");
+			    writer.println("</script>");
+			    writer.flush();
+
+			}
+			else {
+				writer.println("<script type='text/javascript'>");
+				writer.println("alert('로그인이 필요한 서비스입니다');");
+				writer.println("history.back();");
+				writer.println("</script>");
+				writer.flush();
+			}
 		  return false;
 		}
 		return true;

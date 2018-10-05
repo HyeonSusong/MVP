@@ -23,7 +23,7 @@ public class MovieController {
 	
 	@Autowired
 	@Inject
-	MovieDetailAPI mdapi;
+	MovieAPI mdapi;
 	
 	@Autowired
 	@Inject

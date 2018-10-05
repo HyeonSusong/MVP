@@ -1,28 +1,28 @@
-<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="reply">
+<mapper namespace="mlike">
 
-	<insert id="add" parameterType="net.hb.crud.ReplyDTO">
-	  insert into hobby_reply
-	  values( rhobby_seq.nextVal, #{rwriter}, #{rmemo}, #{hobby_idx})     
+	<insert id="add" parameterType="net.mvp.movie.like.MovieLikeDTO">
+	  insert into movie_like (ml_no, m_no, u_no, ml_like)
+	  values( ml_seq.nextVal, #{m_no}, #{u_no}, 1)     
 	</insert>
 	
-	<select id="selectAll"  parameterType="int" resultType="net.hb.crud.ReplyDTO">
-		select * from  hobby_reply where hobby_idx=#{hobby_idx} 
+	<select id="dbAllMovieuserLike"  parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="net.mvp.movie.like.MovieLikeDTO">
+		select * from  movie_like where u_no = #{u_no}
 	</select>
 
-	<select id="countAll" parameterType="int" resultType="int">
-		select count(*) from  hobby_reply where hobby_idx=#{hobby_idx} 
+	<select id="movielikecheck" parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="int">
+		select count(*) from  movie_like where m_no=#{m_no} 
+	</select>
+	
+	<select id="usercheck" parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="int">
+		select count(*) from movie_like where m_no = #{m_no} and u_no = #{u_no}
 	</select>
 		
-	<update id="edit" parameterType="net.hb.crud.ReplyDTO">
-		update hobby_reply set rwriter=#{rwriter}, rmemo=#{rmemo} where rhobby_idx=#{rhobby_idx}
-	</update>
-	
-	<delete id="delete" parameterType="int">
-	   delete from  hobby_reply where rhobby_idx = #{rhobby_idx} 
+	<delete id="delete" parameterType="net.mvp.movie.like.MovieLikeDTO">
+	   delete from  movie_like where m_no = #{m_no} and u_no = #{u_no} 
 	</delete>
 
-</mapper> -->
+</mapper>

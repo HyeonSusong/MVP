@@ -12,7 +12,7 @@ import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import kr.or.kobis.kobisopenapi.consumer.rest.exception.OpenAPIFault;
 import net.mvp.admin.movie.MovieDateNow;
 @Repository
-public class MovieDetailAPI {
+public class MovieAPI {
 	private String key = "423d940b3ab18808f63dff1ba428ecdd"; /// 발급받은 키 
 	private String movieCd ="" ;
 	private String movieNmEn ="";
@@ -33,7 +33,7 @@ public class MovieDetailAPI {
 		System.out.println(movieCdResponse);
 		
 		HashMap<String, HashMap<String,Object>> step1 = mapper.readValue(movieCdResponse, new TypeReference<HashMap<String, HashMap<String,Object>>>(){});
-		HashMap<String,Object> step2 = mapper.convertValue(step1.get("movieInfo"), HashMap.class);
+		HashMap<String,Object> step2 = mapper.convertValue(step1.get("movieInfoResult").get("movieInfo"), HashMap.class);
 		///////movieDetail 추출//////
 		ArrayList<HashMap<String,String>> step3 = new ArrayList<HashMap<String,String>>();
 		
@@ -42,6 +42,7 @@ public class MovieDetailAPI {
 		MovieDateNow mdatenow = new MovieDateNow();
 		this.openDt = step2.get("openDt").toString();
 		openDt = mdatenow.openday(openDt);
+		System.out.println(openDt);
 		dto.setOpenDt(openDt);
 		
 		step3 = mapper.convertValue(step2.get("audits"), new TypeReference<ArrayList<HashMap<String,String>>>(){});
@@ -68,7 +69,7 @@ public class MovieDetailAPI {
 			String cast = map.get("cast");
 			String actor="";
 			if(cast!=null && cast!="") {
-				actor = cast+"역: "+name;
+				actor = name+"("+cast+")";
 			}
 			else {
 				actor = name;
@@ -81,6 +82,34 @@ public class MovieDetailAPI {
 	}
 	
 	
+	public ArrayList<Map<String,String>> boxOffice() throws OpenAPIFault, Exception{
+		String targetDt = new MovieDateNow().oneWeekAgo();
+		String itemPerPage="10";
+		String weekGb = "0";
+		String multiMovieYn="";
+		String repNationCd="";
+		String wideAreaCd="";
+		
+		String movieCdResponse = service.getWeeklyBoxOffice(true, targetDt, weekGb, itemPerPage, multiMovieYn, repNationCd, wideAreaCd);
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String,HashMap<String,Object>> result1 = mapper.readValue(movieCdResponse, new TypeReference<HashMap<String,HashMap<String,Object>>>() {});
+		System.out.println(result1);
+		ArrayList<Map<String,String>> result = mapper.convertValue(result1.get("boxOfficeResult").get("weeklyBoxOfficeList"), new TypeReference<ArrayList<Map<String,String>>>() {});
+		return result;
+		
+		/*{"rnum":"1",
+		"rank":"1",  				// 순위 rank
+		"rankInten":"0", 		    // 	증감대비
+		"rankOldAndNew":"OLD",		//  신규진입여부
+		"movieCd":"20112207",		// 영화분류번호
+		"movieNm":"미션임파서블:고스트프로토콜",	//영화제목
+		"openDt":"2011-12-15",		//개봉일
+		"audiCnt":"353274",			//일일관객수
+		"audiAcc":"5328435",		//누적관객수
+		}*/
+	
+	}
+
 	
 
 }
