@@ -17,21 +17,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   delete from  movie_rate where u_no=#{u_no} and m_no=#{m_no}
 	</delete>
 	
-	<select id="ratecheck"  parameterType="int" resultType="net.mvp.movie.rate.MovieRateDTO">
+	<select id="ratecheck"  parameterType="net.mvp.movie.rate.MovieRateDTO" resultType="int">
 		select count(*) from  movie_rate where u_no=#{u_no} and m_no=#{m_no} 
 	</select>
 
-	<select id="allrate" parameterType="double" resultType="net.mvp.movie.rate.MovieRateDTO">
+	<select id="allrate" parameterType="net.mvp.movie.rate.MovieRateDTO" resultType="double">
 		select mr_rating from  movie_rate where m_no=#{m_no} 
 	</select>
-		<select id="userrate" parameterType="net.mvp.movie.rate.MovieRateDTO" resultType="net.mvp.movie.rate.MovieRateDTO">
+	
+	<select id="userrate" parameterType="net.mvp.movie.rate.MovieRateDTO" resultType="net.mvp.movie.rate.MovieRateDTO">
 		select * from  movie_rate where u_no=#{u_no} and m_no=#{m_no} 
 	</select>
 	
 	<select id ="userratemovie" parameterType="net.mvp.movie.rate.MovieRateDTO" resultType="net.mvp.movie.rate.MovieRateDTO">
 		select * from movie_rate where u_no=#{u_no}
 	</select>
-		
+
+	<select id ="userratemoviecheck" parameterType="net.mvp.movie.rate.MovieRateDTO" resultType="int">
+		select count(*) from movie_rate where u_no=#{u_no}
+	</select>
+			
 
 	
 

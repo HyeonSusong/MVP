@@ -12,13 +12,13 @@
 
   </head>
   
-  <body>
+  <body style="background-color: #eee; overflow:auto;">
 
     <div id="header">
 		<tiles:insertAttribute name="header"/>
 	</div>
 
-	  	<div style="padding-top:80px;">
+	  	<div>
 	<div id="main">
 		<tiles:insertDefinition name="${page}"/>
 	</div>

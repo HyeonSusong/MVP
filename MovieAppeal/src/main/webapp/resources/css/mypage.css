@@ -1,9 +1,14 @@
 @charset "UTF-8";
+
+	#mypage{
+	background-color: #eee;
+	}
 	.spaceLeft { margin-left: 10px;	}
 	.spaceRight {margin-right: 10px;}
 	.space{	margin : 10px;}
 	.space2x{	margin : 20px;}
 	.spaceTop{ 	margin-top: 10px;}
+	.spaceBottom{ margin-bottom: 30px;}
 	.btn span. {	opacity: 0;}
 	.btn.active span. {opacity: 1;}
 
@@ -25,26 +30,41 @@
  		margin-top: 20px;
  		margin-bottom: 20px;
  		font-size: 20px;
- 		font-mily: 
  	}
  	
  	.list-area{
- 		background-color:#b98d72;
+ 		background-color:#202020;
  		width: 200px;
  		float:left;
  		min-height:45rem;
+ 		border-radius: 10px;
+ 		border-color: #D6BA8A;
+ 		border: solid;
  		
  	}
  	.list-area > ul > li{
- 		display : block;
- 		color: #030303;
- 		border: solid;
- 		border-color: #a87c60
+ 		display:inline-block;
+ 		color: #D6BA8A;
+ 		margin-left: 10px;
  	}
  	
  	.list-area > ul > li > a{
- 		color: #030303;
+ 		color: #D6BA8A;
+ 		display:inline-block;
+		text-align:center; 
  	}
+ 	.list-area > ul > li:hover > a > label{
+ 		background-color: #e08f23;
+ 		display:inline-block;
+ 		color: #fff;
+ 		cursor:pointer;
+ 		transition: all 0.3s;
+ 	}
+ 	
+	.list-area > ul > li > a > label{
+	 		transition: all 0.3s;
+	
+	}
  	.left_float{float: left;
  	height: inherit;
  	

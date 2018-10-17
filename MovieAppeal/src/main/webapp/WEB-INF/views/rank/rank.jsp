@@ -13,210 +13,62 @@ $(document).ready(function(){
         $("#panel").slideToggle("slow");
     });
 });
+$(function(){
+	$('.listrow').click(function(){
+		var m_no = $(this).children(".m_no").val();
+		var url = "/moviedetail.do?m_no="+m_no;
+		alert(m_no);
+		alert(url);
+		window.open(url);
+	});
+	
+});
 </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-		<style>
-	#ranklist{
-	margin-left: 5rem;
-}
-#ranklist {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 40%;
-}
-
-#ranklist td, #ranklist th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#ranklist tr:nth-child(even){background-color: #f2f2f2;}
-
-#ranklist tr:hover {
-background-color: #ddd;
- -webkit-transform:scale(1.2);
-    -moz-transform:scale(1.2);
-    -ms-transform:scale(1.2);   
-    -o-transform:scale(1.2);
-    transform:scale(1.2);
-
-}
-#ranklist th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color:#6c757d;
-    color: white;
-}
-
-#panel {
-    padding: 50px;
-    display: none;
-}
-	</style>
     <title>MVP TOP</title>
    
 
   </head>
-
-  <body id="page-top">
-    <div id="top-page">
-    <h1 style="margin-left:10px;">영화 랭킹 &nbsp;&nbsp;&nbsp; 
-	    <div class="btn-group">
-	    <button type="button" class="btn btn-primary">조회순</button>
-	    <button type="button" class="btn btn-primary">평점순</button>
-    </div></h1>
-    </div>
-    
-    <table id="ranklist">
-    	<thead>
-	    <tr id="thead">
-	      <th>        </th>
-	      <th>순위.제목</th>
-	      <th align="center">내용</th>
-	      <th colspan="2">평점 </th>
-	      <th>좋아요</th>
-	    </tr>
-	    </thead>
-	    
-	    <tbody id="flip">
-	     <tr>
-	      <td ><img src="img/rank1.jpg" width="75"height="114"></td>
-	      <td>1.서치</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>9.7</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank2.jpg" width="75"height="114"></td>
-	      <td>2.너의 결혼식</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>9.6</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank3.jpg" width="75"height="114"></td>
-	      <td>3.상류사회</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>9.33</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank4.jpg" width="75"height="114"></td>
-	      <td>4.신과함께</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>9.2</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank5.jpg" width="75"height="114"></td>
-	      <td>5.맘마미아2</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td><9.12</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank6.jpg" width="75"height="114"></td>
-	      <td>6.공작</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>8.7</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank7.jpg" width="75"height="114"></td>
-	      <td>7.목격자</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>8.65</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank8.jpg" width="75"height="114"></td>
-	      <td>8.미션 임파서블</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>8.6</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank9.jpg" width="75"height="114"></td>
-	      <td>9.휘트니</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>8.56</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      
-	      
-	     <tr>
-	      <td ><img src="img/rank10.jpg" width="75"height="114"></td>
-	      <td>10.카메라를 멈추면 안 돼!</td>
-	      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut</td>
-	      <td ><a href="#"><img src="img/star.PNG"></a></td>
-	      <td>7.9</td>
-	      <td><a href="#"><img src="img/heart.PNG"></a></td>
-	      </tr>
-	      </tbody>	
-	</table>
-   
- <p><br>
-     
-      
-      <hr>
-      
-      
-      <!-- /.row -->
-    
-    
-    
-
-
-    <!-- About Section -->
-    <section class="bg-primary text-white mb-0" id="about">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-white">About</h2>
-        <hr class="star-light mb-5">
-        <div class="row">
-          <div class="col-lg-4 ml-auto">
-            <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-          </div>
-          <div class="col-lg-4 mr-auto">
-            <p class="lead">Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
-            <i class="fa fa-download mr-2"></i>
-            Download Now!
-          </a>
-        </div>
-      </div>
-    </section>
+  
+ <body id="page-top">
+   <div class="panel panel-body rank-wrap">
+    <h1 style=""><strong><em>MVP MOVIE RANK</em> &nbsp;&nbsp;&nbsp;</strong>
+	    <div class="btn-group rank-btn-wrap">
+	    <button type="button" class="btn btn-link btn-lg" onclick="location.href='/rank.do?query=m_rating'"><strong style="color:#D6BA8A;">평점순</strong></button>
+	    <button type="button" class="btn btn-link btn-lg" onclick="location.href='/rank.do?query=m_likes'"><strong style="color:#D6BA8A;">추천순</strong></button>
+   		</div>
+   	</h1>
+   	<hr>
+    <div class="list-wrap">
+    <ul class="list-group">
+    	<li class="list-group-item text-left" id="headrow">
+    		<div class="headrow row">
+    			<div class="list-img cell text-right" ><strong>영화</strong></div>
+    			<div class="list-title cell"></div>
+    			<div class="list-rating cell"><strong>평점</strong></div>
+    			<div class="list-like cell" style="width: 120px;"><strong>추천수</strong></div>
+    		</div>    	
+    	</li>
+    	<c:forEach var="list" items="${list}">
+ 	    	<li class="list-group-item text-left" id="listrow">
+    			<div class="listrow row">
+    			<input class="m_no" type="hidden" value="${list.m_no}">
+    				<div class="list-img cell"><img src="${list.m_imgurl}" width="105px" height="148px"></div>
+    				<div class="list-title cell"><strong style="color:#D6BA8A;"><em>${list.rn}위</em></strong><br>
+    					<strong>${list.m_title}</strong></div>
+    				<div class="list-content cell" >${list.m_plot}</div>
+    				<div class="list-rating cell">
+    				<input class="rating" type="number" min=0 max=10 step=1 data-size="xs" data-show-clear="false" data-show-caption="false" value="${list.m_rating}" readonly>
+    				 &nbsp;&nbsp;&nbsp;<strong style="color:#D6BA8A;"><em>${list.m_rating}점</em></strong></div>
+    				<div class="list-like cell"> <span class="glyphicon glyphicon-heart" style="color: red;"></span> ${list.m_likes}</div>
+    				<input type="hidden" value="${list.m_no}">
+    			</div>    	
+   		 	</li>
+	     </c:forEach> 
+    </ul>
+   </div>
+</div>
 
   </body>
 

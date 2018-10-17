@@ -16,7 +16,7 @@
 
 	 유저정보 관련 쿼리문 xml -->
 	 	<mapper resource="config/mybatis/users.xml"/>	 
-		 
+		<mapper resource="config/mybatis/mailkey.xml"/> 
 		 <!-- 	  영화게시글 관련 쿼리문 xml  -->
 		<mapper resource="config/mybatis/movie.xml"/>
 		<mapper resource="config/mybatis/movie_rate.xml"/>

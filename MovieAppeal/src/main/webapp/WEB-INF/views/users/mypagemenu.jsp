@@ -5,20 +5,22 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html>
+    <link href="/css/mypage.css" rel="stylesheet"/>
+
    <head>
     <title>MovieAppeal</title>
     
  	<tiles:insertAttribute name="libinsert"/>
 	
   </head>
-  <body>
+  <body style="background-color: #eee;">
   <!--  header -->
     <div id="header">
 		<tiles:insertAttribute name="header"/>
 	</div>
 	
 	<!-- cotnet -->	
-  	<div style="padding-top:80px; ">
+  	<div id="mypage" style="padding-top:80px; ">
   		<div class="visible-xs-block dropdown">
 			<button id="categry-btn" class="btn btn_linen dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				<i class="fa" style="color:#030303">카테고리</i>
@@ -29,6 +31,11 @@
 					<li class="list_categoty">
 						<a class="" href="/myprofile.do">
 							<label class="control-label">프로필편집</label>
+						</a>
+					</li>
+					<li class="list_categoty">
+						<a class="" href="/passwordmodify.do">
+							<label class="control-label">비밀번호변경</label>
 						</a>
 					</li>
 					<li class="list_categoty">

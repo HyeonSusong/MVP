@@ -21,6 +21,7 @@
 	.btn span.fa {	opacity: 0;}
 	.btn.active span.fa {opacity: 1;}
 	    .card {
+	    background-color: #eee;
         margin: 0 auto; /* Added */
         float: none; /* Added */
         margin-bottom: 10px; /* Added */

@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>로그인</title>
-	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script src="/js/login.js"></script>
 	<link href="/css/login.css" rel="stylesheet">
 	<style type="text/css">

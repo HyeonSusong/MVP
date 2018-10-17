@@ -6,46 +6,32 @@
 			<br>
         	 	<h1 class="spaceLeft spaceTop">회원정보수정</h1>
        		</div>
-			<form class="form-horizontal" id="signupform" method="post" action="usercreate.do">
+			<form class="form-horizontal" id="profileform" method="post" action="useredit.do">
        			<!-- id -->
-				<div class="form-group space">
-          			<label class="col-sm-3 control-label" for="idbox" >아이디</label>
+				<div class="form-group space2x">
+          			<label class="col-sm-4 control-label" for="idbox" >아이디</label>
         				<div class="col-sm-6">
-							<input class="form-control" placeholder="아이디" id="idbox" name="u_id" onchange="flagreset(this);" type="text" maxlength="20" readonly/>
+							<strong>${LOGIN.u_id}</strong>
+							
 						</div>
 						
 				</div>
-				<div class="form-group space">
-          			<label class="col-sm-3 control-label" for="pwdbox1">비밀번호</label>
-        			<div class="col-sm-6">
-						<input class="form-control" placeholder="비밀번호" id="pwdbox1" name="u_pwd" type="password" maxlength="20">
-					</div>
-				</div>
-				<div class="form-group space">
-          			<label class="col-sm-3 control-label" for="pwdbox2">비밀번호 재입력</label>
+				
+				<div class="form-group space2x">
+          			<label class="col-sm-4 control-label" for="mailbox">이메일</label>
         				<div class="col-sm-6">
-							<input class="form-control" placeholder="비밀번호 재입력" id="pwdbox2" type="password" maxlength="20">
-						</div>
-				</div>
-				<div class="form-group space">
-          			<label class="col-sm-3 control-label" for="mailbox">이메일</label>
-        				<div class="col-sm-6">
-							<input class="form-control" placeholder="이메일" id="mailbox" onchange="flagreset(this);" name="u_mail_id" type="text" readonly>
-        					<span class="input-group-btn spaceTop spaceLeft">
-								<button class="btn btn-default spaceTop" id="mailck" type="button" disabled="disabled">
-									<i class=fa> 메일중복체크</i>
-								</button>								
-							</span>
+							<strong>${LOGIN.u_mail}</strong>
 						</div>		
 				</div>
 			<p>
 
 
 				<div class="col-sm-offset-3" >
-				<div class="form-group space">
+				<input id="hiddengenre"type="hidden" value="${LOGIN.u_mygenre}">
+				
 							<small class="space">* 선호하시는 장르를 5개이상 선택해주세요</small>
 				<div class="checkbox">
-					<p>
+				<div class="form-group space">
 					<label>
 					<input class="checkSelect" name="u_mygenre" type="checkbox" value="액션">액션
 					</label>
@@ -61,10 +47,8 @@
 					<label>
 					<input class="checkSelect" name="u_mygenre" type="checkbox" value="코미디">코미디
 					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="checkbox">
+					</div>
+					<div class="form-group space">
 					<label>
 					<input class="checkSelect" name="u_mygenre" type="checkbox" value="공포">공포
 					</label>
@@ -89,7 +73,39 @@
 		<button class="btn btn-primary btn-lg" id="submit_btn" type="button" >
 			<i class="fa fa-check spaceLeft">정보수정</i>
 		</button>
-		<button class="btn btn-danger btn-lg" id="cancel_btn" type="button" >
-			 <i class="fa fa-times spaceLeft">취소</i>
-		</button> 
 	</div>
+	
+<script>
+$(document).ready(function(){
+	var genre = $("#hiddengenre").val();
+	for(var i = 0 ; i<$(".checkSelect").length ;i++ ){
+		var v = $(".checkbox").find(".checkSelect").eq(i).val();
+		if (genre.match(v) == v){
+			$(".checkbox").find(".checkSelect").eq(i).prop('checked', true);
+		}
+	}
+});
+
+$(function(){
+	$('#submit_btn').click(function(){
+		if(genre_ck()<5){
+			alert("선호하시는 장르를 5개이상 체크해주세요");
+			genre_cnt=0;
+			return;
+		}
+		$('#profileform').submit();
+	});
+});
+
+function genre_ck(){
+	var chkbox = $(".checkSelect");
+	for(i=0;i<chkbox.length;i++) {
+	    if (chkbox[i].checked == true){
+	        genre_cnt++; 
+	    }
+	}
+	return genre_cnt;
+}
+ 	 
+</script>	
+	

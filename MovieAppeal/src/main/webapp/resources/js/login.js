@@ -71,7 +71,15 @@
 	                } else if(data.cnt == 1) {
 	                	$('#default').text("");
 	                	$('#default').append('비밀번호가 잘못되었습니다');
-	                }else{
+	                } else if(data.cnt == -1){
+	                	$('#default').text("");
+	                	$('#default').append('탈퇴된 회원입니다.');
+	                }
+	                else if(data.cnt == -2){
+	                	$('#default').text("");
+	                	$('#default').append('가입인증이 완료되지 않은 회원입니다.');
+	                }
+	                else{
 	                	$('#default').text("");
 	                	$('#default').append('존재하지 않는 아이디입니다');	                	
 	                }

@@ -36,7 +36,6 @@ import net.mvp.movie.MovieDTO;
 import net.mvp.movie.MovieImgDAO;
 import net.mvp.movie.MovieImgDTO;
 import net.mvp.users.UsersDTO;
-import oracle.net.aso.e;
 
 @Controller
 public class AdminController {
@@ -53,26 +52,11 @@ public class AdminController {
 	
 	/// 화면처리 관련 ///////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/administrator/main.do")
-	public ModelAndView home() {
-		ModelAndView mav = new ModelAndView();
-		String url = "movietable";
-		mav.addObject("page",url);
-		mav.setViewName("administratormain");
-		return mav;
+	public String home() {
+		String url = "redirect:/administrator/movietable.do";
+		return url;
 	}
-	
-
-	
-
-	@RequestMapping(value = "/administrator/usersmanage.do")
-	public ModelAndView usersmanage() {
-		ModelAndView mav = new ModelAndView();
-		String url = "usersmanage";
-		mav.addObject("page",url);
-		mav.setViewName("administratormain");
-		return mav;
-	}
-	
+		
 	@RequestMapping(value = "/administrator/reviewmanage.do")
 	public ModelAndView reviewmanage() {
 		ModelAndView mav = new ModelAndView();
@@ -90,16 +74,7 @@ public class AdminController {
 		mav.setViewName("administratormain");
 		return mav;
 	}
-	
-	@RequestMapping(value = "/administrator/admincreate.do")
-	public ModelAndView admincreate() {
-		ModelAndView mav = new ModelAndView();
-		String url = "admincreate";
-		mav.addObject("page",url);
-		mav.setViewName("administratormain");
-		return mav;
-	}
-	
+		
 	////////////////////////// 영화 수정 관련 /////////////////////////////////////
 	MovieDateNow now = new MovieDateNow();
 	@Inject
@@ -117,7 +92,7 @@ public class AdminController {
 		MovieDTO reqdto = new MovieDTO();
 		List<MovieDTO> list = new ArrayList<MovieDTO>();
 		String curPage = req.getParameter("curPage");
-		int maxitem = mdao.MovieAllCount(reqdto);
+		int maxitem = mdao.dbMovieAllCount(reqdto);
 		Map<String,Integer> setpage = reqdto.setPage(curPage,maxitem);
 		list = mdao.dbAdminMovieList(reqdto);
 		String url = "movietable";
@@ -134,10 +109,12 @@ public class AdminController {
 		MovieDTO mdto = new MovieDTO();
 		Map<Object, Object> map = new HashMap<Object,Object>();
 		System.out.println(reqmap);
-		System.out.println(reqmap.get("m_no"));
+		String m_plot = (String)reqmap.get("m_plot");
+		m_plot = m_plot.replace("\n", "<br>");
+		System.out.println(m_plot);
 		mdto.setM_no(Integer.parseInt((String)reqmap.get("m_no")));
 		mdto.setM_imgurl((String)reqmap.get("m_imgurl"));
-		mdto.setM_plot((String)reqmap.get("m_plot"));
+		mdto.setM_plot(m_plot);
 		mdto.setM_trailerurl((String)reqmap.get("m_trailerurl"));
 		int cnt = mdao.dbMovieCount(mdto);
 		String msg = "NO";
@@ -196,6 +173,7 @@ public class AdminController {
 		String path = this.PATH;
 		String newFileName = "";
 		String msg ="";
+		String webpath="/local/upload/movie/";
 		MovieImgDTO midto = new MovieImgDTO();
 		int m_no = Integer.parseInt(multi.getParameter("m_no").toString());
 		File file = new File(path);
@@ -223,7 +201,7 @@ public class AdminController {
 			try {
 				mf.transferTo(new File(path+newFileName));
 				msg = "파일업로드 성공";
-				midto.setDirectory(path);
+				midto.setDirectory(webpath);
 				midto.setM_no(m_no);
 				midto.setOriginal_fileNm(fileName);
 				midto.setStorage_fileNm(newFileName);
@@ -270,6 +248,29 @@ public class AdminController {
 		return map;
 	} //conunt AJAX ADMINmovieadd
 	
+	@RequestMapping(value ="/administrator/movieImgdelete.do")
+	@ResponseBody
+	public Map<Object, Object> movieImgdelete(@RequestBody Map<Object,Object> reqmap){
+		MovieImgDTO midto = new MovieImgDTO();
+		Map<Object, Object> map = new HashMap<Object,Object>();
+		String msg = "NO";
+		int mi_no = Integer.parseInt(reqmap.get("mi_no").toString());
+		midto.setMi_no(mi_no);
+		int cnt = midao.dbMovieimgcount(midto);
+		if(cnt >0) {
+		midto = midao.dbMovieImgSelectOne(midto);
+		midao.dbmovieImgdelete(midto);
+		String url = midto.getDirectory()+midto.getStorage_fileNm();
+		File file = new File(url);
+		if(file.exists()) {
+			if(file.delete()) {
+				msg="OK";
+			}
+		}
+		}
+		map.put("msg", msg);
+		return map;
+	}
 	
 	////////////////////////// 영화 추가 관련 /////////////////////////////////////
 
@@ -278,9 +279,14 @@ public class AdminController {
 	public ModelAndView movieadd(MovieSearchDTO mdto, HttpServletRequest req) {
 		ArrayList<HashMap<String, Object>> movielist = new ArrayList<HashMap<String, Object>>();
 		ModelAndView mav = new ModelAndView();
+		String query = "";
 		if(req.getQueryString()==""||req.getQueryString()==null) {
 			mdto.setPrdtStartYear(now.nowyear());
 			mdto.setPrdtEndYear(now.nowyear());
+		}
+		else {
+			query = "&movieNm="+mdto.getMovieNm();
+			System.out.println(mdto.getMovieNm());
 		}
 		try {
 			movielist = msapi.MovieSearch(mdto);
@@ -301,6 +307,7 @@ public class AdminController {
 		String page = mdto.getCurPage()==null ? "" : mdto.getCurPage();
 		Map<String,Integer> pageset = msapi.SearchPageNum(page);	
 		String url = "movieadd";
+		mav.addObject("query",query);
 		mav.addObject("page",url);
 		mav.addObject("pageset",pageset);
 		mav.addObject("movielist",movielist);

@@ -7,8 +7,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
-<link rel="stylesheet" href="css/lightslider.css" />
-<link rel="stylesheet" href="css/movieDetail.css" />
+<link rel="stylesheet" href="/css/lightslider.css" />
+<link href="/css/movieDetail.css" rel="stylesheet">
 <style>
 ul {
 	list-style: none outside none;

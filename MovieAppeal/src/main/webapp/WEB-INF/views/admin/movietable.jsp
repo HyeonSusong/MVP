@@ -3,44 +3,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <div style="margin-top:100px; margin-left:100px;">
-    	<div>
+   <div>
+    	<div class="panel panel-body" style="width: 1080px; margin: 0px auto;">
+    	   <h3><strong>영화관리</strong></h3>
+  			 <hr>
     		<table class="table table-striped" >
     			<tr>
     			<td>영화분류번호
     			</td>
-    			<td>img
+    			<td>
     			</td>
-    			<td>영화제목
-    			</td>
-    			<td>줄거리
+    			<td colspan="2" >영화제목 / 줄거리
     			</td>
     			<td>
     			</td>
     			</tr>
     			<c:forEach var="list" items="${list}">
 	    			<tr class = "movieEntity">
-		    			<td>${list.m_no}
+		    			<td style="width: 120px;">${list.m_no}
     						<input type="hidden" class="m_no" value="${list.m_no}">
     					</td>
-    					<td><img src="${list.m_imgurl}">
+    					<td style="width: 115px;"><img height="157px" width="110px" src="${list.m_imgurl}">
     						<input type="hidden" class="m_imgurl" value="${list.m_imgurl}">    			
     					</td>
-    					<td>${list.m_title }
+    					<td colspan="2">
+    					<div style="overflow: hidden; text-overflow: ellipsis;"><h4><strong>${list.m_title }</strong></h4><hr></div>
+    					<div style="height:95px; overflow: hidden; text-overflow: ellipsis;">${list.m_plot }</div>
     						<input type="hidden" class="m_title" value="${list.m_title}">
-    					</td>
-    					<td>${list.m_plot }
     						<input type="hidden" class="m_plot" value="${list.m_plot}">
     						<input type="hidden" class="m_trailerurl" value="${list.m_trailerurl}">
     					</td>
-    					<td>
+    					<td style="width: 130px;">
     						<button class="btn btn-primary editBtn" data-toggle="modal" data-target="#editModal" type="button" onclick="movieEdit(this);"><i>수정</i></button>
     						<button class="btn btn-danger" type="button" onclick="movieDelete(this);"><i>삭제</i></button>
     					</td>    			
     				</tr>
     			</c:forEach>    			
     			<tr>
-    			<td colspan="5">
+    			<td class="text-center" colspan="5">
     							<ul class="pagination">
 					<c:if test="${pageset.firstPage > pageset.pageIndex}">
 				    <li>
@@ -103,20 +103,22 @@
         				</div>
      				</form>
      				<div>
-     					<h6>movie photoadder</h6>
+     					<h4>Movie Photo Adder</h4>
      					<div>
      						<form id="img_file_upload" action="/administrator/movieimgupload.do" method="post"  enctype="multipart/form-data" >
-     							<div class="input-group">
+     							<div class="form-group">
      								<label for="file_input" class="control-label">이미지첨부</label>
+     								<div class="input-group" >
      								<input id="m_image" type="file" name="multi" class="form-control" placeholder="imageonly">
      								<span class="input-group-btn">
       					 				<button id="imageadd-btn" class="btn btn-default" type="button">등록</button>
      				 				</span>
+     				 				</div>
      				 				<input type="hidden" name="m_no" id="file_m_no">
 		     					</div>
      						</form>
      						<div>
-     							<ul id="img_list">
+     							<ul class="list-unstyled" id="img_list">
      							</ul>
      						</div>
      					</div>
@@ -169,7 +171,7 @@
 	});
 	
 /* 	function fileExtendcheck(name){
-		var ext = name.substring		
+		var ext = name.substring		3
 	}
  */
  
@@ -180,7 +182,7 @@
             async: true,
             type : 'POST',
             data : JSON.stringify({
-            	'm_no' : m_no,
+            	'm_no' : m_no
              }),
             url : "/administrator/movieimglist.do",
             dataType : "json",
@@ -189,11 +191,12 @@
             	if(data.cnt > 0 ){
         			$('#img_list').text("");
             		$.each(data.list, function(idx, val) {
-	            		$('#img_list').append('<li>');
-	            		$('#img_list').append('<a href="/upload/movie/'+val.storage_fileNm+'">'+val.storage_fileNm+'</a>');
-	            		$('#img_list').append('<input type="hidden" value="'+val.mi_no+'" >');
-						$('#img_list').append('<button type="button" class="img_delete_btn btn btn-danger"> 삭제 </button>');
-	            		$('#img_list').append('</li>');
+            			var text = '<li>';
+            			text += '<a href="/upload/movie/'+val.storage_fileNm+'" onclick="window.open(this.href);return false;" target="_blank" ">'+val.storage_fileNm+'</a>';
+            			text +='<input type="hidden" class="mi_no" value="'+val.mi_no+'" >';
+						text +='<button type="button" class="img_delete_btn btn btn-danger" onclick="imgdelete(this);"> 삭제 </button>';
+	            		text +='</li>';
+            		$('#img_list').append(text);
             		});
             	}
             	else{
@@ -208,12 +211,17 @@
         });	 
  } 
  
+ function imgdelete(k){
+		 var mi_no = $(k).parent().chilren("#mi_no").val();
+		 alert(mi_no);
+ }
+	 
  
 	function movieEdit(btn){
 		var m_no = $(btn).parents('.movieEntity').children().children('.m_no').val();
-		var m_title = $(btn).parents('.movieEntity').children().children('.m_title').val();
+		var m_title = $(btn).parents('.movieEntity').children().find('.m_title').val();
 		var m_imgurl = $(btn).parents('.movieEntity').children().children('.m_imgurl').val();
-		var m_plot = $(btn).parents('.movieEntity').children().children('.m_plot').val();
+		var m_plot = $(btn).parents('.movieEntity').children().find('.m_plot').val();
 		var m_trailerurl = $(btn).parents('.movieEntity').children().children('.m_trailerurl').val();
 			$('#hide_m_no').val(m_no);
 			imglistexpress(m_no);	
@@ -288,5 +296,53 @@
 			
 		});
 	});
+	
+	$(function(){
+		$('.img_delete_btn').click(function(){
+			var mi_no = $(this).parent().children().val();
+			alert(mi_no);
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data : JSON.stringify({
+		            	'mi_no' : mi_no
+		             }),
+		            url : "/administrator/movieImgdelete.do",
+		            dataType : "json",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		            	if(data.msg == "OK"){
+		            		location.reload();
+		            	}
+		            	else{
+		            		alert("수정실패");
+		            		location.reload();
+		            	}
+		            },
+		            error : function(error) {		                
+		            }
+		        });
+			
+		});
+	});
 
 </script>
+<style>
+ .img_delete_btn{
+ 	float:right;
+ }
+ 
+ #img_list li {
+ 	height: 40px;
+ 	padding: 5px 3px 5px 10px;
+ 	padding-bottom: 3px;
+ 	border-bottom: #444;
+ 	border-bottom-style: solid;
+ 	border-bottom-width: 1px;
+ }
+ 
+ #img_list li:hover {
+	-webkit-filter: brightness(50%);
+    filter: brightness(50%);	
+}
+</style>

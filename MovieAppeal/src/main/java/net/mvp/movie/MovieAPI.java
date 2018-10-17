@@ -90,7 +90,7 @@ public class MovieAPI {
 		String repNationCd="";
 		String wideAreaCd="";
 		
-		String movieCdResponse = service.getWeeklyBoxOffice(true, targetDt, weekGb, itemPerPage, multiMovieYn, repNationCd, wideAreaCd);
+		String movieCdResponse = service.getWeeklyBoxOffice(true, targetDt, itemPerPage, weekGb, multiMovieYn, repNationCd, wideAreaCd);
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String,HashMap<String,Object>> result1 = mapper.readValue(movieCdResponse, new TypeReference<HashMap<String,HashMap<String,Object>>>() {});
 		System.out.println(result1);

@@ -9,8 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  values( ml_seq.nextVal, #{m_no}, #{u_no}, 1)     
 	</insert>
 	
-	<select id="dbAllMovieuserLike"  parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="net.mvp.movie.like.MovieLikeDTO">
+	<select id="allmovieuserlike"  parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="net.mvp.movie.like.MovieLikeDTO">
 		select * from  movie_like where u_no = #{u_no}
+	</select>
+	
+	<select id="allmovieuserlikecheck" parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="int">
+		select count(*) from  movie_like where u_no = #{u_no}	
 	</select>
 
 	<select id="movielikecheck" parameterType="net.mvp.movie.like.MovieLikeDTO" resultType="int">

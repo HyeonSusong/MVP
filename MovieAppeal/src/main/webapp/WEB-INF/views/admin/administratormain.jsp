@@ -17,10 +17,8 @@
 		<tiles:insertAttribute name="header"/>
 	</div>
 	<!-- cotnet -->	
-  	<div style="padding-top:80px; ">		
-		<div class="article">
+  	<div id="main" style="padding-top:80px; ">		
 			<tiles:insertDefinition name="${page}"/>
-		</div>
 	</div>
 	
 	<!-- footer -->

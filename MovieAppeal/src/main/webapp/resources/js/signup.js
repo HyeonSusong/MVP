@@ -144,13 +144,12 @@
 					alert("이메일형식을 확인해주세요");
 					return;
 				}
-		        var mail =  $("#mailbox").val();
+		        var u_mail = $("#mailbox").val();
+		        alert(u_mail);
 		        $.ajax({
 		            async: true,
 		            type : 'POST',
-		            data : JSON.stringify({
-		            			u_mail : mail
-		            }),
+		            data : u_mail,
 		            url : "mailcheck.do",
 		            dataType : "json",
 		            contentType: "application/json; charset=UTF-8",

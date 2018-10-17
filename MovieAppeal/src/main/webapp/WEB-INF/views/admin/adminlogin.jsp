@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>로그인</title>
-	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script src="/js/login.js"></script>
 	<link href="/css/login.css" rel="stylesheet">
 	<style type="text/css">
@@ -16,6 +15,7 @@
 	.spaceTop{ 	margin-top: 10px;}
 	.btn span.fa {	opacity: 0;}
 	.btn.active span.fa {opacity: 1;}
+	.logincard{background-color:#fff;}
 	</style>
 	<div class="container" id="admin-loginarea">
 		<div>
@@ -31,11 +31,7 @@
         <label for="loginpwdbox" class="sr-only">비밀번호</label>
         <input name="u_pwd" type="password" id="loginpwdbox" class="form-control" placeholder="Password" required><br>
         <label id = "default"></label>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> 기억하기
-          </label>
-        </div>
+
         <button id="admin-btn-login" class="btn btn-lg btn-block btn-black" type="button">
         <i>로 그 인</i></button>
       </form>

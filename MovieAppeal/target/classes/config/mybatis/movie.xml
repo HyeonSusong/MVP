@@ -20,20 +20,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countAll" parameterType="net.mvp.movie.MovieDTO" resultType="int">
 		select count(*) from movies
 		<if test="m_title != null">
-		where m_title like %'||#{m_title}||'%'
+		 where m_title like '%'||#{m_title}||'%'
 		</if>
+		<if test="m_genre != null">
+		 where m_genre like '%'||#{m_genre}||'%'
+		</if>
+		
 	</select>
 	
 	<select id="list" parameterType="net.mvp.movie.MovieDTO" resultType="net.mvp.movie.MovieDTO">
 		select * from 
 					(select 
 						rownum as rn, 
-						m.* from movies m 
+						m.* from 
+						(select * from movies
+						<if test="query != null">
+						order by #{query} desc
+						</if>
+						) m 
 						<if test="m_title != null">
-						where m_title like %'||#{m_title}||'%'
+						where m_title like '%'||#{m_title}||'%'
+						</if>
+						<if test="m_genre != null">
+						where m_genre like '%'||#{m_genre}||'%'
 						</if>
 					)
 					where rn between #{start} and #{end}
+					
 	</select>
 		
 	<update id="edit" parameterType="net.mvp.movie.MovieDTO">

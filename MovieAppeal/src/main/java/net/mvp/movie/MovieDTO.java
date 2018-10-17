@@ -12,8 +12,10 @@ public class MovieDTO {
 	private String m_plot;
 	private int m_rating;
 	private int m_likes;
+	private int m_dislikes;
 	private String m_imgurl;
 	private String m_trailerurl;
+	private int rn;
 	
 	///// from API data ///////////
 	private String m_titleEn;
@@ -28,6 +30,7 @@ public class MovieDTO {
 	private int start;
 	private int end;
 	private final int pageperentity = 10;
+	private String query;
 	
 	public Map<String, Integer> setPage(String curPage, int maxitem){
 		System.out.println("curpage:"+curPage);
@@ -147,5 +150,41 @@ public class MovieDTO {
 	}
 	public void setWatchGrade(String watchGrade) {
 		this.watchGrade = watchGrade;
+	}
+
+
+
+	public int getM_dislikes() {
+		return m_dislikes;
+	}
+
+
+
+	public void setM_dislikes(int m_dislikes) {
+		this.m_dislikes = m_dislikes;
+	}
+
+
+
+	public String getQuery() {
+		return query;
+	}
+
+
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
+
+
+	public int getRn() {
+		return rn;
+	}
+
+
+
+	public void setRn(int rn) {
+		this.rn = rn;
 	}
 }

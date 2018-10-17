@@ -13,6 +13,11 @@
 						</a>
 					</li>
 					<li class="list_categoty">
+						<a class="" href="/passwordmodify.do">
+							<label class="control-label">비밀번호변경</label>
+						</a>
+					</li>
+					<li class="list_categoty">
 						<a class="" href="/myfavorite.do">
 							<label class="control-label">나의추천영화</label>
 						</a>

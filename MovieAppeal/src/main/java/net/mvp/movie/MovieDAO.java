@@ -35,7 +35,7 @@ public class MovieDAO {
 		return movieList;
 	}
 	
-	public int MovieAllCount(MovieDTO dto) {
+	public int dbMovieAllCount(MovieDTO dto) {
 		int cnt = temp.selectOne("movie.countAll",dto);
 		return cnt;
 	}

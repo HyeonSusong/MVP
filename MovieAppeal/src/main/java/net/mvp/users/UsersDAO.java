@@ -27,4 +27,17 @@ public class UsersDAO {
 		int cnt = temp.selectOne("users.mailcheck",u_mail);
 		return cnt;
 	}
+	public void dbverify(UsersDTO udto) {
+		temp.update("users.verify",udto);
+	}
+	
+	public void dbuserdelete(UsersDTO udto) {
+		temp.update("users.delete",udto);
+	}
+	public void dbpwdmodify(UsersDTO udto) {
+		temp.update("users.pwdmodify",udto);
+	}
+	public void dbuseredit(UsersDTO udto) {
+		temp.update("users.edit",udto);
+	}
 }

@@ -10,9 +10,12 @@
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
-	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>	
+	<definition name="main" template="/WEB-INF/views/main/main.jsp"/>
+	
+	<definition name="test" template="/WEB-INF/views/main/test.jsp"/>	
 
 	<!-- movie -->
+	<definition name="movieserch" template="/WEB-INF/views/movie/movieserch.jsp"/>
 	<definition name="movie" template="/WEB-INF/views/movie/movie.jsp"/>
 	<definition name="moviedetail" template="/WEB-INF/views/movie/movieDetail.jsp"/>
 	
@@ -24,7 +27,7 @@
 		
 	<!-- recommend -->
 	<definition name="recommend" template="/WEB-INF/views/recommend/recommend.jsp"></definition>
-	
+	<definition name="movielist" template="/WEB-INF/views/movie/movielist.jsp"></definition>
 	<!-- users -->
 	<definition name="signup" template="/WEB-INF/views/users/signup.jsp"/>
 	<definition name="login" template="/WEB-INF/views/users/login.jsp"/>
@@ -42,7 +45,15 @@
 	<definition name="myrating" template="/WEB-INF/views/users/mypage/myrating.jsp"></definition>
 	<definition name="myreview" template="/WEB-INF/views/users/mypage/myreview.jsp"></definition>
 	<definition name="myreply" template="/WEB-INF/views/users/mypage/myreply.jsp"></definition>
-	<definition name="user_delete" template="/WEB-INF/views/users/mypage/user_delete.jsp"></definition>
+	<definition name="userdelete" template="/WEB-INF/views/users/mypage/userdelete.jsp"></definition>
+	<definition name="passwordmodify" template="/WEB-INF/views/users/mypage/passwordmodify.jsp"></definition>
+	
+	
+	<!-- verify -->
+	<definition name="mailverify" template="/WEB-INF/views/users/mailverify.jsp"></definition>
+	<definition name="verifymailsend" template="/WEB-INF/views/users/verifymailsend.jsp"></definition>
+	<definition name="verifyfail" template="/WEB-INF/views/users/verifyfail.jsp"></definition>
+	
 	
 	
 	<!-- adminpage -->
@@ -54,10 +65,8 @@
 	
 	<definition name="movietable" template="/WEB-INF/views/admin/movietable.jsp"/>
 	<definition name="movieadd" template="/WEB-INF/views/admin/movieadd.jsp"/>
-	<definition name="usermanage" template="/WEB-INF/views/admin/usermanage.jsp"/>
 	<definition name="reviewmanage" template="/WEB-INF/views/admin/reviewmanage.jsp"/>
 	<definition name="replymanage" template="/WEB-INF/views/admin/replymanage.jsp"/>
-	<definition name="admincreate" template="/WEB-INF/views/admin/admincreate.jsp"/>
 	<definition name="adminlogin" template="/WEB-INF/views/admin/adminlogin.jsp"/>
 	
 	

@@ -33,7 +33,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			else {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('로그인이 필요한 서비스입니다');");
-				writer.println("history.back();");
+				writer.println("location.href='/main.do';");
 				writer.println("</script>");
 				writer.flush();
 			}

@@ -3,24 +3,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 
-<div style="float: none;">
-	<div class="container" style="padding-top: 50px; padding-bottom: 80px;">
+<div class="panel panel-body" style="width:1200px; margin:0px auto; float: none;">
+	<h3><strong>영화추가</strong></h3>
+	<hr>
+	<div class="container">
 		<div class="table-responsive">
-		<div>
-		<header>
-			<ul class="list-unstyled list-inline">
-				<li>
-					<select>
-						<option>
-						</option>
-					</select>
-				</li>
-			</ul>	
-		</header>
+		<div style="float: right; width: 300px; margin-right: 20px; margin-bottom: 10px;">
+			<form>
+			<span class="input-group">
+			<input type="text" name="movieNm" id="movieNm" class="form-control" placeholder="영화제목검색"> 
+			<span class="input-group-btn">
+			<button class="btn btn-default" type="submit">검색</button>
+			</span>	
+			</span>
+			</form>
 		</div>
 		
 		<table class="table table-striped table-hover">
-			<tr class="info"> 
+			<tr class="info text-center" > 
 				<td></td>
 				<td><label class="fa">영화코드</label>
 				</td>
@@ -36,19 +36,19 @@
 				</td>
 				<td><label class="fa">감독</label>
 				</td>
-				<td> 영화추가
+				<td style="width: 100px; "> 영화추가
 				</td>		
 			</tr>
 			<c:if test="${not empty movielist}">
 				<c:forEach var="list" items="${movielist}">
-					<tr class="dager movieEntity">
+					<tr class="dager movieEntity" style="height: 170px; font-size: 15px; font-weight: bold;">
 					<td class="m_imgarea">
 					<img  class="m_imgurl" src="${list.imageUrl}">
 					</td>
 					<td><label class="fa" >${list.movieCd}</label>
 					<input class="m_no" type="hidden" value="${list.movieCd}"> 
 					</td>
-					<td><label class="fa">${list.movieNm}</label>
+					<td><label class="fa"><strong>${list.movieNm}</strong></label>
 					<input class="m_title" type="hidden" value="${list.movieNm}"> 
 					</td>
 					<td><label class="fa">${list.movieNmEn}</label>
@@ -65,7 +65,7 @@
 						<label class="fa">${ direct} &nbsp;</label>
 						</c:forEach>
 					</td>
-					<td>
+					<td class="text-center">
 						<div class="checkbox">
 							<input class="movieAddCheck" id="movieAddCheck" type="checkbox">
 						</div>
@@ -74,11 +74,11 @@
 				</c:forEach>
 			</c:if>
 			<tr>
-				<td colspan="9">
+				<td class="text-center" colspan="9">
 				<ul class="pagination">
 					<c:if test="${pageset.firstPage>10}">
 				    <li>
-    				<a href="/administrator/movieadd.do?curPage=${pageset.firstPage-pageset.pageIndex}" aria-label="Previous">
+    				<a href="/administrator/movieadd.do?curPage=${pageset.firstPage-pageset.pageIndex}${query}" aria-label="Previous">
         			<span aria-hidden="true">&laquo;</span>
       				</a>
    	 				</li>
@@ -89,31 +89,40 @@
    	 					<li><a class ="nowpage">${i}</a></li>
    	 					</c:when>
    	 					<c:otherwise>
-   	 					<li><a href="/administrator/movieadd.do?curPage=${i}">${i}</a></li>
+   	 					<li><a href="/administrator/movieadd.do?curPage=${i}${query}">${i}</a></li>
    	 					</c:otherwise>
    	 					</c:choose>
    	 				</c:forEach>
    	 				<li>
-      					<a href="/administrator/movieadd.do?curPage=${pageset.firstPage+pageset.pageIndex}" aria-label="Next">
+      					<a href="/administrator/movieadd.do?curPage=${pageset.firstPage+pageset.pageIndex}${query}" aria-label="Next">
         				<span aria-hidden="true">&raquo;</span>
       					</a>
+
     				</li>
     			</ul>
 				</td>
 			</tr>
 		</table>
-		<button class ="btn" type="button" id="btnMovieAdd"> <i>영화 추가</i>
-		</button>
-	<form>
-	<input type="text" id="m_imgurl" name="m_imgurl" >
-	<input type="text" id="m_no" name="m_no">
-	<input type="text" id="m_title" name="m_title">
-	<input type="text" id="m_genre" name="m_genre">
-	</form>
+		<div style="float: right;"> 
+      		<button class ="btn btn-lg btn-primary" type="button" id="btnMovieAdd"> <i>영화 추가</i>
+			</button>
+      	</div>
+
 	</div>
 </div>
 </div>
 <script type="text/javascript">
+	$(function(){
+		$(".movieEntity").click(function(){
+			var box = $(this).children().find('.movieAddCheck');
+			if(box.is(":checked")){
+				box.attr("checked",false);				
+			}
+			else{
+				box.attr("checked",true);
+			}
+		});
+	});
 	$(function(){
 		$("#btnMovieAdd").click(function(){
 			var dataname = '';
@@ -163,6 +172,9 @@
 	.mystar-rating-poster:hover{
 		-webkit-filter: brightness(50%);
     	filter: brightness(50%);	
+	}
+	.movieEntity:hover{
+		cursor: pointer;
 	}
 
 </style>

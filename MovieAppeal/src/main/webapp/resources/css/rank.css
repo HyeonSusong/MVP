@@ -15,12 +15,126 @@ rgba(224, 143, 35, 0.5);
 °ËÀº»ö : #0B0D0C;
 rgba(11, 13, 12, 0.5); */
 
-#rank{
+.rank-wrap{
 	
-    margin: 350px 0 150px;
-    width: 100%;
+    margin: 80px auto;
+    width: 1080px;
     height: auto;
-    display: inline-flex;
+    display: table;
+    background: url(/img/firmback.jpg)
 }
+.rank-wrap h1{
+	color : #D6BA8A;
+	margin-left:20px;
+	margin-top: 20px;
+}
+.rank-wrap .rank-btn-wrap {
+	float: right;
+	right: 20px;
+	top: 15px;
+	color: #D6BA8A;
 }
 
+.rank-wrap .list-wrap{
+background-color:#2a2e33;
+	font-size: 15px;
+	
+}
+.rank-wrap .list-wrap .list-group-item{
+	background-color:#2a2e33;
+	border-color: #030303;
+	color: #999;
+	font-size: 20px;
+	
+}
+.rank-wrap .list-wrap .list-group-item .headrow{
+	padding: 3px 10px 3px 15px;
+	font-size: 30px;
+	color: #D6BA8A;
+}
+
+.rank-wrap .list-wrap .list-group-item .listrow{
+	padding: 3px 10px 3px 15px;
+	height: auto;
+	transition: all 0.4s;
+}
+
+.rank-wrap .list-wrap #listrow{
+	height: 175px;
+}
+.rank-wrap .list-wrap .list-group-item .listrow:hover {
+background-color: #ddd;
+ -webkit-transform:scale(1.5);
+    -moz-transform:scale(1.5);
+    -ms-transform:scale(1.5);   
+    -o-transform:scale(1.5);
+    transform:scale(1.2);
+ z-index: 1000;
+ border-radius: 10px;
+ transition: all 0.1s;
+ position: absolute;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ 
+}
+
+.rank-wrap .list-wrap .cell{
+	display: table-cell;
+}
+
+.rank-wrap .list-wrap .list-img{
+	width: 210px;
+}
+
+.rank-wrap .list-wrap .list-title{
+	width: 575px;
+	padding-left: 10px;
+}
+
+.rank-wrap .list-wrap .list-group-item .listrow:hover {
+	cursor: pointer;
+}
+
+.rank-wrap .list-wrap .list-group-item .listrow:hover .list-title {
+	width: 205px;
+	
+	}
+	.rank-wrap .list-wrap .list-group-item .listrow:hover .list-content {
+	display: table-cell;
+	color:#030303;
+	font-size: 15px;
+	}
+
+
+
+
+.rank-wrap .list-wrap .listrow .list-content{
+	width: 360px;
+	overflow: hidden; text-overflow: ellipsis;
+	border-left-style: solid;
+	border-left-color: rgb(200,200,200,0.5);
+	border-left-width: 2px;
+	padding-left: 10px;
+	display: none;
+	
+	
+}
+
+.rank-wrap .list-wrap .headrow {
+	font-size: 20px;
+}
+.rank-wrap .list-wrap #headrow {
+	background-color: #C71B1B !important;
+	color: #eee;
+}
+
+.rank-wrap .list-wrap .list-rating{
+	width: 250px;
+	padding-left: 10px;
+}
+.rank-wrap .list-wrap .list-like{
+	width: 130px;
+}
+.rank-wrap .list-wrap .headrow .list-rating{
+	
+	width: 160px;
+}

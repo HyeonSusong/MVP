@@ -8,7 +8,7 @@
 <div class="header-wrap">
 	
 	<span class="logo">
-		<a href="/main.do"><img id="logoimg" src="/img/MVP.png"></a>
+		<a href="/administrator/main.do"><img id="logoimg" src="/img/MVP.png"></a>
 	</span>
 	<ul class="nav">
 		<li class="list_categoty">
@@ -22,11 +22,6 @@
 						</a>
 					</li>
 					<li class="list_categoty">
-						<a href="/administrator/usersmanage.do">
-							<label class="control-label">회원관리</label>							
-						</a>
-					</li>
-					<li class="list_categoty">
 						<a href="/administrator/reviewmanage.do">
 							<label class="control-label">게시글관리</label>							
 						</a>
@@ -34,11 +29,6 @@
 					<li class="list_categoty">
 						<a href="/administrator/replymanage.do">
 							<label class="control-label">댓글관리</label>							
-						</a>
-					</li>
-					<li class="list_categoty">
-						<a href="/administrator/admincreate.do">
-							<label class="control-label">관리자생성</label>							
 						</a>
 					</li>
 

@@ -1,3 +1,4 @@
+
 var NowUser ="";
 var starNum;
 var AVG;

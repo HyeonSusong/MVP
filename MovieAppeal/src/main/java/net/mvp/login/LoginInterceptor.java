@@ -35,7 +35,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		try {
 		HttpSession session = request.getSession();
 		UsersDTO dto =(UsersDTO)session.getAttribute("LOGIN");
-		System.out.println(dto.getU_verify());
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			System.out.println("½ÇÆÐ");

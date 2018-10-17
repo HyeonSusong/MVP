@@ -49,8 +49,10 @@ public class MovieSearchAPI {
 		prdtStartYear = dto.getPrdtStartYear()==null?"":dto.getPrdtStartYear();	
 		prdtEndYear = dto.getPrdtEndYear()==null?"":dto.getPrdtEndYear();			
 		repNationCd = dto.getRepNationCd()==null?"":dto.getRepNationCd();			
-		movieTypeCdArr = dto.getMovieTypeCd()==null ? new String[] {"220101"} : dto.getMovieTypeCd();	
+		movieTypeCdArr = dto.getMovieTypeCd()==null ? new String[] {"220101"} : dto.getMovieTypeCd();
 		
+		//movieNm = URLEncoder.encode(movieNm, "UTF-8");
+		directorNm = URLEncoder.encode(directorNm, "UTF-8");	
 		// 영화코드조회 서비스 호출 (boolean isJson, String curPage, String itemPerPage,String directorNm, String movieCd, String movieNm, String openStartDt,String openEndDt, String ordering, String prdtEndYear, String prdtStartYear, String repNationCd, String[] movieTypeCdArr)
 		// Json 라이브러리를 통해 Handling\
 		
@@ -73,6 +75,7 @@ public class MovieSearchAPI {
 	*/	
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String,Object> result1 = mapper.readValue(movieCdResponse, HashMap.class);
+		System.out.println(result1);
 		HashMap<String,Object> result2 = mapper.convertValue(result1.get("movieListResult"), HashMap.class);
 		ArrayList<HashMap<String, Object>> lastresult = mapper.convertValue(result2.get("movieList"),new TypeReference<ArrayList<HashMap<String, Object>>>(){});
 		ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
