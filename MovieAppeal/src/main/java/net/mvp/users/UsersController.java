@@ -29,6 +29,10 @@ import net.mvp.movie.like.MovieLikeDAO;
 import net.mvp.movie.like.MovieLikeDTO;
 import net.mvp.movie.rate.MovieRateDAO;
 import net.mvp.movie.rate.MovieRateDTO;
+import net.mvp.review.ReviewDAO;
+import net.mvp.review.ReviewDTO;
+import net.mvp.review.reply.ReviewReplyDAO;
+import net.mvp.review.reply.ReviewReplyDTO;
 import net.mvp.users.mail.MailKeyDAO;
 import net.mvp.users.mail.MailKeyDTO;
 import net.mvp.users.mail.Sendmail;
@@ -66,7 +70,6 @@ public class UsersController {
 		return url;
 	}
 	
-
 	
 	@RequestMapping("/testmail.do")
 	public ModelAndView test() {
@@ -112,14 +115,6 @@ public class UsersController {
 		return mav;
 	}
 	
-	@RequestMapping("/verifyfail.do")
-	public ModelAndView verifyfail() {
-		ModelAndView mav = new ModelAndView();
-		String url = "verifyfail";
-		mav.addObject("page",url);
-		mav.setViewName("mainLayout");
-		return mav;
-	}
 	@RequestMapping("/mailverify.do")
 	public ModelAndView mailverify() {
 		ModelAndView mav = new ModelAndView();
@@ -154,7 +149,7 @@ public class UsersController {
        return map;	
 	}
 	
-	
+////////////////////////////////////////////////////////////////////////////////
 	
 	// 마이페이지 메인	
 	@RequestMapping("/mypage.do")
@@ -274,12 +269,13 @@ public class UsersController {
 		int cnt = mrdao.dbuserAllRateMovieCheck(mrdto);
 		if(cnt>0) {
 			List<MovieRateDTO> ratelist = mrdao.dbUserRateMovie(mrdto);
-			List<Map<String,Object>> myratelist = new ArrayList<Map<String,Object>>();
+			List<HashMap<String,Object>> myratelist = new ArrayList<HashMap<String,Object>>();
 			for(MovieRateDTO mymr : ratelist) {
 				MovieDTO mdto = new MovieDTO();
-				Map<String,Object> mymovie = new HashMap<String, Object>();
+				HashMap<String,Object> mymovie = new HashMap<String, Object>();
 				mdto.setM_no(mymr.getM_no());
 				mdto = mdao.dbMovieSelet(mdto);
+				System.out.println(mdto.getM_no()+"gd"+mdto.getM_title()+mdto.getM_imgurl());
 				mymovie.put("m_no",mdto.getM_no());
 				mymovie.put("m_title", mdto.getM_title());
 				mymovie.put("m_genre",mdto.getM_genre());
@@ -297,25 +293,65 @@ public class UsersController {
 	}
 	
 	///////////////////회원 페이지 - 나의 게시물
+	
+	@Inject
+	@Autowired
+	ReviewDAO rdao; 
+	
 	@RequestMapping("/myreview.do")
 	public ModelAndView myreview(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
 		UsersDTO udto = new UsersDTO();
+		String curPage = req.getParameter("curPage");
+		if(curPage == "" || curPage ==null) {
+			curPage="1";
+		}
 		udto = (UsersDTO)session.getAttribute("LOGIN");
+		int u_no = udto.getU_no();
+		ReviewDTO rdto = new ReviewDTO();
+		rdto.setU_no(u_no);
+		int cnt = rdao.dbCountAll(rdto);
+		System.out.println(cnt);
+		Map<String, Integer> pageset = rdto.setPage(curPage, cnt, 10);
+		if(cnt>0) {
+			List<ReviewDTO> list = rdao.dbReviewList(rdto);
+			System.out.println(list.size());
+			mav.addObject("list",list);
+		}
 		String url = "myreview";
+		mav.addObject("pageset",pageset);
 		mav.addObject("page",url);
 		mav.setViewName("mypagemenu");
 		return mav;
 	}
 	
 	////////////////////회원 페이지 - 나의 댓글
+	@Inject
+	@Autowired
+	ReviewReplyDAO brdao;
+	
 	@RequestMapping("/myreply.do")
 	public ModelAndView myreply(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
 		UsersDTO udto = new UsersDTO();
+		String curPage = req.getParameter("curPage");
+		if(curPage == null || curPage =="") {
+			curPage = "1";
+		}
 		udto = (UsersDTO)session.getAttribute("LOGIN");
+		int u_no = udto.getU_no();
+		ReviewReplyDTO brdto = new ReviewReplyDTO();
+		brdto.setU_no(u_no);
+		int cnt = brdao.dbreplyCount(brdto);
+		System.out.println(cnt);
+		Map<String,Integer> pageset =brdto.setPage(curPage, cnt, 10);
+		if(cnt>0) {
+			List<ReviewReplyDTO> list = brdao.dbMyReply(brdto);
+			System.out.println(list.size());
+			mav.addObject("list",list);
+		}
 		String url = "myreply";
 		mav.addObject("page",url);
 		mav.setViewName("mypagemenu");

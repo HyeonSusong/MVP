@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="add" parameterType="net.mvp.movie.rate.MovieRateDTO">
 	  insert into movie_rate (mr_no, u_no, m_no, mr_rating)
-	  values( rhobby_seq.nextVal, #{u_no}, #{m_no}, #{mr_rating})     
+	  values( mr_no.nextVal, #{u_no}, #{m_no}, #{mr_rating})     
 	</insert>
 	
 	<update id="edit" parameterType="net.mvp.movie.rate.MovieRateDTO">

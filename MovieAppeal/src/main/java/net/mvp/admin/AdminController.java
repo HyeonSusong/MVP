@@ -93,7 +93,7 @@ public class AdminController {
 		List<MovieDTO> list = new ArrayList<MovieDTO>();
 		String curPage = req.getParameter("curPage");
 		int maxitem = mdao.dbMovieAllCount(reqdto);
-		Map<String,Integer> setpage = reqdto.setPage(curPage,maxitem);
+		Map<String,Integer> setpage = reqdto.setPage(curPage,maxitem,10);
 		list = mdao.dbAdminMovieList(reqdto);
 		String url = "movietable";
 		mav.addObject("page",url);
@@ -223,8 +223,8 @@ public class AdminController {
 		MovieImgDTO midto = new MovieImgDTO();
 		Map<Object, Object> map = new HashMap<Object,Object>();
 		List<Map<String,Object>> dtolist = new ArrayList<Map<String,Object>>();
-		System.out.println(reqmap.get("m_no"));
-		midto.setM_no(Integer.parseInt((String)reqmap.get("m_no")));
+		int m_no = Integer.parseInt(reqmap.get("m_no").toString());
+		midto.setM_no(m_no);
 		int cnt = midao.dbMovieimgcount(midto);
 		if(cnt > 0) {
 			try {
@@ -243,7 +243,6 @@ public class AdminController {
 			}
 		map.put("list",dtolist);	
 		}	
-		System.out.println(dtolist);
 		map.put("cnt", cnt);
 		return map;
 	} //conunt AJAX ADMINmovieadd
@@ -254,13 +253,14 @@ public class AdminController {
 		MovieImgDTO midto = new MovieImgDTO();
 		Map<Object, Object> map = new HashMap<Object,Object>();
 		String msg = "NO";
+		String path = this.PATH;
 		int mi_no = Integer.parseInt(reqmap.get("mi_no").toString());
 		midto.setMi_no(mi_no);
 		int cnt = midao.dbMovieimgcount(midto);
 		if(cnt >0) {
 		midto = midao.dbMovieImgSelectOne(midto);
 		midao.dbmovieImgdelete(midto);
-		String url = midto.getDirectory()+midto.getStorage_fileNm();
+		String url = path+midto.getStorage_fileNm();
 		File file = new File(url);
 		if(file.exists()) {
 			if(file.delete()) {

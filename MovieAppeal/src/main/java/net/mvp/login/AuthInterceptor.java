@@ -20,12 +20,15 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session= request.getSession();
+		String preurl = request.getHeader("referer");
+		
 		if(session.getAttribute(LOGIN) == null) { 
 			response.setCharacterEncoding("EUC-KR");
 			PrintWriter writer = response.getWriter();
 			if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))){
 			    writer.println("<script type='text/javascript'>");
 			    writer.println("alert('로그인이 필요한 서비스입니다');");
+			    writer.println("$('#loginModal').modal();");
 			    writer.println("</script>");
 			    writer.flush();
 
@@ -33,7 +36,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			else {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('로그인이 필요한 서비스입니다');");
-				writer.println("location.href='/main.do';");
+				System.out.println(preurl);
+				if(preurl.indexOf(":8080/")<0) {
+					writer.println("location.href='http://183.98.215.169:8080/';");	
+				}else {
+				writer.println("location.href='"+preurl+"';");
+				}
 				writer.println("</script>");
 				writer.flush();
 			}

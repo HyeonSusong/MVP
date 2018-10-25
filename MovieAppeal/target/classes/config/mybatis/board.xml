@@ -1,33 +1,221 @@
-<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="board">
-
-	<insert id="add" parameterType="net.hb.crud.BoardDTO">
-	  insert into hobby
-	  values( hobby_seq.nextVal, #{name}, #{title}, #{content}, #{gender}, #{hobby}, #{img_file_name} )     
+<mapper namespace="review_board">
+	<!-- 검색된 게시글 리스트 출력 -->
+	<select id="selectAll" parameterType="net.mvp.review.ReviewDTO" resultType="net.mvp.review.ReviewDTO">
+		select 	* 
+		from (select  rownum as rn, br.*
+			  from			  
+			  (select
+					 b.*,
+					 m.m_imgurl,
+					 m.m_title,
+					 u.u_id,
+					 r.rcnt
+			  from (select * from review_board order by b_date desc) b
+			  LEFT OUTER JOIN movies m
+			  on (m.m_no = b.m_no)
+			  LEFT OUTER JOIN (select b_no, count(*) as rcnt from review_board_reply group by b_no) r
+			  on ( r.b_no = b.b_no)
+			  LEFT OUTER JOIN users u
+			  on (u.u_no = b.u_no)
+			  ) br
+			 
+		<choose>
+		<when test="b_category != null">
+		<choose>
+		<when test="b_category.equals('like')">
+		where b_category = 'like'
+		<if test="qsel != null">
+		and ${qsel} like '%'||#{qval}||'%' 
+		</if>
+		</when>
+		<when test="b_category.equals('dislike')">
+		where b_category = 'dislike'
+		<if test="qsel != null">
+		and ${qsel} like '%'||#{qval}||'%' 
+		</if>
+		</when>
+		<otherwise>
+		<if test="qsel != null">
+		where ${qsel} like '%'||#{qval}||'%' 
+		</if>
+		</otherwise>		
+		</choose>
+		</when>
+		<when test="u_no != 0">
+		where u_no = #{u_no}
+		</when>
+		</choose>
+		) 
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="Hot" resultType="net.mvp.review.ReviewDTO">
+		select 	* 
+		from (select  rownum as rn, br.*
+			  from			  
+			  (select
+					 b.*,
+					 m.m_imgurl,
+					 m.m_title,
+					 u.u_id,
+					 r.rcnt
+			  from (select * from review_board order by b_likes desc) b
+			  LEFT OUTER JOIN movies m
+			  on (m.m_no = b.m_no)
+			  LEFT OUTER JOIN (select b_no, count(*) as rcnt from review_board_reply group by b_no) r
+			  on ( r.b_no = b.b_no)
+			  LEFT OUTER JOIN users u
+			  on (u.u_no = b.u_no)
+			  ) br
+		) 
+		where rn between 1 and 5
+	</select>
+	
+		<select id="New" resultType="net.mvp.review.ReviewDTO">
+		select 	* 
+		from (select  rownum as rn, br.*
+			  from			  
+			  (select
+					 b.*,
+					 m.m_imgurl,
+					 m.m_title,
+					 u.u_id,
+					 r.rcnt
+			  from (select * from review_board order by b_date desc) b
+			  LEFT OUTER JOIN movies m
+			  on (m.m_no = b.m_no)
+			  LEFT OUTER JOIN (select b_no, count(*) as rcnt from review_board_reply group by b_no) r
+			  on ( r.b_no = b.b_no)
+			  LEFT OUTER JOIN users u
+			  on (u.u_no = b.u_no)
+			  ) br
+		) 
+		where rn between 1 and 5
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="net.mvp.review.ReviewDTO">
+		select *
+		from (
+			  select	 b.*,
+					 m.m_imgurl,
+					 m.m_title,
+					 m.m_genre,
+					 m.m_rating,
+					 u.u_id,
+					 r.rcnt
+			  from (select * from review_board order by b_date desc) b
+			  LEFT OUTER JOIN movies m
+			  on (m.m_no = b.m_no)
+			  LEFT OUTER JOIN (select b_no, count(*) as rcnt from review_board_reply group by b_no) r
+			  on ( r.b_no = b.b_no)
+			  LEFT OUTER JOIN users u
+			  on (u.u_no = b.u_no)
+			  )
+		where b_no = #{b_no}			  
+	</select>		
+	
+	<select id="countAll" parameterType="net.mvp.review.ReviewDTO" resultType="int">
+		select count (*) cnt 
+		from (
+			  select	 b.*,
+					 m.m_imgurl,
+					 m.m_title,
+					 u.u_id,
+					 r.rcnt
+			  from (select * from review_board order by b_date desc) b
+			  LEFT OUTER JOIN movies m
+			  on (m.m_no = b.m_no)
+			  LEFT OUTER JOIN (select b_no, count(*) as rcnt from review_board_reply group by b_no) r
+			  on ( r.b_no = b.b_no)
+			  LEFT OUTER JOIN users u
+			  on (u.u_no = b.u_no)
+			  )
+		<choose>
+		<when test="b_category != null">
+		<choose>
+		<when test="b_category.equals('like')">
+		where b_category = 'like'
+		<if test="qsel != null">
+		and ${qsel} like '%'||#{qval}||'%' 
+		</if>
+		</when>
+		<when test="b_category.equals('dislike')">
+		where b_category = 'dislike'
+		<if test="qsel != null">
+		and ${qsel} like '%'||#{qval}||'%' 
+		</if>
+		</when>
+		<otherwise>
+		<if test="qsel != null">
+		where ${qsel} like '%'||#{qval}||'%' 
+		</if>
+		</otherwise>		
+		</choose>
+		</when>
+		<when test="u_no != 0">
+		where u_no = #{u_no}
+		</when>
+		</choose>
+	</select> 
+	
+	<select id="insertcheck" parameterType="net.mvp.review.ReviewDTO" resultType="int">
+		select count(*) cnt from review_board 
+		where u_no = #{u_no} and m_no=#{m_no} 
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<insert id="insert" parameterType="net.mvp.review.ReviewDTO">
+		insert into review_board
+								(b_no, 
+								u_no, 
+								m_no, 
+								b_category, 
+								b_title, 
+								b_text, 
+								b_date
+								) 
+		values (rb_seq.nextval, 
+				#{u_no}, 
+				#{m_no}, 
+				#{b_category}, 
+				#{b_title} , 
+				#{b_text}, 
+				sysdate
+				)
 	</insert>
 	
-	<select id="selectAll"  resultType="net.hb.crud.BoardDTO">
-		select rownum as rn, (select count(*) from hobby_reply r where r.hobby_idx=h.hobby_idx) as rcnt, h.* from  hobby h 
-	</select>
-
-	<select id="countAll"  resultType="int">
-		select count(*) from  hobby
-	</select>
 	
-	<select id="detail" parameterType="int" resultType="net.hb.crud.BoardDTO">
-		select * from hobby where hobby_idx= #{hobby_idx}
-	</select>
 	
-	<update id="edit" parameterType="net.hb.crud.BoardDTO">
-		update hobby set name=#{name}, title=#{title}, content=#{content}, gender=#{gender},
-		hobby=#{hobby}, img_file_name=#{img_file_name} where hobby_idx=#{hobby_idx}
+	<update id="edit" parameterType="net.mvp.review.ReviewDTO">
+		update review_board
+		set
+			m_no=#{m_no},
+			b_category=#{b_category},
+			b_title=#{b_title},
+			b_text=#{b_text},
+			b_date=sysdate
+		where
+			b_no=#{b_no}
 	</update>
 	
+	<update id="likeupdate" parameterType="net.mvp.review.ReviewDTO">
+		update review_board
+		set b_likes += #{b_likes}
+		where b_no=#{b_no}
+	</update>
+	
+	<update id="counterupdate" parameterType="int">
+		update review_board
+		set b_count=b_count+1
+		where b_no=#{b_no}
+	</update>
+	
+	<!-- 선택한 데이터 삭제 -->
 	<delete id="delete" parameterType="int">
-	   delete from  hobby where hobby_idx = #{hobby_idx} 
+		delete from review_board where b_no = #{b_no}
 	</delete>
-
-</mapper> -->
+</mapper>

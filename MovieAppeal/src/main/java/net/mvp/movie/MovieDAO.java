@@ -45,4 +45,8 @@ public class MovieDAO {
 	public void dbMovieDelete(MovieDTO dto) {
 		temp.delete("movie.delete",dto.getM_no());
 	}
+	
+	public void dbRateUpdate(MovieDTO dto) {
+		temp.update("movie.rateupdate",dto);
+	}
 }

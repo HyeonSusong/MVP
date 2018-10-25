@@ -23,7 +23,9 @@
 	<definition name="rank" template="/WEB-INF/views/rank/rank.jsp"/>
 	
 	<!-- review -->
-	<definition name="review" template="/WEB-INF/views/review/review.jsp"/>
+	<definition name="reviewList" template="/WEB-INF/views/review/reviewList.jsp"/>
+	<definition name="reviewInsert" template="/WEB-INF/views/review/reviewInsert.jsp"/>
+	<definition name="reviewDetail" template="/WEB-INF/views/review/reviewDetail.jsp"/>
 		
 	<!-- recommend -->
 	<definition name="recommend" template="/WEB-INF/views/recommend/recommend.jsp"></definition>
@@ -52,8 +54,6 @@
 	<!-- verify -->
 	<definition name="mailverify" template="/WEB-INF/views/users/mailverify.jsp"></definition>
 	<definition name="verifymailsend" template="/WEB-INF/views/users/verifymailsend.jsp"></definition>
-	<definition name="verifyfail" template="/WEB-INF/views/users/verifyfail.jsp"></definition>
-	
 	
 	
 	<!-- adminpage -->

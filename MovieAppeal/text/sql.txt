@@ -34,7 +34,7 @@ m_genre varchar2(20 char),
 m_plot varchar2(600 char),
 m_rating number(2,1),
 m_likes number(7) default 0,
-m_dislikes number(7) default,
+m_dislikes number(7) default 0,
 m_imgurl varchar2(100 char),
 m_trailerurl varchar2(100 char)
 );
@@ -119,12 +119,10 @@ create table review_board_reply(
 br_no number(10) not null primary key,
 b_no number(10) not null,
 u_no number(10) not null,
-m_no number(10) not null,
 br_text varchar2(300 char),
 br_date date,
 constraint br_b_no_fk foreign key (b_no) references review_board(b_no),
 constraint br_u_no_fk foreign key (u_no) references users(u_no),
-constraint br_m_no_fk foreign key (m_no) references movies(m_no)
 );
 
 create sequence br_seq;
@@ -136,11 +134,9 @@ create table review_board_like(
 bl_no number(11) not null primary key,
 b_no number(10) not null,
 u_no number(10) not null,
-m_no number(10) not null,
 bl_like number(1),
 constraint br_b_no_fk foreign key (b_no) references review_board(b_no),
 constraint br_u_no_fk foreign key (u_no) references users(u_no),
-constraint br_m_no_fk foreign key (m_no) references movies(m_no)
 );
 
 create sequence bl_seq;

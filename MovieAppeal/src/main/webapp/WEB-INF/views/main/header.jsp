@@ -11,9 +11,9 @@
 		<a href="main.do"><img id="logoimg" src="img/MVP.png"></a>
 	</span>
 	<ul class="nav">
-		<li><a href="rank.do"><i class="fas fa-flag" ></i>RANK</a></li>
-		<li><a href="recommend.do"><i class="fas fa-thumbs-up"></i>RECOMMEND</a></li>
-		<li><a href="review.do"><i class="fas fa-pen">REVIEW</i></a></li>
+		<li><a href="/rank.do"><i class="fas fa-flag" ></i> RANK</a></li>
+		<li><a href="/recommend.do"><i class="glyphicon glyphicon-film"></i> MOVIE</a></li>
+		<li><a href="/review.do"><i class="fas fa-pen"> REVIEW</i></a></li>
 		<c:choose> 
 		<c:when test="${LOGIN==null}">
 			<li><button id="loginbt" data-toggle="modal" data-target="#loginModal" data-backdrop="false" >LOGIN</button></li>

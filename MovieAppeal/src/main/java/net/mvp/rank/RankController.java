@@ -44,7 +44,8 @@ public class RankController {
 		}
 		MovieDTO mdto= new MovieDTO();
 		mdto.setQuery(query);
-		Map<String,Integer> pageset = mdto.setPage(curPage, 20);
+		int cnt = mdao.dbMovieAllCount(mdto);
+		Map<String,Integer> pageset = mdto.setPage(curPage,cnt, 20);
 		List<MovieDTO> list = mdao.dbAdminMovieList(mdto);
 		ModelAndView mav = new ModelAndView();
 		String url = "rank";

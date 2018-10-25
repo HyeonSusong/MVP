@@ -10,7 +10,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="detail"  parameterType="int" resultType="net.mvp.movie.MovieDTO">
-		select * from  movies where m_no=#{m_no} 
+		select *  from 
+						      (select m.*, 
+									  b.m_likes, 
+									  b.m_dislikes 
+						 	   from movies m,
+									(select bl.m_no, 
+								 			bl.m_likes, 
+								 			bd.m_dislikes  
+									 from 
+										 (select 
+												 m_no,
+												 count(*) as m_likes
+							 			  from review_board
+							 			  where b_category ='like'
+							 			  group by m_no 
+							  			  ) bl
+									 Full OUTER JOIN (select 
+															m_no,
+															count(*) as m_dislikes
+							 						  from review_board
+							 						  where b_category ='dislike'
+								 					  group by m_no 
+													  ) bd
+									 on ( bl.m_no = bd.m_no )
+									 ) b
+								where b.m_no(+)=m.m_no
+								) where m_no=#{m_no} 
 	</select>
 
 	<select id="count" parameterType="int" resultType="int">
@@ -32,22 +58,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from 
 					(select 
 						rownum as rn, 
-						m.* from 
-						(select * from movies
-						<if test="query != null">
-						order by #{query} desc
-						</if>
-						) m 
+						a.* 
+					from 
+						(select * 
+						 from 
+						      (select m.*, 
+									  b.m_likes, 
+									  b.m_dislikes 
+						 	   from movies m,
+									(select bl.m_no, 
+								 			bl.m_likes, 
+								 			bd.m_dislikes  
+									 from 
+										 (select 
+												 m_no,
+												 count(*) as m_likes
+							 			  from review_board
+							 			  where b_category ='like'
+							 			  group by m_no 
+							  			  ) bl
+									 Full OUTER JOIN (select 
+															m_no,
+															count(*) as m_dislikes
+							 						  from review_board
+							 						  where b_category ='dislike'
+								 					  group by m_no 
+													  ) bd
+									 on ( bl.m_no = bd.m_no )
+									 ) b
+								where b.m_no(+)=m.m_no
+								)
+							<if test="query != null">
+						   order by ${query} desc nulls last
+							</if>
+							) a					 
 						<if test="m_title != null">
 						where m_title like '%'||#{m_title}||'%'
 						</if>
 						<if test="m_genre != null">
 						where m_genre like '%'||#{m_genre}||'%'
 						</if>
-					)
+					)							
 					where rn between #{start} and #{end}
 					
 	</select>
+	
+	<update id="rateupdate" parameterType="net.mvp.movie.MovieDTO">
+		update movies set m_rating=#{m_rating} where m_no = #{m_no}
+	</update>
 		
 	<update id="edit" parameterType="net.mvp.movie.MovieDTO">
 		update movies set m_plot=#{m_plot}, m_imgurl=#{m_imgurl}, m_trailerurl=#{m_trailerurl} where m_no=#{m_no}
