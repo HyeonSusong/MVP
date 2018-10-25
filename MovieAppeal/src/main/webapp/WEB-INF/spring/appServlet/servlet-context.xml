@@ -63,8 +63,8 @@
 	<beans:bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
 	    <beans:property name="host" value="smtp.gmail.com" />
 	    <beans:property name="port" value="587" />
-	    <beans:property name="username" value="shs8831@gmail.com" />
-	    <beans:property name="password" value="spfm0925" />
+	    <beans:property name="username" value="" />
+	    <beans:property name="password" value="" />
 	    <beans:property name="javaMailProperties">
 	    <beans:props>
 	           <beans:prop key="mail.transport.protocol">smtp</beans:prop>
@@ -105,6 +105,12 @@
 		 		<mapping path="/recommend.do"/>
 		 		<mapping path="/movielike.do"/>
 		 		<mapping path="/movierate.do"/>
+		 		
+		 		<!--  review refer -->
+		 		<mapping path="/reviewPreInsert.do"/>
+		 		<mapping path="/reviewInsert.do"/>
+		 		<mapping path="/reviewDelete.do"/>
+		 		<mapping path="/reviewedit.do"/>
 		 		<beans:ref bean="authInterceptor"/>
 		 	</interceptor>
 		 	<interceptor>

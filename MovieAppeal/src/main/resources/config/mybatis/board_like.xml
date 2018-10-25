@@ -2,27 +2,23 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="reply">
+<mapper namespace="reviewLike">
 
-	<insert id="add" parameterType="net.hb.crud.ReplyDTO">
-	  insert into hobby_reply
-	  values( rhobby_seq.nextVal, #{rwriter}, #{rmemo}, #{hobby_idx})     
+	<insert id="add" parameterType="net.mvp.review.like.ReviewLikeDTO">
+	  insert into review_board_like(bl_no, b_no, u_no, bl_like) 
+	  values( bl_seq.nextVal, #{b_no}, #{u_no}, 1)     
 	</insert>
 	
-	<select id="selectAll"  parameterType="int" resultType="net.hb.crud.ReplyDTO">
-		select * from  hobby_reply where hobby_idx=#{hobby_idx} 
+	<select id="check"  parameterType="net.mvp.review.like.ReviewLikeDTO" resultType="int">
+		select count(*) cnt from  review_board_like where b_no=#{b_no} and u_no=#{u_no}
 	</select>
 
-	<select id="countAll" parameterType="int" resultType="int">
-		select count(*) from  hobby_reply where hobby_idx=#{hobby_idx} 
+	<select id="likecount" parameterType="net.mvp.review.like.ReviewLikeDTO" resultType="int">
+		select count(*) from  review_board_like where b_no=#{b_no}
 	</select>
-		
-	<update id="edit" parameterType="net.hb.crud.ReplyDTO">
-		update hobby_reply set rwriter=#{rwriter}, rmemo=#{rmemo} where rhobby_idx=#{rhobby_idx}
-	</update>
 	
-	<delete id="delete" parameterType="int">
-	   delete from  hobby_reply where rhobby_idx = #{rhobby_idx} 
+	<delete id="delete" parameterType="net.mvp.review.like.ReviewLikeDTO">
+	   delete from  review_board_like where b_no=#{b_no} and u_no=#{u_no} 
 	</delete>
 
 </mapper>

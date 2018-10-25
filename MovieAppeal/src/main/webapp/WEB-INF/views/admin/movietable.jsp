@@ -41,7 +41,7 @@
     			</c:forEach>    			
     			<tr>
     			<td class="text-center" colspan="5">
-    							<ul class="pagination">
+    			<ul class="pagination">
 					<c:if test="${pageset.firstPage > pageset.pageIndex}">
 				    <li>
     				<a href="/administrator/movietable.do?curPage=${pageset.firstPage-pageset.pageIndex}" aria-label="Previous">
@@ -206,14 +206,34 @@
             	}
             },
             error : function(error) {		                
-                alert("error : " + error);
             }
         });	 
  } 
  
  function imgdelete(k){
-		 var mi_no = $(k).parent().chilren("#mi_no").val();
-		 alert(mi_no);
+		 var mi_no = $(k).parent().children(".mi_no").val();
+		 var li = $(k).parent('li');
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data : JSON.stringify({
+		            	'mi_no' : mi_no
+		             }),
+		            url : "/administrator/movieImgdelete.do",
+		            dataType : "json",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		            	if(data.msg == "OK"){
+		            		li.text("");
+		            		li.remove();
+		            	}
+		            	else{
+		            		alert("수정실패");
+		            	}
+		            },
+		            error : function(error) {
+		            }
+		        });
  }
 	 
  
@@ -255,7 +275,6 @@
 	            	}
 	            },
 	            error : function(error) {		                
-	                alert("error : " + error);
 	            }
 	        });
 		}		
@@ -290,41 +309,12 @@
 		            	}
 		            },
 		            error : function(error) {		                
-		                alert("error : " + error);
 		            }
 		        });
 			
 		});
 	});
 	
-	$(function(){
-		$('.img_delete_btn').click(function(){
-			var mi_no = $(this).parent().children().val();
-			alert(mi_no);
-		        $.ajax({
-		            async: true,
-		            type : 'POST',
-		            data : JSON.stringify({
-		            	'mi_no' : mi_no
-		             }),
-		            url : "/administrator/movieImgdelete.do",
-		            dataType : "json",
-		            contentType: "application/json; charset=UTF-8",
-		            success : function(data) {
-		            	if(data.msg == "OK"){
-		            		location.reload();
-		            	}
-		            	else{
-		            		alert("수정실패");
-		            		location.reload();
-		            	}
-		            },
-		            error : function(error) {		                
-		            }
-		        });
-			
-		});
-	});
 
 </script>
 <style>

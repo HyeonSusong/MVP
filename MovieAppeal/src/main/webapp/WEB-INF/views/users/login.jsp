@@ -33,12 +33,8 @@
         <label for="loginpwdbox" class="sr-only">비밀번호</label>
         <input type="password" id="loginpwdbox" class="form-control" placeholder="Password" required><br>
         <label id = "default"></label>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> 기억하기
-          </label>
-        </div>
-        <button id="btn-login" class="btn btn-lg btn-block btn-black" type="button">로 그 인</button>
+        <br>
+        <button id="btn-login" class="btn btn-lg btn-block btn-black" type="button"><font color="#D6BA8A">로 그 인</font></button>
       </form>
       <br>
       	<a href = "/signup.do">회원가입</a>&nbsp;/&nbsp;<a href="#">아이디찾기</a>

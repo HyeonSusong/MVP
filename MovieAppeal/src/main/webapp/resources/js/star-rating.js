@@ -552,14 +552,14 @@
     };
 
     $.fn.ratingLocales.en = {
-        defaultCaption: '평점을 입력해주세요',
+        defaultCaption: '{rating} 점',
         starCaptions: {
             //"0.5": 'Half Star',
         	//"1.5": 'One & Half Star',
         	//"2.5": 'Two & Half Stars',
         	//"3.5": 'Three & Half Stars',
         	//"4.5": 'Four & Half Stars',
-            "1": '보지마세요',
+/*            "1": '보지마세요',
             "2": '괜히 봤어요',
             "3": '별로였네요',
             "4": '기대하진 마세요',
@@ -570,7 +570,7 @@
             "9": '기대이상입니다',
             "10": '최고의 영화입니다',
             	
-            	
+            	*/
             	
             	
         },

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 	#mypage{
-	background-color: #eee;
+	background: url(/img/white.jpg)
 	}
 	.spaceLeft { margin-left: 10px;	}
 	.spaceRight {margin-right: 10px;}
@@ -11,15 +11,31 @@
 	.spaceBottom{ margin-bottom: 30px;}
 	.btn span. {	opacity: 0;}
 	.btn.active span. {opacity: 1;}
-
+	.left-float{
+	float: left;
+	}
+	.right-float{
+	float: right;
+	}
 	.back{
-	 	 		display: flex;
+		margin: 0px auto;
  		overflow:visible;
  		float: none;
  		height:inherit;
+ 		min-width: 1100px;
+ 		padding-bottom: 20px;
+ 		padding-top: 10px;
  	}
  	.btn_linen{
-		background-color: #0B0D0C !important; 	
+		background-color: #0B0D0C !important;
+		color: #D6BA8A;
+			 		transition: all 0.3s;
+		
+ 	}
+ 	.btn_linen:hover{
+ 		-webkit-filter: brightness(90%);
+    filter: brightness(90%);
+    color: #D6BA8A;    
  	}
  	.list_user{
  		border-right: 1;
@@ -71,15 +87,196 @@
  	}
  	.article{
     	margin: 10px;
-    	padding: 0;
-		max-width:80%;
-    	width: 110rem;
+    	padding: 20px 20px 20px 20px;
+		max-width:800px;
+		min-height: 500px;
+		min-width: 500px;
+		width : inherit;
 		float:left;
     	margin-bottom: 10px; /* Added */
         padding-bottom:20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 20px;
+        background: url(/img/firmback.jpg);
+        color: #cacaca;
 	}
-	
+	.article h1 {
+	color: #D6BA8A;
+	font-weight: bold;
+	}
 	#categry-btn > i{
 		color:#D6BA8A !important;
 	}
+	
+	 
+	 /* ////////////////페이지내부 리스트 css //////////////*/
+	 
+	 .article .listul{
+	  	 		transition: all 0.3s;
+	  
+	 }
+	 .article .listul li{
+	  background-color: #fafafa;
+        color: #333;
+	  font-size:12px;
+	  min-height: 45px;
+	  padding: 10px 0px 5px 0px;
+	  
+	 }
+	 .article label {
+	 color : #D6BA8A;
+	 }
+	.article .listul .list-Entity:hover{
+	transition: all 0.3s;
+	-webkit-filter: brightness(90%);
+    filter: brightness(90%);
+        cursor: pointer;	
+
+	 }
+	 .article .listul .list-title{
+	  background-color: #333;
+	  color: #D6BA8A;
+	  font-size: 15px!Important;
+  	  padding: 10px 0px 5px 0px;
+  	  min-height: 50px;
+	 }
+	  .article .listul li .title{
+	  display: inline-block;
+	  margin-left: 10px;
+	  width: 50%;
+	  min-width: 200px;
+	  padding-left: 10px;
+	  overflow: hidden;
+	  float: left;
+	  text-overflow: ellipsis;
+	  font-size: 15px;
+	  height: 25px;
+	  white-space: nowrap;
+	  }
+	  	  .article .listul li .date{
+	  display: inline-block;
+	  min-height: 25px;
+	  margin-left: 10px;
+	  width: 15%;
+	  min-width: 50px;
+	  float: left;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  height: 20px;
+	  white-space: nowrap;
+	  
+	  }
+	  	  .article .listul li .hit{
+	  display: inline-block;
+	  min-height: 25px;
+	  width: 25%;
+	  min-width: 70px;
+	  text-align: right;
+	  margin-right: 10px;
+	  text-overflow: ellipsis;
+	  float: right;
+	  overflow: hidden;
+	  font-size: 15px;
+  	  white-space: nowrap;	  
+	  }
+	  .article .listul li .title .cate{
+	  display: inline-block;
+	  min-width: 30px;
+	  }
+	  .article .listul li .title .movieNm{
+	  display: inline-block;
+	  min-width: 30px;
+	  max-width: 60px;
+	  }
+	  .article .listul li .title .reviewtitle{
+	  display: inline-block;
+	  min-width: 100px;
+	  font-weight: bold;
+	  }
+	  
+	 	.article .listul .replylist-Entity:hover{
+	transition: all 0.3s;
+	-webkit-filter: brightness(90%);
+    filter: brightness(90%);
+    cursor: pointer;
+
+	 }
+	 
+	.article .listul .replylist-Entity{
+		height: 100px;
+		padding-top: 0px;
+
+	 }
+	 .replylist-Entity .review-wrap{
+		height: 40px;
+		background-color: #aaa;
+		padding: 5px 5px 5px 5px;
+		
+
+	 }
+	 .replylist-Entity .reply-wrap{
+		height: 40px;
+		margin: 5px 5px 5px 0px;
+	 }
+	 
+	  .replylist-Entity .reply-wrap .redate{
+	  display: inline-block;
+	  min-height: 25px;
+	  min-width: 70px;
+	  text-align: right;
+	  margin-right: 10px;
+	  text-overflow: ellipsis;
+	  float: right;
+	  overflow: hidden;
+	  font-size: 13px;
+  	  white-space: nowrap;
+
+	 }
+	 
+	 .replylist-Entity .reply-wrap .replytext{
+	  display: inline-block;
+	  margin-left: 10px;
+	  width: 50%;
+	  min-width: 200px;
+	  padding-left: 10px;
+	  overflow: hidden;
+	  float: left;
+	  text-overflow: ellipsis;
+	  font-size: 15px;
+	  height: 45px;
+	 }
+	 
+	 
+/* 	 ///////////// 나의 별점 관련 ///////////////// */
+ 	.article .listul .ratelist-Entity:hover{
+	transition: all 0.3s;
+	-webkit-filter: brightness(90%);
+    filter: brightness(90%);
+    cursor: pointer;
+	 }
+	 .article .listul .ratelist-Entity{
+	 height: 240px;
+	 }
+	 .article .listul .ratelist-Entity .title{
+	 float: left;
+	 margin-left: 20px;
+	 height: 210px;
+	 }
+	 .article .listul .ratelist-Entity .rating-wrap{
+	 float: right;
+	 margin-right: 10px;
+	 margin-top: 90px;
+	 }
+	 
+	 .article .listul .ratelist-Entity .movieposter{
+	 float: left;
+	 width: 150px;
+	 }
+	 .article .listul .ratelist-Entity .movieNm{
+	 float: left;
+	 margin-left: 10px;
+	 height: 200px;
+	 width: 200px;
+	 }	 
+	 
+	 

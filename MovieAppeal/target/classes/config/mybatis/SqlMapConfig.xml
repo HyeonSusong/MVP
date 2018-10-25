@@ -15,13 +15,18 @@
 
 
 	 유저정보 관련 쿼리문 xml -->
-	 	<mapper resource="config/mybatis/users.xml"/>	 
-		<mapper resource="config/mybatis/mailkey.xml"/> 
+	 	<mapper resource="/config/mybatis/users.xml"/>	 
+		<mapper resource="/config/mybatis/mailkey.xml"/>
 		 <!-- 	  영화게시글 관련 쿼리문 xml  -->
-		<mapper resource="config/mybatis/movie.xml"/>
-		<mapper resource="config/mybatis/movie_rate.xml"/>
-		<mapper resource="config/mybatis/movie_like.xml"/>
-		<mapper resource="config/mybatis/movie_img.xml"/>
+		<mapper resource="/config/mybatis/movie.xml"/>
+		<mapper resource="/config/mybatis/movie_rate.xml"/>
+		<mapper resource="/config/mybatis/movie_like.xml"/>
+		<mapper resource="/config/mybatis/movie_img.xml"/>
+		
+		<!-- 리뷰게시판 관련 쿼리문 xml -->
+		<mapper resource="/config/mybatis/board.xml"/>
+		<mapper resource="/config/mybatis/board_reply.xml"/>
+		<mapper resource="/config/mybatis/board_like.xml"/>
 		
 	</mappers>
 </configuration>

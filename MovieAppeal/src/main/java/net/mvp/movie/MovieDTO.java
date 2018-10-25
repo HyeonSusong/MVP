@@ -10,7 +10,7 @@ public class MovieDTO {
 	private String m_title;
 	private String m_genre;
 	private String m_plot;
-	private int m_rating;
+	private double m_rating;
 	private int m_likes;
 	private int m_dislikes;
 	private String m_imgurl;
@@ -29,10 +29,11 @@ public class MovieDTO {
 	//////// 검색 쿼리문 관련 /////
 	private int start;
 	private int end;
-	private final int pageperentity = 10;
+	private int pageperentity;
 	private String query;
 	
-	public Map<String, Integer> setPage(String curPage, int maxitem){
+	public Map<String, Integer> setPage(String curPage, int maxitem  ,int perentity){
+		this.pageperentity = perentity;
 		System.out.println("curpage:"+curPage);
 		curPage = curPage==null||curPage=="" ?"1":curPage;				
 		Map<String,Integer> pageNummap = new HashMap<String, Integer>();
@@ -90,10 +91,10 @@ public class MovieDTO {
 	public void setM_plot(String m_plot) {
 		this.m_plot = m_plot;
 	}
-	public int getM_rating() {
+	public double getM_rating() {
 		return m_rating;
 	}
-	public void setM_rating(int m_rating) {
+	public void setM_rating(double m_rating) {
 		this.m_rating = m_rating;
 	}
 	public int getM_likes() {

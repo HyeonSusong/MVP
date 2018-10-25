@@ -68,6 +68,34 @@ $(function(){
 	     </c:forEach> 
     </ul>
    </div>
+   <div class="text-center">
+   		<ul class="pagination">
+			<c:if test="${pageset.firstPage > pageset.pageIndex}">
+		   		<li>
+    				<a href="/rank.do?curPage=${pageset.firstPage-pageset.pageIndex}&query=${query}" aria-label="Previous">
+        				<span aria-hidden="true">&laquo;</span>
+      				</a>
+   	 			</li>
+   	 		</c:if>
+   	 		<c:forEach var="i" begin="${pageset.firstPage}" end="${pageset.lastPage}" step="1">
+   	 			<c:choose>
+   	 				<c:when test="${i == pageset.nowPage}">
+   	 					<li><a class ="nowpage">${i}</a></li>
+   	 				</c:when>
+   	 				<c:otherwise>
+   	 					<li><a href="/rank.do?curPage=${i}&query=${query}">${i}</a></li>
+   	 				</c:otherwise>
+   	 			</c:choose>
+   	 		</c:forEach>
+			<c:if test="${pageset.firstPage+pageset.pageIndex <= pageset.maxPage}">
+   	 			<li>
+      				<a href="/rank.do?curPage=${pageset.firstPage+pageset.pageIndex}&query=${query}" aria-label="Next">
+        				<span aria-hidden="true">&raquo;</span>
+      				</a>
+    			</li>
+    		</c:if>
+    	</ul>
+    </div>
 </div>
 
   </body>

@@ -6,14 +6,14 @@
 		<div class="col-md-12" style=" border-radius:20px;">
 			<div class="page-header space align-middle">
 			<br>
-        	 	<h1 class="spaceLeft spaceTop">회원탈퇴</h1>
+        	 	<h1 class="spaceLeft text-left spaceTop">회원 탈퇴</h1>
        		</div>
        		
 			<form class=""  id="userdeleteform" method="post" action="/userdeletepost.do">
        			<!-- id -->
         			<div class="text-center form-group" >
         			<br>
-						<strong>${LOGIN.u_id}님</strong>의 계정정보를 삭제합니다.
+						<font color="#C71B1B"><strong>${LOGIN.u_id}님</strong></font>의 계정정보를 삭제합니다.
 						<br>확인을 위해 <strong>비밀번호</strong>를 입력해주세요
 						<br>
 						<br>
@@ -27,15 +27,17 @@
 
 					</div>
 			</form>		
-				<div class="form-group space2x" align="center">
+		<div>
+			<div class="form-group space2x" align="center">
 	
-		<button class="btn btn-primary btn-lg" id="submit_btn" type="button" >
+		<button class="btn btn_linen btn-lg" id="submit_btn" type="button" >
 			<i class="fa fa-check spaceLeft">회원탈퇴</i>
 		</button>
-		<button class="btn btn-danger btn-lg" id="cancel_btn" type="button" onclick="location.href='/main.do'" >
+		<button class="btn btn-default btn-lg" style="width: 120px; text-align: left; font-weight: bold;" id="cancel_btn" type="button" onclick="location.href='/main.do'" >
 			 <i class="fa fa-times spaceLeft">취소</i>
 		</button> 
-	</div>
+		</div>
+		</div>
 			</div>
 	
 	

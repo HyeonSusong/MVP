@@ -1,33 +1,75 @@
-<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="board">
+<mapper namespace="reviewReply">
 
-	<insert id="add" parameterType="net.hb.crud.BoardDTO">
-	  insert into hobby
-	  values( hobby_seq.nextVal, #{name}, #{title}, #{content}, #{gender}, #{hobby}, #{img_file_name} )     
+	<insert id="add" parameterType="net.mvp.review.reply.ReviewReplyDTO">
+	  insert into review_board_reply(br_no, b_no, u_no, br_text, br_date)
+	  values(br_seq.nextVal, #{b_no}, #{u_no}, #{br_text}, sysdate)
 	</insert>
 	
-	<select id="selectAll"  resultType="net.hb.crud.BoardDTO">
-		select rownum as rn, (select count(*) from hobby_reply r where r.hobby_idx=h.hobby_idx) as rcnt, h.* from  hobby h 
+	<select id="selectAll" parameterType="net.mvp.review.reply.ReviewReplyDTO"  resultType="net.mvp.review.reply.ReviewReplyDTO">
+		select *
+		from
+			(select r.*, u.u_id 
+			from review_board_reply r
+			left OUTER JOIN users u
+			on ( r.u_no = u.u_no) )
+		<choose>
+			<when test="b_no != 0">
+				where b_no = #{b_no}
+			</when>
+			<when test="u_no != 0">
+				where u_no = #{u_no}
+			</when>
+		</choose>	
+	</select>
+	
+	<select id="myreply" parameterType="net.mvp.review.reply.ReviewReplyDTO"  resultType="net.mvp.review.reply.ReviewReplyDTO">
+	select * 
+	from (
+		select rownum as rn, br.*
+		from 
+			(select r.*,
+					b.b_category,
+					b.b_title,
+					b.b_date,
+					m.m_title
+			from review_board b
+			left outer join movies m
+			on (b.m_no = m.m_no)
+			left outer join review_board_reply r
+			on (r.b_no = b.b_no)
+			) br
+		where u_no = #{u_no}
+		)
+	where rn between #{start} and #{end}
 	</select>
 
-	<select id="countAll"  resultType="int">
-		select count(*) from  hobby
+	<select id="count" parameterType="net.mvp.review.reply.ReviewReplyDTO"  resultType="int">
+		select count(*) from  review_board_reply
+		<choose>
+			<when test="b_no != 0">
+				where b_no = #{b_no}
+				<if test="u_no != 0">
+					and u_no = #{u_no}
+				</if>
+			</when>
+			<when test="u_no != 0">
+				where u_no=#{u_no}
+			</when>
+		</choose> 
 	</select>
 	
-	<select id="detail" parameterType="int" resultType="net.hb.crud.BoardDTO">
-		select * from hobby where hobby_idx= #{hobby_idx}
-	</select>
-	
-	<update id="edit" parameterType="net.hb.crud.BoardDTO">
-		update hobby set name=#{name}, title=#{title}, content=#{content}, gender=#{gender},
-		hobby=#{hobby}, img_file_name=#{img_file_name} where hobby_idx=#{hobby_idx}
+	<update id="edit" parameterType="net.mvp.review.reply.ReviewReplyDTO">
+		update review_board_reply 
+		set br_text=#{br_text} , br_date=sysdate 
+		where br_no=#{br_no}
 	</update>
 	
-	<delete id="delete" parameterType="int">
-	   delete from  hobby where hobby_idx = #{hobby_idx} 
+	<delete id="delete" parameterType="net.mvp.review.reply.ReviewReplyDTO">
+	   delete from review_board_reply where br_no = #{br_no}
 	</delete>
 
-</mapper> -->
+</mapper> 

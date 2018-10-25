@@ -72,7 +72,7 @@
 		<h4><strong>MVP 최고 별점 영화 랭킹 Top10</strong></h4>
 		<hr>
 			<ul id="content-slider" class="content-slider">
-			<c:if test="${likelist != null}">
+			<c:if test="${ratelist != null}">
             <c:forEach var="list" items="${ratelist}">   
                 <li class="poster-li">
                     <input class="m_no" type="hidden" value="${list.m_no}">
@@ -93,8 +93,8 @@
 		<hr>
 		<div>
 			<ul id="content-slider" class="content-slider">
-			<c:if test="${ratelist != null}">
-            <c:forEach var="list" items="${ratelist}">   
+			<c:if test="${likelist != null}">
+            <c:forEach var="list" items="${likelist}">   
                 <li class="poster-li">
                 	<input class="m_no" type="hidden" value="${list.m_no}">
                 	<img class="slider-poster" height="165.56px" width="133.3px" alt="poster" src="${list.m_imgurl}">

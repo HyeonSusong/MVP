@@ -68,6 +68,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	private void saveDest(HttpServletRequest req) {
 		String uri = req.getRequestURI();
 		String query = req.getQueryString();
+		System.out.println(query);
 		if(query == null || query.equals("null")) {
 			query ="";
 		}else {

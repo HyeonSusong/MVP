@@ -39,8 +39,12 @@ public class MainController {
 	@Autowired
 	MovieDAO mdao;
 	
+	@RequestMapping(value = "/")
+	public String home() {
+		return "redirect:/main.do";
+	}
 	@RequestMapping(value = "/main.do")
-	public ModelAndView home() {
+	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
 		String url = "main";
 		MovieAPI movieapi = new MovieAPI();
@@ -53,14 +57,17 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		MovieDTO mdto = new MovieDTO();
-		mdto.setPage("1", 10);
-		mdto.setQuery("m_rating");
-		List<MovieDTO> list1 =  mdao.dbAdminMovieList(mdto);
+		MovieDTO mdto1 = new MovieDTO();
+		MovieDTO mdto2 = new MovieDTO();
+		int cnt = mdao.dbMovieAllCount(mdto1);
+		mdto1.setPage("1",cnt, 10);
+		mdto1.setQuery("m_rating");
+		List<MovieDTO> list1 =  mdao.dbAdminMovieList(mdto1);
 		System.out.println(list1.get(0).getM_title());
 		mav.addObject("ratelist",list1);
-		mdto.setQuery("m_likes");
-		List<MovieDTO> list2 =  mdao.dbAdminMovieList(mdto);
+		mdto2.setPage("1",cnt,10);
+		mdto2.setQuery("m_likes");
+		List<MovieDTO> list2 =  mdao.dbAdminMovieList(mdto2);
 		mav.addObject("likelist",list2);
 		String week = new MovieDateNow().week();
 		mav.addObject("week",week);
@@ -78,7 +85,8 @@ public class MainController {
 		System.out.println(query);
 		mdto.setM_title(query);
 		mdto.setQuery("m_rating");
-		Map<String, Integer> setPage = mdto.setPage("1", 20);
+		int cnt= mdao.dbMovieAllCount(mdto);
+		Map<String, Integer> setPage = mdto.setPage("1",cnt, 20);
 		int curPage = setPage.get("nowPage");
 		List<MovieDTO> list = mdao.dbAdminMovieList(mdto);
 		String url = "movieserch";
@@ -97,9 +105,9 @@ public class MainController {
 		int curPage = Integer.parseInt(rmap.get("curPage").toString())+1;
 		String m_title = rmap.get("query").toString();
 		MovieDTO mdto = new MovieDTO();
-		mdto.setPage(Integer.toString(curPage), 20);
 		mdto.setM_title(m_title);
 		int cnt = mdao.dbMovieAllCount(mdto);
+		mdto.setPage(Integer.toString(curPage),cnt, 20);
 		if(cnt < (curPage-1)*20) {
 			cnt=0;
 		}

@@ -3,6 +3,7 @@ package net.mvp.recommend;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +41,21 @@ public class RecommendController {
 	
 	@RequestMapping(value = "/recommend.do")
 	public ModelAndView home(HttpServletRequest req) {
+		Enumeration param = req.getParameterNames();
+		String strParam = "";
+		while(param.hasMoreElements()) {
+			String name = (String)param.nextElement();
+			String value = req.getParameter(name);
+			strParam = name + "="+value+"&";
+		}
+		String query = req.getQueryString();
+		System.out.println(req.getRequestURI()+"?"+query);
+		String URL = req.getRequestURI()+"?"+strParam;
+		
+		if(URL.length()>0) {
+			URL=URL.substring(0, URL.length()-1);
+		}
+		System.out.println(URL);
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
 		UsersDTO udto = (UsersDTO)session.getAttribute("LOGIN");
@@ -55,7 +71,8 @@ public class RecommendController {
 			Map<String,Object> moviemap = new HashMap<String, Object>();
 			mdto.setM_genre(m_genre);
 			mdto.setQuery("m_rating");
-			mdto.setPage("1", 20);
+			int cnt = mdao.dbMovieAllCount(mdto);
+			mdto.setPage("1",cnt, 20);
 			List<MovieDTO> list = mdao.dbAdminMovieList(mdto);
 			moviemap.put("genre", m_genre);
 			moviemap.put("movielist", list);
@@ -73,7 +90,8 @@ public class RecommendController {
 	public ModelAndView movieList(MovieDTO mdto) {
 		ModelAndView mav = new ModelAndView();
 		mdto.setQuery("m_rating");
-		Map<String, Integer> setPage = mdto.setPage("1", 20);
+		int cnt = mdao.dbMovieAllCount(mdto);
+		Map<String, Integer> setPage = mdto.setPage("1",cnt, 20);
 		int curPage = setPage.get("nowPage");
 		List<MovieDTO> list = mdao.dbAdminMovieList(mdto);
 		String m_genre = mdto.getM_genre();
@@ -93,10 +111,9 @@ public class RecommendController {
 		int curPage = Integer.parseInt(rmap.get("curPage").toString())+1;
 		String m_genre = rmap.get("query").toString();
 		MovieDTO mdto = new MovieDTO();
-		mdto.setPage(Integer.toString(curPage), 20);
 		mdto.setM_genre(m_genre);
-		
 		int cnt = mdao.dbMovieAllCount(mdto);
+		mdto.setPage(Integer.toString(curPage),cnt, 20);	
 		if(cnt < (curPage-1)*20) {
 			cnt=0;
 		}

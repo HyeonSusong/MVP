@@ -35,9 +35,6 @@ ul {
 	height: 430px;
 }
 </style>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="js/lightslider.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#content-slider").lightSlider({
@@ -59,15 +56,17 @@ ul {
 		});
 	});
 </script>
-
-
-<div id="movieDetail">
 	<div class="mdbg"></div>
-	<div class="movieDetail-wrap" align="center">
+	<div style="/* background: url(/img/firmback.jpg); */  overflow: hidden;">
+	
+<div id="movieDetail">
+
+	<div class="movieDetail-wrap" >
 		<div class="moviedetail-top">
 			<div class="movieDetail-poster">
 				<img src="img/movie/ansi_poster.jpg">
 			</div>
+			<div class="title-wrap">
 			<div class="movieDetail-title">
 				<h1>안시성</h1>
 			</div>
@@ -83,13 +82,20 @@ ul {
 					<i class="fa fa-heart"></i>
 				</button>
 			</div>
+			</div>
 
 		</div>
 
-		<div class="movieDetail-bottom">
+		<div role="tabpanel" class="movieDetail-bottom">
+		<div class="tabul-wrap">
+		<ul class="nav nav-tabs" role="tablist" id="movieTab">
+		<li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Home</a></li>
+  		<li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Profile</a></li>
+		</ul>
+		</div>
 
-
-			<div class="d_middle">
+		<div class="tab-content">
+			<div  role="tabpanel" class="tab-pane active d_middle" id="profile">
 				<strong>출연진</strong>
 				<div class="actor" style="text-align: left; margin-left: 55px;">
 				 양만춘(조인성) , ...................
@@ -130,15 +136,29 @@ ul {
 						allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</div>
 				
+
+			</div>
+			<div  role="tabpanel" class="tab-pane d_middle" id="review">
 				<div class="likeBoard">
-				
+				<h3>
+						<strong style="color: #ff5555; font-size:18pt">
+								<span class="glyphicon glyphicon-thumbs-up" style="color:#ff5555; font-size: 30px; "></span>
+							좋아요
+						</strong>
+				</h3>
+				<hr>
 				</div>
 				<div class="hateBoard">
+						<strong style="color: #4ca7d8; font-size:18pt">
+								<span class="glyphicon glyphicon-thumbs-down" style="color:#4ca7d8;font-size: 30px;"></span>
+						글쎄요
+						</strong>
 				</div>
 			</div>
-
+		</div>
 
 
 		</div>
 	</div>
+</div>
 </div>

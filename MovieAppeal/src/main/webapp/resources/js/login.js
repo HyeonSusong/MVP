@@ -77,7 +77,7 @@
 	                }
 	                else if(data.cnt == -2){
 	                	$('#default').text("");
-	                	$('#default').append('가입인증이 완료되지 않은 회원입니다.');
+	                	$('#default').append('가입인증이 완료되지 않은 <br> 회원입니다.');
 	                }
 	                else{
 	                	$('#default').text("");

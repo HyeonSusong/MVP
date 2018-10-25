@@ -30,7 +30,7 @@
 			  <ul class="dropdown-menu" role="menu" aria-labelledby="categry-btn">
 					<li class="list_categoty">
 						<a class="" href="/myprofile.do">
-							<label class="control-label">프로필편집</label>
+							<label class="control-label">선호장르변경</label>
 						</a>
 					</li>
 					<li class="list_categoty">
@@ -50,7 +50,7 @@
 					</li>
 					<li class="list_categoty">
 						<a href="/myreview.do">
-							<label class="control-label">나의게시글</label>							
+							<label class="control-label">나의리뷰</label>							
 						</a>
 					</li>
 					<li class="list_categoty">
